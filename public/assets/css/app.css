@@ -1,12 +1,40 @@
 .ms-choice {
-  background-color: transparent;
+    background-color: transparent;
 }
 .navbar-brand img {
-  max-height: 80px;
+    max-height: 80px;
 }
 .price_list .description {
-  max-width: calc(100% - 115px);
+    max-width: calc(100% - 115px);
 }
 a {
-  color: var(--client-primary-color)!important;
+    color: var(--client-primary-color) !important;
+}
+.owl-prev,
+.owl-next {
+  position: absolute;
+  top: calc(50% - 33px);
+}
+.owl-prev {
+  left: -30px;
+}
+.owl-next {
+  right: -30px;
+}
+.owl-prev span,
+.owl-next span {
+  font-size: 80px;
+  color: #222227;
+}
+@media all and (max-width: 570px) {
+  .owl-prev span,
+  .owl-next span {
+    color: white;
+  }
+  .owl-prev {
+    left: 0;
+  }
+  .owl-next {
+    right: 0;
+  }
 }

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreClientAttributeRequest;
-use App\Http\Requests\UpdateClientAttributeRequest;
-use App\Models\ClientAttribute;
+use Illuminate\Http\Request;
 
-class ClientAttributeController extends Controller
+class ClientImageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +29,10 @@ class ClientAttributeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreClientAttributeRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreClientAttributeRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -42,10 +40,10 @@ class ClientAttributeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ClientAttribute  $clientAttribute
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(ClientAttribute $clientAttribute)
+    public function show($id)
     {
         //
     }
@@ -53,10 +51,10 @@ class ClientAttributeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ClientAttribute  $clientAttribute
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(ClientAttribute $clientAttribute)
+    public function edit($id)
     {
         //
     }
@@ -64,11 +62,11 @@ class ClientAttributeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateClientAttributeRequest  $request
-     * @param  \App\Models\ClientAttribute  $clientAttribute
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateClientAttributeRequest $request, ClientAttribute $clientAttribute)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,10 +74,10 @@ class ClientAttributeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ClientAttribute  $clientAttribute
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ClientAttribute $clientAttribute)
+    public function destroy($id)
     {
         //
     }

@@ -38,6 +38,8 @@
     <!-- Multiple Select CSS -->
     <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.css">
     <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.5.2/dist/themes/bootstrap.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
     <!-- App CSS -->
     <link rel="stylesheet" href="assets/css/app.css" />
 
@@ -45,8 +47,8 @@
 
     <style>
         :root {
-            --client-primary-color: {{$client->attributes->primary_color}};
-            --client-text-color: {{$client->attributes->text_color}};
+            --client-primary-color: {{ $client->attributes->primary_color }};
+            --client-text-color: {{ $client->attributes->text_color }};
         }
     </style>
 </head>
@@ -199,6 +201,31 @@
         </div>
     </section>
 
+    @if (count($client->images) > 0)
+        <section id="portfolio" class="pricing_section bg-grey bd-bottom padding">
+            <div class="container">
+                <div class="section_heading text-center mb-40 wow fadeInUp" data-wow-delay="300ms">
+                    <h2>Imagens</h2>
+                    <div class="heading-line"></div>
+                </div>
+                <div class="row">
+                    <div class="col-12 sm-padding">
+                        <div class="owl-carousel">
+                            @foreach ($client->images as $image)
+                                <div>
+                                    <a href="{{ $image->name }}" target="_blank">
+                                        <img src="{{ $image->name }}" alt="{{ $client->company_name }}"
+                                            class="w-100">
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
+
     <section class="widget_section padding">
         <div class="container">
             <div class="row">
@@ -315,6 +342,8 @@
     <script src="assets/js/appointment.js"></script>
     <!-- Multiple Select JS -->
     <script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js"></script>
+    <!-- Owl Carousel CSS -->
+    <script src="assets/js/owl.carousel.min.js"></script>
     <!-- Main JS -->
     <script src="assets/js/main.js"></script>
 

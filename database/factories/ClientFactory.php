@@ -50,6 +50,7 @@ class ClientFactory extends Factory
             $config = ['client_uuid' => $client->uuid];
             \App\Models\ClientAttribute::factory(1)->create($config);
             \App\Models\ClientAddress::factory(1)->create($config);
+            \App\Models\ClientImage::factory(6)->create($config);
             \App\Models\Category::factory(3)->create($config);
         });
     }
