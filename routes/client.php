@@ -9,8 +9,9 @@ use App\Http\Controllers\Client\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guest'])->group(function () {
+  Route::get('/', function() { return view('client.login'); })->name('login');
   Route::post('/register', [AuthController::class, 'register'])->name('register');
-  Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('login');
+  Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
   Route::get('/reset-password', [AuthController::class, 'reset_password_view'])->name('password.reset.view');
   Route::post('/reset-password', [AuthController::class, 'reset_password'])->name('password.reset');
 });

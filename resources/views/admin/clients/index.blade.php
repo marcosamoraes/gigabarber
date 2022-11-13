@@ -79,7 +79,7 @@
 																	</button>
 																</form>
 															@endif
-															<a href="{{ env('APP_URL')}}/{{ $client->document_image }}" target="_blank" class="btn btn-info">
+															<a href="{{env('APP_URL')}}/{{ $client->document_image }}" target="_blank" class="btn btn-info">
 																<i class="fa fa-image"></i>
 															</a>
 															<form method="post" action="{{route('admin.clients.impersonate', $client->id)}}">

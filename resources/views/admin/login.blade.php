@@ -8,21 +8,21 @@
 		<meta name="author" content="4 You Vip">
 
 		<!-- Favicon -->
-		<link rel="icon" href="{{ env('APP_URL')}}/assets/img/brand/favicon.ico" type="image/x-icon"/>
+		<link rel="icon" href="{{env('APP_URL')}}/assets/admin/img/brand/favicon.ico" type="image/x-icon"/>
 
 		<!-- Title -->
 		<title>{{env('APP_NAME')}} - Login</title>
 
 		<!-- Bootstrap css-->
-		<link  id="style" href="{{ env('APP_URL')}}/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+		<link  id="style" href="{{env('APP_URL')}}/assets/admin/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 
 		<!-- Icons css-->
-		<link href="{{ env('APP_URL')}}/assets/plugins/web-fonts/icons.css" rel="stylesheet"/>
-		<link href="{{ env('APP_URL')}}/assets/plugins/web-fonts/font-awesome/font-awesome.min.css" rel="stylesheet">
-		<link href="{{ env('APP_URL')}}/assets/plugins/web-fonts/plugin.css" rel="stylesheet"/>
+		<link href="{{env('APP_URL')}}/assets/admin/plugins/web-fonts/icons.css" rel="stylesheet"/>
+		<link href="{{env('APP_URL')}}/assets/admin/plugins/web-fonts/font-awesome/font-awesome.min.css" rel="stylesheet">
+		<link href="{{env('APP_URL')}}/assets/admin/plugins/web-fonts/plugin.css" rel="stylesheet"/>
 
 		<!-- Style css-->
-		<link href="{{ env('APP_URL')}}/assets/css/style.css" rel="stylesheet">
+		<link href="{{env('APP_URL')}}/assets/admin/css/style.css" rel="stylesheet">
 	</head>
 
 	<body class="ltr main-body leftmenu error-1">
@@ -37,7 +37,7 @@
 
 		<!-- Loader -->
 		<div id="global-loader">
-			<img src="{{ env('APP_URL')}}/assets/img/loader.svg" class="loader-img" alt="Loader">
+			<img src="{{env('APP_URL')}}/assets/admin/img/loader.svg" class="loader-img" alt="Loader">
 		</div>
 		<!-- End Loader -->
 
@@ -51,10 +51,10 @@
 						<div class="row row-sm">
 							<div class="col-lg-6 col-xl-5 d-none d-lg-block text-center bg-primary details" style="padding-left: 0!important">
 								<div class="mt-5 pt-4 p-2 pos-absolute w-100">
-									<img src="{{ env('APP_URL')}}/assets/img/brand/logo-light.png" class="d-lg-none header-brand-img text-start float-start mb-4 error-logo-light" alt="logo">
-									<img src="{{ env('APP_URL')}}/assets/img/brand/logo.png" class=" d-lg-none header-brand-img text-start float-start mb-4 error-logo" alt="logo">
+									<img src="{{env('APP_URL')}}/assets/admin/img/brand/logo-light.png" class="d-lg-none header-brand-img text-start float-start mb-4 error-logo-light" alt="logo">
+									<img src="{{env('APP_URL')}}/assets/admin/img/brand/logo.png" class=" d-lg-none header-brand-img text-start float-start mb-4 error-logo" alt="logo">
 									<div class="clearfix"></div>
-									<img src="{{ env('APP_URL')}}/assets/img/svgs/user.svg" class="ht-100 mb-0" alt="user">
+									<img src="{{env('APP_URL')}}/assets/admin/img/svgs/user.svg" class="ht-100 mb-0" alt="user">
 									<h5 class="mt-4 text-white">{{env('APP_NAME')}}</h5>
 									<span class="tx-white-6 tx-13 mb-5 mt-xl-0">Painel Administrativo</span>
 								</div>
@@ -63,7 +63,7 @@
 								<div class="main-container container-fluid">
 									<div class="row row-sm">
 										<div class="card-body mt-2 mb-2">
-											<img src="{{ env('APP_URL')}}/assets/img/brand/logo.png" class=" d-lg-none header-brand-img text-start float-start mb-4" alt="logo">
+											<img src="{{env('APP_URL')}}/assets/admin/img/brand/logo.png" class=" d-lg-none header-brand-img text-start float-start mb-4" alt="logo">
 											<div class="clearfix"></div>
 											<form method="post" action="{{route('admin.authenticate')}}">
 												@csrf
@@ -91,23 +91,26 @@
 		<!-- End Page -->
 
 		<!-- Jquery js-->
-		<script src="{{ env('APP_URL')}}/assets/plugins/jquery/jquery.min.js"></script>
+		<script src="{{env('APP_URL')}}/assets/admin/plugins/jquery/jquery.min.js"></script>
+		
+		<!-- Jquery Mask js -->
+		<script src="{{env('APP_URL')}}/assets/admin/js/jquery.mask.min.js"></script>
 
 		<!-- Bootstrap js-->
-		<script src="{{ env('APP_URL')}}/assets/plugins/bootstrap/js/popper.min.js"></script>
-		<script src="{{ env('APP_URL')}}/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="{{env('APP_URL')}}/assets/admin/plugins/bootstrap/js/popper.min.js"></script>
+		<script src="{{env('APP_URL')}}/assets/admin/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 		<!-- Select2 js-->
-		<script src="{{ env('APP_URL')}}/assets/plugins/select2/js/select2.min.js"></script>
-		<script src="{{ env('APP_URL')}}/assets/js/select2.js"></script>
+		<script src="{{env('APP_URL')}}/assets/admin/plugins/select2/js/select2.min.js"></script>
+		<script src="{{env('APP_URL')}}/assets/admin/js/select2.js"></script>
 
 		<!-- Perfect-scrollbar js -->
-		<script src="{{ env('APP_URL')}}/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+		<script src="{{env('APP_URL')}}/assets/admin/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
 		<!-- Color Theme js -->
-		<script src="{{ env('APP_URL')}}/assets/js/themeColors.js"></script>
+		<script src="{{env('APP_URL')}}/assets/admin/js/themeColors.js"></script>
 
 		<!-- Custom js -->
-		<script src="{{ env('APP_URL')}}/assets/js/custom.js"></script>
+		<script src="{{env('APP_URL')}}/assets/admin/js/custom.js"></script>
 	</body>
 </html>

@@ -5,16 +5,16 @@
 			<a class="main-header-menu-icon" href="javascript:void(0)" id="mainSidebarToggle"><span></span></a>
 			<div class="hor-logo">
 				<a class="main-logo" href="index.html">
-					<img src="{{ env('APP_URL')}}/app/assets/img/logo_4youvip.png" class="header-brand-img desktop-logo" alt="logo">
-					<img src="{{ env('APP_URL')}}/app/assets/img/logo_4youvip.png" class="header-brand-img desktop-logo-dark"
+					<img src="{{env('APP_URL')}}/app/assets/img/logo_4youvip.png" class="header-brand-img desktop-logo" alt="logo">
+					<img src="{{env('APP_URL')}}/app/assets/img/logo_4youvip.png" class="header-brand-img desktop-logo-dark"
 						alt="logo">
 				</a>
 			</div>
 		</div>
 		<div class="main-header-center">
 			<div class="responsive-logo">
-				<a href="index.html"><img src="{{ env('APP_URL')}}/app/assets/img/logo_4youvip.png" class="mobile-logo" alt="logo" style="height: 55px;"></a>
-				<a href="index.html"><img src="{{ env('APP_URL')}}/app/assets/img/logo_4youvip.png" class="mobile-logo-dark"
+				<a href="index.html"><img src="{{env('APP_URL')}}/app/assets/img/logo_4youvip.png" class="mobile-logo" alt="logo" style="height: 55px;"></a>
+				<a href="index.html"><img src="{{env('APP_URL')}}/app/assets/img/logo_4youvip.png" class="mobile-logo-dark"
 						alt="logo"></a>
 			</div>
 		</div>
@@ -52,7 +52,7 @@
 						<div class="dropdown main-profile-menu">
 							<a class="d-flex" href="javascript:void(0)">
 								<span class="main-img-user"><img alt="avatar"
-										src="{{ env('APP_URL')}}/images/{{Auth::user()->image}}"></span>
+										src="{{env('APP_URL')}}/images/{{Auth::user()->image}}"></span>
 							</a>
 							<div class="dropdown-menu">
 								<div class="header-navheading">
