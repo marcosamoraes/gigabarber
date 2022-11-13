@@ -14,14 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('client_attributes', function (Blueprint $table) {
-            $table->foreignUuid('client_id')->constrained('clients', 'uuid')->primary();
+            $table->foreignUuid('client_uuid')->constrained('clients', 'uuid')->primary();
             $table->string('title');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('public_email')->nullable();
             $table->string('image')->default('/storage/book-bg.jpg');
-            $table->string('primary_color')->default('#222227');
+            $table->string('primary_color')->default('#9E8A78');
             $table->string('text_color')->default('#fff');
-            $table->string('description_footer')->nullable();
+            $table->text('description_footer')->nullable();
             $table->string('link_facebook')->nullable();
             $table->string('link_instagram')->nullable();
             $table->text('opening_hours')->nullable();

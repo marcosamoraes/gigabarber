@@ -1,0 +1,12 @@
+.ms-choice {
+  background-color: transparent;
+}
+.navbar-brand img {
+  max-height: 80px;
+}
+.price_list .description {
+  max-width: calc(100% - 115px);
+}
+a {
+  color: var(--client-primary-color)!important;
+}

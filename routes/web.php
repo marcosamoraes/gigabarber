@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Client;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,21 +15,27 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/{slug}', function () {
-    return view('index');
+Route::get('/', function () {
+    $client = Client::inRandomOrder()->firstOrFail();
+    return redirect(route('index', ['slug' => $client->slug]));
 });
+Route::get('/{slug}', function ($slug) {
+    try {
+        $client = Client::where('slug', $slug)->firstOrFail();
+        $client->increment('views');
+        return view('index', compact('client'));
+    } catch (Exception $e) {
+        Log::error('[Route: index]', ['slug' => $slug, 'message' => $e->getMessage()]);
+        abort(404);
+    }
+})->name('index');
 
-Route::name('client.')->prefix('client')->group(function () {
-    Route::middleware(['guest'])->group(function () {
-    });
-    Route::middleware(['auth'])->group(function () {
-    });
-});
-
-Route::name('admin.')->prefix('admin')->group(function () {
-    Route::middleware(['guest'])->group(function () {
-    });
-    Route::middleware(['auth:admin'])->group(function () {
-    });
-});
+Route::post('/{uuid}', function (Request $request, $uuid) {
+    try {
+        $client = Client::findOrFail($uuid);
+        return back()->with('success', 'Agendamento realizado com sucesso!');
+    } catch (Exception $e) {
+        Log::error('[Route: make.appointment]', ['uuid' => $uuid, 'message' => $e->getMessage()]);
+        return back()->withError('message', 'Falha ao realizar agendamento, tente novamente.');
+    }
+})->name('make.appointment');

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class ClientImage extends Model
 {
     use HasFactory;
     use HasUuids;
@@ -15,20 +15,12 @@ class Service extends Model
 
     protected $fillable = [
         'client_id',
-        'category_id',
-        'title',
-        'description',
-        'value',
+        'name',
         'active',
     ];
 
     public function client()
     {
         return $this->belongsTo(Client::class);
-    }
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
     }
 }

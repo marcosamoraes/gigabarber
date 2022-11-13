@@ -16,6 +16,7 @@ class ClientSeeder extends Seeder
     {
         \App\Models\Client::factory()->create([
             'email' => 'client@client.com',
+            'slug' => 'teste',
         ]);
 
         \App\Models\Client::factory(5)->create();

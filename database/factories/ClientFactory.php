@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Client;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -25,7 +26,8 @@ class ClientFactory extends Factory
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
-            'whatsapp' => '(' . fake()->areaCode() . ') ' . fake()->cellphone(),
+            'logo' => fake()->imageUrl(100, 100, 'Logo'),
+            'whatsapp' => fake()->cellphoneNumber(),
             'cnpj' => fake()->unique()->cnpj()
         ];
     }
@@ -40,5 +42,15 @@ class ClientFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Client $client) {
+            $config = ['client_uuid' => $client->uuid];
+            \App\Models\ClientAttribute::factory(1)->create($config);
+            \App\Models\ClientAddress::factory(1)->create($config);
+            \App\Models\Category::factory(3)->create($config);
+        });
     }
 }

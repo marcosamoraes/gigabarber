@@ -43,6 +43,11 @@ class Client extends Model
         });
     }
 
+    public function address()
+    {
+        return $this->hasMany(ClientAddress::class)->latest();
+    }
+
     public function addresses()
     {
         return $this->hasMany(ClientAddress::class);
@@ -66,5 +71,27 @@ class Client extends Model
     public function appointments()
     {
         return $this->hasMany(Appointment::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ClientImage::class);
+    }
+
+    public function fullAddress()
+    {
+        $address = $this->address[0];
+
+        $full_address = $address->address . 
+        ', ' . $address->number .
+        ', ' . $address->area;
+
+        if ($address->complement)
+            $full_address .= ', ' . $address->complement;
+
+        $full_address .= ' - ' . $address->cep .
+            ' - ' . $address->city . '/' . $address->state;
+
+        return $full_address;
     }
 }

@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('client_images', function (Blueprint $table) {
             $table->uuid()->primary();
             $table->foreignUuid('client_uuid')->constrained('clients', 'uuid');
-            $table->foreignUuid('category_uuid')->constrained('categories', 'uuid');
-            $table->string('title', 20);
-            $table->string('description', 100)->nullable();
-            $table->decimal('value', 10, 2)->nullable();
+            $table->string('name');
             $table->boolean('active')->default(true);
             $table->timestamps();
         });
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('client_images');
     }
 };

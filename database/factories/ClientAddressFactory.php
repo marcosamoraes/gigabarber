@@ -1,0 +1,28 @@
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ClientAddress>
+ */
+class ClientAddressFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition()
+    {
+        return [
+            'cep' => '15042015',
+            'address' => fake()->streetName(),
+            'number' => fake()->numerify(),
+            'area' => fake()->streetName(),
+            'city' => 'São José do Rio Preto',
+            'state' => 'SP',
+        ];
+    }
+}
