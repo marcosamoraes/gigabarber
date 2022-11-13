@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->uuid()->unique();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('whatsapp');
+        Schema::create('appointments', function (Blueprint $table) {
+            $table->uuid();
+            $table->foreignUuid('user_id')->constrained();
+            $table->foreignUuid('client_id')->constrained();
+            $table->json('services');
+            $table->dateTime('date');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('appointments');
     }
 };
