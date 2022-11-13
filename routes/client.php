@@ -1,6 +1,11 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Client\AppointmentController;
+use App\Http\Controllers\Client\AuthController;
+use App\Http\Controllers\Client\CategoryController;
+use App\Http\Controllers\Client\ClientImageController;
+use App\Http\Controllers\Client\Controller;
+use App\Http\Controllers\Client\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guest'])->group(function () {
@@ -11,8 +16,8 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-  Route::get('/dashboard', [ClientController::class, 'dashboard'])->name('dashboard');
-  Route::put('/settings', [ClientController::class, 'settings_update'])->name('settings.update');
+  Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
+  Route::put('/settings', [Controller::class, 'settings_update'])->name('settings.update');
   Route::resource('categories', CategoryController::class);
   Route::resource('services', ServiceController::class);
   Route::resource('images', ClientImageController::class);

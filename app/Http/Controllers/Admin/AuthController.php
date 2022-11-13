@@ -54,9 +54,4 @@ class AuthController extends BaseController
      
         return redirect(route('admin.login'));
     }
-
-    public function dashboard()
-    {
-        return view('admin.dashboard');
-    }
 }
