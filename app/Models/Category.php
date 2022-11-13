@@ -10,6 +10,8 @@ class Category extends Model
 {
     use HasFactory;
     use HasUuids;
+    
+    protected $primaryKey = 'uuid';
 
     protected $fillable = [
         'client_id',

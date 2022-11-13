@@ -14,12 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('clients', function (Blueprint $table) {
-            $table->uuid()->unique();
+            $table->uuid()->primary();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('slug');
             $table->string('whatsapp')->nullable();
+            $table->string('company_name')->unique();
             $table->string('cnpj')->nullable()->unique();
             $table->string('logo')->nullable();
             $table->string('favicon')->default('/storage/favicon.png');

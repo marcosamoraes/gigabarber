@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->uuid()->unique();
-            $table->foreignUuid('client_id')->constrained();
+            $table->uuid()->primary();
+            $table->foreignUuid('client_id')->constrained('clients', 'uuid');
             $table->string('name');
             $table->boolean('active')->default(true);
             $table->timestamps();

@@ -14,6 +14,11 @@ class ClientSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\Client::factory()->create([
+            'email' => 'client@client.com',
+        ]);
+
+        \App\Models\Client::factory(5)->create();
+        \App\Models\Client::factory(5)->unverified()->create();
     }
 }

@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('client_addresses', function (Blueprint $table) {
-            $table->uuid()->unique();
-            $table->foreignUuid('client_id')->constrained();
+            $table->uuid()->primary();
+            $table->foreignUuid('client_id')->constrained('clients', 'uuid');
             $table->string('cep', 8);
             $table->string('address', 50);
             $table->string('number', 4);

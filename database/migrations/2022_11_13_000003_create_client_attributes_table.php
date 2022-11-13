@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('client_attributes', function (Blueprint $table) {
-            $table->foreignUuid('client_id')->constrained()->unique();
+            $table->foreignUuid('client_id')->constrained('clients', 'uuid')->primary();
             $table->string('title');
             $table->string('description')->nullable();
             $table->string('public_email')->nullable();

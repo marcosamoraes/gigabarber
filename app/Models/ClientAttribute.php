@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ClientAttribute extends Model
 {
     use HasFactory;
+    
     protected $primaryKey = 'client_id';
 
     protected $fillable = [

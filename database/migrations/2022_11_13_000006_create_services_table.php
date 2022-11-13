@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('services', function (Blueprint $table) {
-            $table->uuid()->unique();
-            $table->foreignUuid('client_id')->constrained();
-            $table->foreignUuid('category_id')->constrained();
+            $table->uuid()->primary();
+            $table->foreignUuid('client_id')->constrained('clients', 'uuid');
+            $table->foreignUuid('category_id')->constrained('categories', 'uuid');
             $table->string('title', 20);
             $table->string('description', 50)->nullable();
             $table->decimal('value', 10, 2)->nullable();

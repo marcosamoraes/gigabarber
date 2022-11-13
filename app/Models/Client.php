@@ -5,11 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Str;
 
 class Client extends Model
 {
-    use HasFactory;
-    use HasUuids;
+    use HasFactory, HasUuids, SoftDeletes;
+    
+    protected $primaryKey = 'uuid';
 
     protected $fillable = [
         'name',
@@ -30,6 +34,14 @@ class Client extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function ($model) {
+            $model->slug = Str::slug($model->company_name.'-'.rand(1000,9999), '-');
+        });
+    }
 
     public function addresses()
     {

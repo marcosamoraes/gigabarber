@@ -11,6 +11,8 @@ class Appointment extends Model
 {
     use HasFactory;
     use HasUuids;
+    
+    protected $primaryKey = 'uuid';
 
     protected $fillable = [
         'user_id',

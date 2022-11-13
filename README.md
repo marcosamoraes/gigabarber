@@ -1,7 +1,3 @@
-- Migrations
-- Models
-- Factories
-- Seeders
 - Routes
 - Controllers
 - Requests

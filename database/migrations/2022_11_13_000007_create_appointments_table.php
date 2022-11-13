@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('appointments', function (Blueprint $table) {
-            $table->uuid();
-            $table->foreignUuid('user_id')->constrained();
-            $table->foreignUuid('client_id')->constrained();
+            $table->uuid()->primary();
+            $table->foreignUuid('user_id')->constrained('users', 'uuid');
+            $table->foreignUuid('client_id')->constrained('clients', 'uuid');
             $table->json('services');
             $table->dateTime('date');
             $table->timestamps();
