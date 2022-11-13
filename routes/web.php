@@ -13,6 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/{slug}', function () {
+    return view('index');
+});
+
+Route::name('client.')->prefix('client')->group(function () {
+    Route::middleware(['guest'])->group(function () {
+    });
+    Route::middleware(['auth'])->group(function () {
+    });
+});
+
+Route::name('admin.')->prefix('admin')->group(function () {
+    Route::middleware(['guest'])->group(function () {
+    });
+    Route::middleware(['auth:admin'])->group(function () {
+    });
 });
