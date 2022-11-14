@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Str;
 
-class Client extends Model
+class Client extends Authenticatable
 {
     use HasFactory, HasUuids, SoftDeletes;
     
@@ -24,6 +23,7 @@ class Client extends Model
         'logo',
         'favicon',
         'views',
+        'active',
     ];
 
     protected $hidden = [

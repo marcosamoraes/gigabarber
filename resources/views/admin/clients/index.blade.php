@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
  
-@section('title', 'Acompanhantes')
+@section('title', 'Clientes')
  
 @section('content')
 
@@ -13,7 +13,14 @@
 				<!-- Page Header -->
 				<div class="page-header">
 					<div>
-						<h2 class="main-content-title tx-24 mg-b-5">Acompanhantes</h2>
+						<h2 class="main-content-title tx-24 mg-b-5">Clientes</h2>
+					</div>
+					<div class="d-flex">
+						<div class="justify-content-center">
+							<a href="{{route('admin.clients.create')}}" class="btn btn-primary my-2 btn-icon-text">
+							  <i class="fe fe-plus me-2"></i> Cadastrar
+							</a>
+						</div>
 					</div>
 				</div>
 				<!-- End Page Header -->
@@ -28,9 +35,10 @@
 										<thead>
 											<tr>
 												<th class="text-center">Nome</th>
+												<th>E-mail</th>
 												<th>Whatsapp</th>
 												<th>Cidade</th>
-												<th>Aprovado</th>
+												<th>Verificado</th>
 												<th>Ativo</th>
 												<th>Data de criação</th>
 												<th></th>
@@ -40,19 +48,20 @@
 											@foreach($clients as $client)
 												<tr class="border-bottom">
 													<td class="font-weight-bold text-center">
-														<a href="{{env('APP_URL')}}/acompanhante/{{$client->slug}}" target="_blank">
-															<img src="{{env('APP_URL')}}/{{$client->image}}" class="avatar avatar-sm me-2" alt="" style="margin: auto!important;">
+														<a href="{{$client->slug}}" target="_blank">
+															<img src="{{$client->logo}}" class="avatar avatar-sm me-2" alt="" style="margin: auto!important;">
 															{{$client->name}}
 														</a>
 													</td>
+													<td>{{$client->email}}</td>
 													<td><a target="_blank" href="https://api.whatsapp.com/send?phone=55{{preg_replace('/\D/', '', $client->whatsapp)}}">{{$client->whatsapp}}</a></td>
 													<td>
-														@if ($client->city)
-															{{$client->city}} - {{$client->state}}
+														@if ($client->address[0]->city)
+															{{$client->address[0]->city}}/{{$client->address[0]->state}}
 														@endif
 													</td>
 													<td>
-														@if($client->approved)
+														@if(filled($client->email_verified_at))
 															<span class="text-success font-weight-semibold">Sim</span>
 														@else
 															<span class="text-danger font-weight-semibold">Não</span>
@@ -66,34 +75,19 @@
 														@endif
 													</td>
 													<td>
-														{{ date_format(date_create($client->created_at), 'd/m/Y H:i:s') }}
+														{{ formatDate($client->created_at) }}
 													</td>
 													<td>
 														<div class="btn-group" role="group">
-															@if (!$client->approved)
-																<form method="post" action="{{route('admin.clients.approve', $client->id)}}">
-																	@csrf
-																	@method('PUT')
-																	<button type="submit" class="btn btn-success">
-																		<i class="fa fa-check"></i>
-																	</button>
-																</form>
-															@endif
-															<a href="{{env('APP_URL')}}/{{ $client->document_image }}" target="_blank" class="btn btn-info">
-																<i class="fa fa-image"></i>
+															<a href="{{route('admin.clients.impersonate', $client->uuid)}}" class="btn btn-primary">
+																<i class="fa fa-user-secret"></i>
 															</a>
-															<form method="post" action="{{route('admin.clients.impersonate', $client->id)}}">
-																@csrf
-																<button type="submit" class="btn btn-primary">
-																	<i class="fa fa-user-secret"></i>
-																</button>
-															</form>
 
-															<a href="{{route('admin.clients.edit', $client->id)}}" class="btn btn-warning">
+															<a href="{{route('admin.clients.edit', $client)}}" class="btn btn-warning">
 																<i class="fa fa-edit"></i>
 															</a>
 
-															<form method="post" action="{{route('admin.clients.destroy', $client->id)}}" onsubmit="return confirm('Tem certeza que quer excluir esse cliente?');">
+															<form method="post" action="{{route('admin.clients.destroy', $client)}}" onsubmit="return confirm('Tem certeza que quer excluir esse cliente?');">
 																@csrf
 	    														{{ method_field('DELETE') }}
 																<button type="submit" class="btn btn-danger">

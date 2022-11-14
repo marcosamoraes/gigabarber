@@ -338,23 +338,23 @@ $(function () {
 
 	// ______________ SWITCHER-toggle ______________//
 
-	$(document).on('change', '[name="state"]', function() {
-		let state_id = $('[name="state"] option:selected').data('id');
+	$(document).on('change', '[name="state"], #state', function() {
+		let state_id = $('[name="state"] option:selected, #state option:selected').data('id');
 		$.getJSON('/json/cities.json', function(data) {
 			data = data.filter(function (v){
 		        return v.estado==state_id;
 		    });
 
-			$('[name="city"]').html('<option>Selecione uma cidade...</option>');
+			$('[name="city"], #city').html('<option>Selecione uma cidade...</option>');
 			let new_content = '';
 			$.each(data, function(i, v) {
 				new_content += '<option value="' + v.nome + '">' + v.nome + '</option>';
 			})
-			$('[name="city"]').html(new_content);
+			$('[name="city"], #city').html(new_content);
 		});
 	});
 
-	$(document).on('blur', '[name="cep"]', function() {
+	$(document).on('blur', '[name="cep"], #cep', function() {
 		let cep = $(this).val();
 			cep.replace(/\D/g, "");
 
@@ -362,20 +362,22 @@ $(function () {
 			$('#global-loader').fadeIn();
 			$.get('https://viacep.com.br/ws/' + cep + '/json/', function(response) {
 
-				$('[name="address"]').val(response.logradouro);
-				$('[name="number"]').val();
-				$('[name="area"]').val(response.bairro);
-				$('[name="complement"]').val();
-				$("[name='state']").val(response.uf).trigger('change');
+				$('[name="address"], #address').val(response.logradouro);
+				$('[name="number"], #number').val();
+				$('[name="area"], #area').val(response.bairro);
+				$('[name="complement"], #complement').val();
+				$("[name='state'], #state").val(response.uf).trigger('change');
 
 				setTimeout(function() {
-					$('[name="city"]').val(response.localidade).trigger('change');
+					$('[name="city"], #city').val(response.localidade).trigger('change');
 				}, 1000);
 
 				$('#global-loader').fadeOut();
 			});
 		}
 	});
+
+	$('[name="cpf"]').mask('999.999.999-99');
 
 	$('[name="cpf_cnpj"]').keydown(function(){
 	    try {

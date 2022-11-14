@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Client;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +25,7 @@ Route::get('/{slug}', function ($slug) {
         $client->increment('views');
         return view('index', compact('client'));
     } catch (Exception $e) {
-        Log::error('[Route: index]', ['slug' => $slug, 'message' => $e->getMessage()]);
+        logError($e, false, ['slug' => $slug]);
         abort(404);
     }
 })->name('index');
@@ -35,7 +35,7 @@ Route::post('/{uuid}', function (Request $request, $uuid) {
         $client = Client::findOrFail($uuid);
         return back()->with('success', 'Agendamento realizado com sucesso!');
     } catch (Exception $e) {
-        Log::error('[Route: make.appointment]', ['uuid' => $uuid, 'message' => $e->getMessage()]);
-        return back()->withError('message', 'Falha ao realizar agendamento, tente novamente.');
+        logError($e, $request->all(), ['uuid' => $uuid]);
+        return back()->withErrors('Falha ao realizar agendamento, tente novamente.');
     }
 })->name('make.appointment');

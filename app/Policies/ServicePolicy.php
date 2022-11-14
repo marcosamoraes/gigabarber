@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Client;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -47,13 +48,13 @@ class ServicePolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Client  $client
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Service $service)
+    public function update(Client $client, Service $service)
     {
-        //
+        return $client->uuid === $service->client_uuid;
     }
 
     /**

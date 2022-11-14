@@ -63,7 +63,6 @@
 								<div class="main-container container-fluid">
 									<div class="row row-sm">
 										<div class="card-body mt-2 mb-2">
-											<img src="{{env('APP_URL')}}/assets/admin/img/brand/logo.png" class=" d-lg-none header-brand-img text-start float-start mb-4" alt="logo">
 											<div class="clearfix"></div>
 											<form method="post" action="{{route('admin.authenticate')}}">
 												@csrf

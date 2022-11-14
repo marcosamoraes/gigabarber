@@ -1,7 +1,3 @@
-- Painel ADM
-  - Auth
-  - Dashboard
-  - Clientes
 - Painel Client
   - Auth
   - Dashboard
@@ -13,3 +9,4 @@
 - Agendar
   - Envio de formulário
   - Email para cliente e usuário
+- Google Maps

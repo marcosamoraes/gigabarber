@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Client;
 use App\Models\ClientAttribute;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -47,13 +48,13 @@ class ClientAttributePolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Client  $client
      * @param  \App\Models\ClientAttribute  $clientAttribute
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, ClientAttribute $clientAttribute)
+    public function update(Client $client, ClientAttribute $clientAttribute)
     {
-        //
+        return $client->uuid === $clientAttribute->client_uuid;
     }
 
     /**

@@ -8128,6 +8128,14 @@ table.dataTable.dtr-inline.collapsed>tbody>tr[role=row]>th:first-child:before {
 .main-sidebar-body li.active i {
     color: var(--primary-bg-color);
 }
+.dark-theme a {
+    color: var(--dark-color);
+}
+
+.dark-theme .main-sidebar-body li.active .sidemenu-label,
+.dark-theme .main-sidebar-body li.active i {
+    color: var(--dark-color);
+}
 
 .main-sidebar-body li.active li.active .nav-sub-link.sub-with-sub {
     color: #ffffff !important;

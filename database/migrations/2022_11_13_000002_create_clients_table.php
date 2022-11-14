@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('logo')->nullable();
             $table->string('favicon')->default('/storage/favicon.png');
             $table->integer('views')->default(0);
+            $table->boolean('active')->default(true);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

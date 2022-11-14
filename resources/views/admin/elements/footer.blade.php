@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="row row-sm">
 			<div class="col-md-12">
-				<span>© 2022 {{ env('APP_NAME') }} &amp; Desenvolvido com ❤️ por <b>4 You Vip</b></span>
+				<span>© 2022 | Desenvolvido com ❤️ por <strong>{{env('APP_NAME')}}</strong></span>
 			</div>
 		</div>
 	</div>
