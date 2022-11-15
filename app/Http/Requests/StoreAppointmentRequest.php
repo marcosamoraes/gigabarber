@@ -13,7 +13,19 @@ class StoreAppointmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'services' => json_encode($this->services),
+        ]);
     }
 
     /**
@@ -24,7 +36,12 @@ class StoreAppointmentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'user.name' => ['required'],
+            'user.email' => ['required', 'email'],
+            'user.whatsapp' => ['required'],
+            'user.cpf' => ['required'],
+            'services' => ['required', 'json'],
+            'date' => ['required'],
         ];
     }
 }

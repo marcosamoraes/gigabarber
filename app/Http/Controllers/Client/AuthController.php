@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterClientRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
@@ -11,51 +12,26 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\Client;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function register(RegisterClientRequest $request)
     {
-        $validated = $request->validate([
-            'name' => ['required'],
-            'birthdate' => ['required'],
-            'state' => ['required'],
-            'city' => ['required'],
-            'whatsapp' => ['required'],
-            'email' => ['required', 'email', 'unique:clients'],
-            'password' => ['required', 'confirmed', 'min:6'],
-            'image' => ['required', 'image'],
-            'document_image' => ['required', 'image'],
-            'images' => ['required'],
-        ]);
-
-        $validated['image'] = $this->save_image_file($validated['image'], 'images/clients');
-        $validated['document_image'] = $this->save_image_file($validated['document_image'], 'images/clients/documents');
-
-        $validated['birthdate'] = implode('-', array_reverse(explode('/', $validated['birthdate'])));
-        $validated['password'] = Hash::make($validated['password']);
-
-        $images = $validated['images'];
-        unset($validated['images']);
-
-        $validated['active'] = true;
-        $validated['last_access'] = true;
+        $validated = $request->safe()->all();
 
         try {
             $client = Client::create($validated);
+            $client->attributes()->create(['title' => $client->company_name]);
 
-            foreach ($images as $image) {
-                $image = $this->save_image_file($image, 'images/clients');
-                $client->images()->create(['link' => $image]);
-            }
+            Auth::guard('web')->loginUsingId($client->uuid);
+            return redirect(route('client.dashboard'))->with('success', 'Cadastro realizado com sucesso!');
         } catch (\Exception $e) {
+            logError($e, $validated);
             return back()->withErrors([
-                'email' => 'Erro ao realizar cadastro, tente novamente.',
+                'message' => 'Erro ao realizar cadastro, tente novamente.',
             ])->exceptInput('password');
         }
-
-        Auth::guard('web')->loginUsingId($client->id);
-        return redirect('/dashboard?link=meus-dados')->with('success', 'Cadastro realizado com sucesso!');
     }
 
     public function authenticate(Request $request)
@@ -67,17 +43,21 @@ class AuthController extends Controller
 
         if (Auth::attempt([
             'email' => $credentials['email'],
-            'password' => $credentials['password'],
-            'active' => true
+            'password' => $credentials['password']
         ], true)) {
             $request->session()->regenerate();
 
             return back();
         }
-
+        
         return back()->withErrors([
             'email' => 'E-mail ou senha inválidos.',
         ])->onlyInput('email');
+    }
+
+    public function forgot_password_view() 
+    {
+        return view('client.forgot-password');
     }
 
     public function forgot_password(Request $request)
@@ -89,16 +69,16 @@ class AuthController extends Controller
         );
 
         return $status === Password::RESET_LINK_SENT
-            ? response()->json(['status' => __($status)])
-            : response()->json(['email' => __($status)]);
+            ? redirect(route('client.login'))->with(['success' => __($status)])
+            : redirect(route('client.login'))->withErrors(['email' => __($status)]);
     }
 
     public function reset_password_view(Request $request) 
     {
         if (!$request->input('token') && !$request->input('email'))
-            return redirect('/');
+            return redirect(route('client.login'));
             
-        return view('reset-password', ['token' => $request->input('token'), 'email' => $request->input('email')]);
+        return view('client.reset-password', ['token' => $request->input('token'), 'email' => $request->input('email')]);
     }
 
     public function reset_password(Request $request)
@@ -123,7 +103,7 @@ class AuthController extends Controller
         );
 
         return $status === Password::PASSWORD_RESET
-            ? redirect('/')->with('success', __($status))
+            ? redirect(route('client.login'))->with('success', __($status))
             : back()->withErrors(['email' => [__($status)]]);
     }
 
@@ -134,6 +114,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect(route('client.login'));
     }
 }

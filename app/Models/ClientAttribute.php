@@ -9,10 +9,10 @@ class ClientAttribute extends Model
 {
     use HasFactory;
     
-    protected $primaryKey = 'client_id';
+    protected $primaryKey = 'client_uuid';
 
     protected $fillable = [
-        'client_id',
+        'client_uuid',
         'title',
         'description',
         'public_email',

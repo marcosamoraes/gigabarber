@@ -43,10 +43,10 @@ $(document).ready(function () {
         }
     });
 
-    $('[name="cpf"]').mask('999.999.999-99');
-    $('[name="value"]').mask("000.000.000.000.000,00", { reverse: true });
+    $('[name="cpf"], #cpf').mask('999.999.999-99');
+    $('[name="value"], #value').mask("000.000.000.000.000,00", { reverse: true });
 
-    $('[name="whatsapp"]').mask("(00) 00000-0000");
+    $('[name="whatsapp"], #whatsapp').mask("(00) 00000-0000");
     function updateMask(event) {
         var $element = $(this);
         $(this).off("blur");

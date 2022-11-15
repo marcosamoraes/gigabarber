@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignUuid('category_uuid')->constrained('categories', 'uuid');
             $table->string('title', 20);
             $table->string('description', 100)->nullable();
-            $table->decimal('value', 10, 2)->nullable();
+            $table->decimal('value', 10, 2);
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

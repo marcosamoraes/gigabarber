@@ -17,7 +17,6 @@ return new class extends Migration
             $table->uuid()->primary();
             $table->foreignUuid('client_uuid')->constrained('clients', 'uuid');
             $table->string('name');
-            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

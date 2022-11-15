@@ -1,11 +1,1 @@
-- Painel Client
-  - Auth
-  - Dashboard
-  - Configurações (Atributos, Endereço)
-  - Categorias
-  - Serviços
-  - Imagens
-  - Agendamentos
-- Agendar
-  - Envio de formulário
-  - Email para cliente e usuário
+- Email para cliente e usuário

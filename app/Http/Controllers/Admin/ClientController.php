@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
+use App\Models\ClientAddress;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -58,7 +59,9 @@ class ClientController extends Controller
                 $validated['favicon'] = $this->storageFile($validated['favicon'], 'clients');
             }
 
-            Client::create($validated);
+            $client = Client::create($validated);
+            $client->attributes()->create($validated['attributes']);
+            $client->addresses()->create($validated['address']);
             return redirect(route('admin.clients.index'))->with('success', 'Cliente cadastrado com sucesso!');
         } catch (Exception $e) {
             logError($e, $validated);
@@ -97,7 +100,9 @@ class ClientController extends Controller
         $cities_json = json_decode(file_get_contents(public_path() . '/json/cities.json'), false);
         $all_cities = collect($cities_json)
             ->filter(function($city_json) use ($client) {
-                return $city_json->nome === $client->address[0]->city;
+                if (isset($client->address[0])) {
+                    return $city_json->nome === $client->address[0]->city;
+                  } else return false;
             })
             ->map(function ($city_json) {
                 return [
@@ -131,6 +136,8 @@ class ClientController extends Controller
             }
 
             $client->update($validated);
+            $client->attributes()->updateOrCreate(['client_uuid' => $client->uuid], $validated['attributes']);
+            ClientAddress::updateOrCreate(['client_uuid' => $client->uuid], $validated['address']);
             return redirect(route('admin.clients.index'))->with('success', 'Cliente editado com sucesso!');
         } catch (Exception $e) {
             logError($e, $validated);

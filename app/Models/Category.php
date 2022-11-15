@@ -14,7 +14,7 @@ class Category extends Model
     protected $primaryKey = 'uuid';
 
     protected $fillable = [
-        'client_id',
+        'client_uuid',
         'name',
         'active',
     ];

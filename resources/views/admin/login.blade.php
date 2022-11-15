@@ -4,8 +4,8 @@
 
 		<meta charset="utf-8">
 		<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-		<meta name="description" content="4 You Vip">
-		<meta name="author" content="4 You Vip">
+		<meta name="description" content="{{env('APP_NAME')}}">
+		<meta name="author" content="{{env('APP_NAME')}}">
 
 		<!-- Favicon -->
 		<link rel="icon" href="{{env('APP_URL')}}/assets/admin/img/brand/favicon.ico" type="image/x-icon"/>
@@ -51,8 +51,6 @@
 						<div class="row row-sm">
 							<div class="col-lg-6 col-xl-5 d-none d-lg-block text-center bg-primary details" style="padding-left: 0!important">
 								<div class="mt-5 pt-4 p-2 pos-absolute w-100">
-									<img src="{{env('APP_URL')}}/assets/admin/img/brand/logo-light.png" class="d-lg-none header-brand-img text-start float-start mb-4 error-logo-light" alt="logo">
-									<img src="{{env('APP_URL')}}/assets/admin/img/brand/logo.png" class=" d-lg-none header-brand-img text-start float-start mb-4 error-logo" alt="logo">
 									<div class="clearfix"></div>
 									<img src="{{env('APP_URL')}}/assets/admin/img/svgs/user.svg" class="ht-100 mb-0" alt="user">
 									<h5 class="mt-4 text-white">{{env('APP_NAME')}}</h5>
@@ -68,7 +66,7 @@
 												@csrf
 												<div class="form-group text-start">
 													<label>E-mail</label>
-													<input class="form-control" placeholder="E-mail" name="email" type="text">
+													<input class="form-control" placeholder="E-mail" name="email" type="email">
 												</div>
 												<div class="form-group text-start">
 													<label>Senha</label>

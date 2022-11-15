@@ -14,8 +14,8 @@ class Service extends Model
     protected $primaryKey = 'uuid';
 
     protected $fillable = [
-        'client_id',
-        'category_id',
+        'client_uuid',
+        'category_uuid',
         'title',
         'description',
         'value',

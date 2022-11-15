@@ -74,7 +74,6 @@
 		</div>
 	@endif
 
-
 	<!-- Loader -->
 	<div id="global-loader">
 		<img src="{{env('APP_URL')}}/assets/admin/img/loader.svg" class="loader-img" alt="Loader">
@@ -84,13 +83,13 @@
 	<!-- Page -->
 	<div class="page">
 
-		@include('admin/elements/head')
+		@include('client/elements/head')
 
-		@include('admin/elements/sidemenu')
+		@include('client/elements/sidemenu')
 
         @yield('content')
 
-		@include('admin/elements/footer')
+		@include('client/elements/footer')
 
 		<script type="text/javascript">
 			$(document).ready(function() {

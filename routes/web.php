@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Requests\StoreAppointmentRequest;
+use App\Models\Appointment;
 use App\Models\Client;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', function () {
     $client = Client::inRandomOrder()->firstOrFail();
     return redirect(route('index', ['slug' => $client->slug]));
@@ -30,12 +33,23 @@ Route::get('/{slug}', function ($slug) {
     }
 })->name('index');
 
-Route::post('/{uuid}', function (Request $request, $uuid) {
+Route::post('/{uuid}', function (StoreAppointmentRequest $request, $uuid) {
+    $validated = $request->safe()->all();
+
     try {
-        $client = Client::findOrFail($uuid);
-        return back()->with('success', 'Agendamento realizado com sucesso!');
+        DB::transaction(function () use ($uuid, $validated) {
+            $client = Client::findOrFail($uuid);
+            $user = User::updateOrCreate(['cpf' => $validated['user']['cpf']], $validated['user']);
+
+            $validated['client_uuid'] = $client->uuid;
+            $validated['user_uuid'] = $user->uuid;
+
+            Appointment::create($validated);
+        });
+
+        return response()->json(['Agendamento realizado com sucesso!'], 201);
     } catch (Exception $e) {
         logError($e, $request->all(), ['uuid' => $uuid]);
-        return back()->withErrors('Falha ao realizar agendamento, tente novamente.');
+        return response()->json(['error' => 'Falha ao realizar agendamento, tente novamente.'], 400);
     }
 })->name('make.appointment');

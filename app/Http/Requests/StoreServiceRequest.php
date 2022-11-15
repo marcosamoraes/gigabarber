@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreServiceRequest extends FormRequest
 {
@@ -13,7 +14,20 @@ class StoreServiceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::check();
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'client_uuid' => Auth::id(),
+            'value' => str_replace(['.', ','], ['', '.'], $this->value),
+        ]);
     }
 
     /**
@@ -24,7 +38,11 @@ class StoreServiceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'client_uuid'   => ['required'],
+            'category_uuid' => ['required'],
+            'title'         => ['required'],
+            'description'   => ['nullable'],
+            'value'         => ['required']
         ];
     }
 }

@@ -6,16 +6,19 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class Client extends Authenticatable
 {
-    use HasFactory, HasUuids, SoftDeletes;
+    use HasFactory, HasUuids, SoftDeletes, Notifiable;
     
     protected $primaryKey = 'uuid';
 
     protected $fillable = [
         'name',
+        'company_name',
         'email',
         'email_verified_at',
         'whatsapp',
@@ -40,6 +43,7 @@ class Client extends Authenticatable
         parent::boot();
         self::creating(function ($model) {
             $model->slug = Str::slug($model->company_name.'-'.rand(1000,9999), '-');
+            $model->password = Hash::make($model->password);
         });
     }
 
@@ -80,6 +84,9 @@ class Client extends Authenticatable
 
     public function fullAddress()
     {
+        if (!isset($this->address[0]))
+            return false;
+            
         $address = $this->address[0];
 
         $full_address = $address->address . 

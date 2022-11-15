@@ -13,7 +13,19 @@ class UpdateServiceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'value' => str_replace(['.', ','], ['', '.'], $this->value),
+        ]);
     }
 
     /**
@@ -24,7 +36,11 @@ class UpdateServiceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'category_uuid' => ['required'],
+            'title'         => ['required'],
+            'description'   => ['nullable'],
+            'value'         => ['required'],
+            'active'        => ['required'],
         ];
     }
 }

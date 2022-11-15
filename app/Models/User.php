@@ -20,6 +20,7 @@ class User extends Model
         'name',
         'email',
         'whatsapp',
+        'cpf',
     ];
 
     public function appointments()

@@ -123,25 +123,26 @@
                 <div class="col-12 col-md-6 offset-md-6">
                     <form action="{{ route('make.appointment', ['uuid' => $client->uuid]) }}" method="post"
                         id="appointment_form" class="form-horizontal appointment_form">
+                        @csrf
                         <div class="book_content">
                             <h2>Faça um agendamento</h2>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-6 padding-10">
-                                <input type="text" name="name" class="form-control" placeholder="Nome" required />
+                                <input type="text" name="user[name]" class="form-control" placeholder="Nome" required />
                             </div>
                             <div class="col-md-6 padding-10">
-                                <input type="email" name="email" class="form-control" placeholder="E-mail"
+                                <input type="email" name="user[email]" class="form-control" placeholder="E-mail"
                                     required />
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-6 padding-10">
-                                <input type="text" name="whatsapp" class="form-control" placeholder="Whatsapp"
+                                <input type="text" name="user[whatsapp]" id="whatsapp" class="form-control" placeholder="Whatsapp"
                                     required />
                             </div>
                             <div class="col-md-6 padding-10">
-                                <select class="form-control" placeholder="Serviços" name="services"
+                                <select class="form-control" placeholder="Serviços" name="services[]"
                                     data-select-all="false" multiple>
                                     <option>Hair Styling</option>
                                     <option>Shaving</option>
@@ -153,7 +154,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-md-6 padding-10">
-                                <input type="text" name="cpf" class="form-control" placeholder="CPF"
+                                <input type="text" name="user[cpf]" class="form-control" id="cpf" placeholder="CPF"
                                     required />
                             </div>
                             <div class="col-md-6 padding-10">
@@ -179,23 +180,25 @@
             </div>
             <div class="row">
                 @foreach ($client->categories as $category)
-                    <div class="col-12 col-md-6 col-lg sm-padding">
-                        <div class="price_wrap">
-                            <h3>{{ $category->name }}</h3>
-                            <ul class="price_list">
-                                @foreach ($category->services as $service)
-                                    <li>
-                                        <h4>{{ $service->name }}</h4>
-                                        <p class="description">
-                                            {{ $service->description }}
-                                        </p>
-                                        <span
-                                            class="price">R${{ number_format($service->value, 2, ',', '.') }}</span>
-                                    </li>
-                                @endforeach
-                            </ul>
+                    @if ($category->services->count() > 0)
+                        <div class="col-12 col-md-6 col-lg sm-padding">
+                            <div class="price_wrap">
+                                <h3>{{ $category->name }}</h3>
+                                <ul class="price_list">
+                                    @foreach ($category->services as $service)
+                                        <li>
+                                            <h4>{{ $service->name }}</h4>
+                                            <p class="description">
+                                                {{ $service->description }}
+                                            </p>
+                                            <span
+                                                class="price">R${{ number_format($service->value, 2, ',', '.') }}</span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 @endforeach
             </div>
         </div>

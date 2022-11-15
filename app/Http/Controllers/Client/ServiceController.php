@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
+use App\Models\Category;
 use App\Models\Service;
+use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
@@ -15,7 +18,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $services = Service::where('client_uuid', Auth::id())->get();
+        return view('client.services.index', compact('services'));
     }
 
     /**
@@ -25,7 +29,8 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::where('client_uuid', Auth::id())->where('active', true)->get();
+        return view('client.services.create', compact('categories'));
     }
 
     /**
@@ -36,18 +41,15 @@ class ServiceController extends Controller
      */
     public function store(StoreServiceRequest $request)
     {
-        //
-    }
+        $validated = $request->safe()->all();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Service  $service
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Service $service)
-    {
-        //
+        try {
+            Service::create($validated);
+            return redirect(route('client.services.index'))->with('success', 'Serviço criado com sucesso!');
+        } catch (Exception $e) {
+            logError($e, $validated);
+            return back()->withErrors('Erro ao cadastrar serviço, tente novamente.');
+        }
     }
 
     /**
@@ -58,7 +60,8 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        $categories = Category::where('client_uuid', Auth::id())->where('active', true)->get();
+        return view('client.services.edit', compact('service', 'categories'));
     }
 
     /**
@@ -70,7 +73,15 @@ class ServiceController extends Controller
      */
     public function update(UpdateServiceRequest $request, Service $service)
     {
-        //
+        $validated = $request->safe()->all();
+
+        try {
+            $service->update($validated);
+            return redirect(route('client.services.index'))->with('success', 'Serviço editado com sucesso!');
+        } catch (Exception $e) {
+            logError($e, $validated);
+            return back()->withErrors('Erro ao editar serviço, tente novamente.');
+        }
     }
 
     /**
@@ -81,6 +92,12 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        try {
+            $service->delete();
+            return back()->with('success', 'Serviço deletada com sucesso!');
+        } catch (Exception $e) {
+            logError($e);
+            return back()->withErrors('Erro ao deletar serviço, tente novamente.');
+        }
     }
 }

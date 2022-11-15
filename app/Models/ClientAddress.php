@@ -14,7 +14,7 @@ class ClientAddress extends Model
     protected $primaryKey = 'uuid';
 
     protected $fillable = [
-        'client_id',
+        'client_uuid',
         'cep',
         'address',
         'number',

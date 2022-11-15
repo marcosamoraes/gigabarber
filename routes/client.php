@@ -8,20 +8,24 @@ use App\Http\Controllers\Client\Controller;
 use App\Http\Controllers\Client\ServiceController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['guest'])->group(function () {
+Route::middleware(['guest:web'])->group(function () {
   Route::get('/', function() { return view('client.login'); })->name('login');
-  Route::post('/register', [AuthController::class, 'register'])->name('register');
+  Route::get('/register', function() { return view('client.register'); })->name('register');
+  Route::post('/register', [AuthController::class, 'register'])->name('register.post');
   Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
+  Route::get('/forgot-password', [AuthController::class, 'forgot_password_view'])->name('password.forgot.view');
+  Route::post('/forgot-password', [AuthController::class, 'forgot_password'])->name('password.forgot');
   Route::get('/reset-password', [AuthController::class, 'reset_password_view'])->name('password.reset.view');
   Route::post('/reset-password', [AuthController::class, 'reset_password'])->name('password.reset');
 });
 
 Route::middleware(['auth'])->group(function () {
   Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
+  Route::get('/settings', [Controller::class, 'settings'])->name('settings');
   Route::put('/settings', [Controller::class, 'settings_update'])->name('settings.update');
-  Route::resource('categories', CategoryController::class);
-  Route::resource('services', ServiceController::class);
-  Route::resource('images', ClientImageController::class);
-  Route::resource('appointment', AppointmentController::class)->only(['index', 'view']);
+  Route::resource('categories', CategoryController::class)->except(['show']);
+  Route::resource('services', ServiceController::class)->except(['show']);
+  Route::resource('images', ClientImageController::class)->except(['show', 'edit', 'update']);
+  Route::resource('appointment', AppointmentController::class)->only(['index', 'destroy']);
   Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
