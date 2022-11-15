@@ -226,6 +226,35 @@
         </section>
     @endif
 
+    @if (count($client->address) > 0)
+        <section id="map" class="pricing_section bg-grey bd-bottom">
+            <div class="container-fluid px-0">
+                <div class="mapouter">
+                    <div class="gmap_canvas">
+                        <iframe width="100%" height="300" id="gmap_canvas"
+                            src="https://maps.google.com/maps?q={{ $client->fullAddress() }}&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                        <style>
+                            .mapouter {
+                                position: relative;
+                                text-align: right;
+                                height: 300px;
+                                width: 100%;
+                            }
+
+                            .gmap_canvas {
+                                overflow: hidden;
+                                background: none !important;
+                                height: 300px;
+                                width: 100%;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
+
     <section class="widget_section padding">
         <div class="container">
             <div class="row">
