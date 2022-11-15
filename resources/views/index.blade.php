@@ -12,38 +12,38 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ $client->favicon }}" />
 
     <!-- Elegant Font Icons CSS -->
-    <link rel="stylesheet" href="assets/css/elegant-font-icons.css" />
+    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/elegant-font-icons.css" />
     <!-- Elegant Line Icons CSS -->
-    <link rel="stylesheet" href="assets/css/elegant-line-icons.css" />
+    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/elegant-line-icons.css" />
     <!-- Themify Icon CSS -->
-    <link rel="stylesheet" href="assets/css/themify-icons.css" />
+    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/themify-icons.css" />
     <!-- Barber Icons CSS -->
-    <link rel="stylesheet" href="assets/css/barber-icons.css" />
+    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/barber-icons.css" />
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/bootstrap.min.css" />
     <!-- animate CSS -->
-    <link rel="stylesheet" href="assets/css/animate.min.css" />
+    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/animate.min.css" />
     <!-- Venobox CSS -->
-    <link rel="stylesheet" href="assets/css/venobox/venobox.css" />
+    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/venobox/venobox.css" />
     <!-- Nice Select CSS -->
-    <link rel="stylesheet" href="assets/css/nice-select.css" />
+    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/nice-select.css" />
     <!-- OWL-Carousel CSS -->
-    <link rel="stylesheet" href="assets/css/owl.carousel.css" />
+    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/owl.carousel.css" />
     <!-- Slick Nav CSS -->
-    <link rel="stylesheet" href="assets/css/slicknav.min.css" />
+    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/slicknav.min.css" />
     <!-- Main CSS -->
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/main.css?v=1.0.1" />
     <!-- Responsive CSS -->
-    <link rel="stylesheet" href="assets/css/responsive.css" />
+    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/responsive.css" />
     <!-- Multiple Select CSS -->
     <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.css">
     <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.5.2/dist/themes/bootstrap.css">
     <!-- Owl Carousel CSS -->
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/owl.carousel.min.css">
     <!-- App CSS -->
-    <link rel="stylesheet" href="assets/css/app.css" />
+    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/app.css" />
 
-    <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <script src="{{env('APP_URL')}}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
     <style>
         :root {
@@ -56,7 +56,7 @@
 <body>
     <div id="preloader">
         <div class="loader">
-            <img src="assets/img/loading.gif" width="80" alt="" />
+            <img src="{{env('APP_URL')}}/assets/img/loading.gif" width="80" alt="" />
         </div>
     </div>
 
@@ -144,11 +144,9 @@
                             <div class="col-md-6 padding-10">
                                 <select class="form-control" placeholder="Serviços" name="services[]"
                                     data-select-all="false" multiple>
-                                    <option>Hair Styling</option>
-                                    <option>Shaving</option>
-                                    <option>Face Mask</option>
-                                    <option>Hair Wash</option>
-                                    <option>Beard Triming</option>
+                                    @foreach ($client->services as $service)
+                                        <option>{{$service->category->name . ' - ' . $service->title}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -187,7 +185,7 @@
                                 <ul class="price_list">
                                     @foreach ($category->services as $service)
                                         <li>
-                                            <h4>{{ $service->name }}</h4>
+                                            <h4>{{ $service->title }}</h4>
                                             <p class="description">
                                                 {{ $service->description }}
                                             </p>
@@ -343,44 +341,44 @@
     <a data-scroll href="#header" id="scroll-to-top"><i class="arrow_up"></i></a>
 
     <!-- jQuery Lib -->
-    <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="{{env('APP_URL')}}/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <!-- Jquery Mask JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"
         integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Bootstrap JS -->
-    <script src="assets/js/vendor/bootstrap.min.js"></script>
+    <script src="{{env('APP_URL')}}/assets/js/vendor/bootstrap.min.js"></script>
     <!-- Imagesloaded JS -->
-    <script src="assets/js/vendor/imagesloaded.pkgd.min.js"></script>
+    <script src="{{env('APP_URL')}}/assets/js/vendor/imagesloaded.pkgd.min.js"></script>
     <!-- OWL-Carousel JS -->
-    <script src="assets/js/vendor/owl.carousel.min.js"></script>
+    <script src="{{env('APP_URL')}}/assets/js/vendor/owl.carousel.min.js"></script>
     <!-- isotope JS -->
-    <script src="assets/js/vendor/jquery.isotope.v3.0.2.js"></script>
+    <script src="{{env('APP_URL')}}/assets/js/vendor/jquery.isotope.v3.0.2.js"></script>
     <!-- Smooth Scroll JS -->
-    <script src="assets/js/vendor/smooth-scroll.min.js"></script>
+    <script src="{{env('APP_URL')}}/assets/js/vendor/smooth-scroll.min.js"></script>
     <!-- venobox JS -->
-    <script src="assets/js/vendor/venobox.min.js"></script>
+    <script src="{{env('APP_URL')}}/assets/js/vendor/venobox.min.js"></script>
     <!-- ajaxchimp JS -->
-    <script src="assets/js/vendor/jquery.ajaxchimp.min.js"></script>
+    <script src="{{env('APP_URL')}}/assets/js/vendor/jquery.ajaxchimp.min.js"></script>
     <!--Slicknav-->
-    <script src="assets/js/vendor/jquery.slicknav.min.js"></script>
+    <script src="{{env('APP_URL')}}/assets/js/vendor/jquery.slicknav.min.js"></script>
     <!--Nice Select-->
-    <script src="assets/js/vendor/jquery.nice-select.min.js"></script>
+    <script src="{{env('APP_URL')}}/assets/js/vendor/jquery.nice-select.min.js"></script>
     <!-- Wow JS -->
-    <script src="assets/js/vendor/wow.min.js"></script>
+    <script src="{{env('APP_URL')}}/assets/js/vendor/wow.min.js"></script>
     <!-- Contact JS -->
-    <script src="assets/js/contact.js"></script>
+    <script src="{{env('APP_URL')}}/assets/js/contact.js"></script>
     <!-- Appointment JS -->
-    <script src="assets/js/appointment.js"></script>
+    <script src="{{env('APP_URL')}}/assets/js/appointment.js"></script>
     <!-- Multiple Select JS -->
     <script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js"></script>
     <!-- Owl Carousel CSS -->
-    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="{{env('APP_URL')}}/assets/js/owl.carousel.min.js"></script>
     <!-- Main JS -->
-    <script src="assets/js/main.js"></script>
+    <script src="{{env('APP_URL')}}/assets/js/main.js"></script>
 
     <!-- App JS -->
-    <script src="assets/js/app.js"></script>
+    <script src="{{env('APP_URL')}}/assets/js/app.js"></script>
 </body>
 
 </html>

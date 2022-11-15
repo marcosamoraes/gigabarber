@@ -44,7 +44,8 @@ Route::post('/{uuid}', function (StoreAppointmentRequest $request, $uuid) {
             $validated['client_uuid'] = $client->uuid;
             $validated['user_uuid'] = $user->uuid;
 
-            Appointment::create($validated);
+            $appointment = Appointment::create($validated);
+            $appointment->sendNewAppointment();
         });
 
         return response()->json(['Agendamento realizado com sucesso!'], 201);
