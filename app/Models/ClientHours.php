@@ -2,26 +2,22 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ClientAttribute extends Model
+class ClientHours extends Model
 {
     use HasFactory;
+    use HasUuids;
 
-    protected $primaryKey = 'client_uuid';
+    protected $primaryKey = 'uuid';
 
     protected $fillable = [
         'client_uuid',
-        'title',
-        'description',
-        'public_email',
-        'image',
-        'primary_color',
-        'text_color',
-        'description_footer',
-        'link_facebook',
-        'link_instagram',
+        'day',
+        'open_time',
+        'close_time',
     ];
 
     public function client()

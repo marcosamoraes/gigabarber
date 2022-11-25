@@ -28,7 +28,6 @@ class ClientAttributeFactory extends Factory
             'text_color' => fake()->hexColor(),
             'link_facebook' => 'https://facebook.com',
             'link_instagram' => 'https://instagram.com',
-            'opening_hours' => 'Segunda - Sexta 8:00 às 18:00<br>Sábado 8:00 às 12:00',
         ];
     }
 }

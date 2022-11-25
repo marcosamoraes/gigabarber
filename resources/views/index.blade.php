@@ -12,38 +12,42 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ $client->favicon }}" />
 
     <!-- Elegant Font Icons CSS -->
-    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/elegant-font-icons.css" />
+    <link rel="stylesheet" href="{{ env('APP_URL') }}/assets/css/elegant-font-icons.css" />
     <!-- Elegant Line Icons CSS -->
-    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/elegant-line-icons.css" />
+    <link rel="stylesheet" href="{{ env('APP_URL') }}/assets/css/elegant-line-icons.css" />
     <!-- Themify Icon CSS -->
-    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/themify-icons.css" />
+    <link rel="stylesheet" href="{{ env('APP_URL') }}/assets/css/themify-icons.css" />
     <!-- Barber Icons CSS -->
-    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/barber-icons.css" />
+    <link rel="stylesheet" href="{{ env('APP_URL') }}/assets/css/barber-icons.css" />
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{ env('APP_URL') }}/assets/css/bootstrap.min.css" />
     <!-- animate CSS -->
-    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/animate.min.css" />
+    <link rel="stylesheet" href="{{ env('APP_URL') }}/assets/css/animate.min.css" />
     <!-- Venobox CSS -->
-    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/venobox/venobox.css" />
+    <link rel="stylesheet" href="{{ env('APP_URL') }}/assets/css/venobox/venobox.css" />
     <!-- Nice Select CSS -->
-    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/nice-select.css" />
+    <link rel="stylesheet" href="{{ env('APP_URL') }}/assets/css/nice-select.css" />
     <!-- OWL-Carousel CSS -->
-    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/owl.carousel.css" />
+    <link rel="stylesheet" href="{{ env('APP_URL') }}/assets/css/owl.carousel.css" />
     <!-- Slick Nav CSS -->
-    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/slicknav.min.css" />
+    <link rel="stylesheet" href="{{ env('APP_URL') }}/assets/css/slicknav.min.css" />
     <!-- Main CSS -->
-    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/main.css?v=1.0.1" />
+    <link rel="stylesheet" href="{{ env('APP_URL') }}/assets/css/main.css?v=1.0.1" />
     <!-- Responsive CSS -->
-    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/responsive.css" />
+    <link rel="stylesheet" href="{{ env('APP_URL') }}/assets/css/responsive.css" />
     <!-- Multiple Select CSS -->
     <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.css">
     <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.5.2/dist/themes/bootstrap.css">
     <!-- Owl Carousel CSS -->
-    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="{{ env('APP_URL') }}/assets/css/owl.carousel.min.css">
     <!-- App CSS -->
-    <link rel="stylesheet" href="{{env('APP_URL')}}/assets/css/app.css" />
+    <link rel="stylesheet" href="{{ env('APP_URL') }}/assets/css/app.css" />
 
-    <script src="{{env('APP_URL')}}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <script src="{{ env('APP_URL') }}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
+    <script>
+        envUrl = "{{ env('APP_URL') }}";
+    </script>
 
     <style>
         :root {
@@ -56,7 +60,7 @@
 <body>
     <div id="preloader">
         <div class="loader">
-            <img src="{{env('APP_URL')}}/assets/img/loading.gif" width="80" alt="" />
+            <img src="{{ env('APP_URL') }}/assets/img/loading.gif" width="80" alt="" />
         </div>
     </div>
 
@@ -70,35 +74,44 @@
                         {{ $client->company_name }}
                     @endif
                 </a>
+                <style>
+                    .slicknav_nav {
+                        background-color: #222227;
+                        height: 150px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-wrap: wrap;
+                    }
+                    .slicknav_nav .header-btn {
+                        margin-right: 0;
+                    }
+                    .header-btn button {
+                        cursor: pointer;
+                    }
+                </style>
                 <div class="d-flex menu-wrap align-items-center">
                     <div id="mainmenu" class="mainmenu">
-                        <ul class="nav d-lg-flex align-items-center">
-                            <li>
-                                <a data-scroll class="nav-link active" href="#about">Home<span
-                                        class="sr-only">(current)</span></a>
-                            </li>
-                            <li>
-                                <a href="#services">Serviços</a>
-                            </li>
-                            <li>
-                                <a href="#portfolio">Portfólio</a>
-                            </li>
-                            <li>
-                                <a href="#contact">Contato</a>
-                            </li>
-                            <li>
-                                <div class="header-btn">
-                                    <a href="#appointment" class="menu-btn">Realizar Agendamento</a>
-                                </div>
-                            </li>
-                        </ul>
+                        <form action="">
+                            <ul class="nav d-lg-flex align-items-center">
+                                <li>
+                                    <input type="text" name="whatsapp" class="form-control"
+                                            placeholder="Digite seu Whatsapp" style="height: 45px">
+                                </li>
+                                <li>
+                                    <div class="header-btn">
+                                        <button type="submit" class="menu-btn">Realizar Agendamento</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </form>
                     </div>
                 </div>
             </nav>
         </div>
     </header>
 
-    <section id="about" class="about_section bd-bottom padding">
+    {{-- <section id="about" class="about_section bd-bottom padding">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -168,7 +181,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <section id="services" class="pricing_section bg-grey bd-bottom padding">
         <div class="container">
@@ -178,20 +191,22 @@
             </div>
             <div class="row">
                 @foreach ($client->categories as $category)
-                    @if ($category->services->count() > 0)
+                    @if ($category->services->count() > 0 && $category->active)
                         <div class="col-12 col-md-6 col-lg sm-padding">
                             <div class="price_wrap">
                                 <h3>{{ $category->name }}</h3>
                                 <ul class="price_list">
                                     @foreach ($category->services as $service)
-                                        <li>
-                                            <h4>{{ $service->title }}</h4>
-                                            <p class="description">
-                                                {{ $service->description }}
-                                            </p>
-                                            <span
-                                                class="price">R${{ number_format($service->value, 2, ',', '.') }}</span>
-                                        </li>
+                                        @if ($service->active)
+                                            <li>
+                                                <h4>{{ $service->title }}</h4>
+                                                <p class="description">
+                                                    {{ $service->description }}
+                                                </p>
+                                                <span
+                                                    class="price">R${{ number_format($service->value, 2, ',', '.') }}</span>
+                                            </li>
+                                        @endif
                                     @endforeach
                                 </ul>
                             </div>
@@ -227,7 +242,7 @@
         </section>
     @endif
 
-    @if (count($client->address) > 0)
+    {{-- @if (count($client->address) > 0)
         <section id="map" class="pricing_section bg-grey bd-bottom">
             <div class="container-fluid px-0">
                 <div class="mapouter">
@@ -254,7 +269,7 @@
                 </div>
             </div>
         </section>
-    @endif
+    @endif --}}
 
     <section class="widget_section padding">
         <div class="container">
@@ -341,44 +356,44 @@
     <a data-scroll href="#header" id="scroll-to-top"><i class="arrow_up"></i></a>
 
     <!-- jQuery Lib -->
-    <script src="{{env('APP_URL')}}/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="{{ env('APP_URL') }}/assets/js/vendor/jquery-1.12.4.min.js"></script>
     <!-- Jquery Mask JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"
         integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Bootstrap JS -->
-    <script src="{{env('APP_URL')}}/assets/js/vendor/bootstrap.min.js"></script>
+    <script src="{{ env('APP_URL') }}/assets/js/vendor/bootstrap.min.js"></script>
     <!-- Imagesloaded JS -->
-    <script src="{{env('APP_URL')}}/assets/js/vendor/imagesloaded.pkgd.min.js"></script>
+    <script src="{{ env('APP_URL') }}/assets/js/vendor/imagesloaded.pkgd.min.js"></script>
     <!-- OWL-Carousel JS -->
-    <script src="{{env('APP_URL')}}/assets/js/vendor/owl.carousel.min.js"></script>
+    <script src="{{ env('APP_URL') }}/assets/js/vendor/owl.carousel.min.js"></script>
     <!-- isotope JS -->
-    <script src="{{env('APP_URL')}}/assets/js/vendor/jquery.isotope.v3.0.2.js"></script>
+    <script src="{{ env('APP_URL') }}/assets/js/vendor/jquery.isotope.v3.0.2.js"></script>
     <!-- Smooth Scroll JS -->
-    <script src="{{env('APP_URL')}}/assets/js/vendor/smooth-scroll.min.js"></script>
+    <script src="{{ env('APP_URL') }}/assets/js/vendor/smooth-scroll.min.js"></script>
     <!-- venobox JS -->
-    <script src="{{env('APP_URL')}}/assets/js/vendor/venobox.min.js"></script>
+    <script src="{{ env('APP_URL') }}/assets/js/vendor/venobox.min.js"></script>
     <!-- ajaxchimp JS -->
-    <script src="{{env('APP_URL')}}/assets/js/vendor/jquery.ajaxchimp.min.js"></script>
+    <script src="{{ env('APP_URL') }}/assets/js/vendor/jquery.ajaxchimp.min.js"></script>
     <!--Slicknav-->
-    <script src="{{env('APP_URL')}}/assets/js/vendor/jquery.slicknav.min.js"></script>
+    <script src="{{ env('APP_URL') }}/assets/js/vendor/jquery.slicknav.min.js"></script>
     <!--Nice Select-->
-    <script src="{{env('APP_URL')}}/assets/js/vendor/jquery.nice-select.min.js"></script>
+    <script src="{{ env('APP_URL') }}/assets/js/vendor/jquery.nice-select.min.js"></script>
     <!-- Wow JS -->
-    <script src="{{env('APP_URL')}}/assets/js/vendor/wow.min.js"></script>
+    <script src="{{ env('APP_URL') }}/assets/js/vendor/wow.min.js"></script>
     <!-- Contact JS -->
-    <script src="{{env('APP_URL')}}/assets/js/contact.js"></script>
+    <script src="{{ env('APP_URL') }}/assets/js/contact.js"></script>
     <!-- Appointment JS -->
-    <script src="{{env('APP_URL')}}/assets/js/appointment.js"></script>
+    <script src="{{ env('APP_URL') }}/assets/js/appointment.js"></script>
     <!-- Multiple Select JS -->
     <script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js"></script>
     <!-- Owl Carousel CSS -->
-    <script src="{{env('APP_URL')}}/assets/js/owl.carousel.min.js"></script>
+    <script src="{{ env('APP_URL') }}/assets/js/owl.carousel.min.js"></script>
     <!-- Main JS -->
-    <script src="{{env('APP_URL')}}/assets/js/main.js"></script>
+    <script src="{{ env('APP_URL') }}/assets/js/main.js"></script>
 
     <!-- App JS -->
-    <script src="{{env('APP_URL')}}/assets/js/app.js"></script>
+    <script src="{{ env('APP_URL') }}/assets/js/app.js"></script>
 </body>
 
 </html>

@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer mb-1">
-                                    <button type="submit" class="btn btn-primary">Editar</a>
+                                    <button type="submit" class="btn btn-primary">Salvar</a>
                                 </div>
                             </div>
                         </form>

@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
- 
+
 @section('title', 'Clientes')
- 
+
 @section('content')
 
 	<!-- Main Content-->
@@ -48,7 +48,7 @@
 											@foreach($clients as $client)
 												<tr class="border-bottom">
 													<td class="font-weight-bold text-center">
-														<a href="{{$client->slug}}" target="_blank">
+														<a href="{{env('APP_URL') . '/' . $client->slug}}" target="_blank">
 															<img src="{{$client->logo}}" class="avatar avatar-sm me-2" alt="" style="margin: auto!important;">
 															{{$client->name}}
 														</a>
@@ -56,7 +56,7 @@
 													<td>{{$client->email}}</td>
 													<td><a target="_blank" href="https://api.whatsapp.com/send?phone=55{{preg_replace('/\D/', '', $client->whatsapp)}}">{{$client->whatsapp}}</a></td>
 													<td>
-														@if ($client->address[0]->city)
+														@if (isset($client->address[0]) && $client->address[0]->city)
 															{{$client->address[0]->city}}/{{$client->address[0]->state}}
 														@endif
 													</td>

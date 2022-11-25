@@ -1,7 +1,7 @@
 @extends('client.layouts.app')
- 
+
 @section('title', 'Imagens')
- 
+
 @section('content')
 
 	<!-- Main Content-->
@@ -46,6 +46,9 @@
 													</td>
 													<td>
 														<div class="btn-group" role="group">
+															<a href="{{route('client.images.edit', $image)}}" class="btn btn-warning">
+																<i class="fa fa-edit"></i>
+															</a>
 															<form method="post" action="{{route('client.images.destroy', $image->uuid)}}" onsubmit="return confirm('Tem certeza que quer excluir essa imagem?');">
 																@csrf
 	    														{{ method_field('DELETE') }}

@@ -56,6 +56,41 @@ class ClientImageController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\ClientImage  $clientImage
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(ClientImage $image)
+    {
+        return view('client.images.edit', compact('image'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdateCategoryRequest  $request
+     * @param  \App\Models\ClientImage  $clientImage
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, ClientImage $image)
+    {
+        $validated = $this->validate($request, [
+            'image' => ['required', 'image']
+        ]);
+
+        try {
+            Storage::delete(str_replace('/storage/', '', $image->name));
+            $validated['name'] = $this->storageFile($validated['image'], 'client_images');
+            $image->update($validated);
+            return redirect(route('client.images.index'))->with('success', 'Imagem editada com sucesso!');
+        } catch (Exception $e) {
+            logError($e, $validated);
+            return back()->withErrors('Erro ao editar imagem, tente novamente.');
+        }
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  string  $uuid
@@ -67,7 +102,7 @@ class ClientImageController extends Controller
             $image = ClientImage::findOrFail($uuid);
             Storage::delete(str_replace('/storage/', '', $image->name));
             $image->delete();
-            
+
             return back()->with('success', 'Imagem deletada com sucesso!');
         } catch (Exception $e) {
             logError($e);

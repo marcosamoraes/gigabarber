@@ -49,13 +49,13 @@ class AuthController extends Controller
 
             return back();
         }
-        
+
         return back()->withErrors([
             'email' => 'E-mail ou senha inválidos.',
         ])->onlyInput('email');
     }
 
-    public function forgot_password_view() 
+    public function forgot_password_view()
     {
         return view('client.forgot-password');
     }
@@ -73,11 +73,11 @@ class AuthController extends Controller
             : redirect(route('client.login'))->withErrors(['email' => __($status)]);
     }
 
-    public function reset_password_view(Request $request) 
+    public function reset_password_view(Request $request)
     {
         if (!$request->input('token') && !$request->input('email'))
             return redirect(route('client.login'));
-            
+
         return view('client.reset-password', ['token' => $request->input('token'), 'email' => $request->input('email')]);
     }
 

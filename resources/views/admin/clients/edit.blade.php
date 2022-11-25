@@ -36,7 +36,7 @@
                                         </div>
                                         <div class="col-12 col-lg-6">
                                             <div style="text-align: right">
-                                                <button type="submit" class="btn btn-primary">Editar</a>
+                                                <button type="submit" class="btn btn-primary">Salvar</a>
                                             </div>
                                         </div>
                                     </div>
@@ -88,7 +88,7 @@
                                         <label class="tx-medium">Favicon</label>
                                         <input type="file" class="form-control" name="favicon" id="favicon">
                                         @if ($client->favicon)
-                                            <img height="100px" src="{{$client->favicon}}" alt="favicon">
+                                            <img height="100px" src="{{env('APP_URL') . '/' . $client->favicon}}" alt="favicon">
                                         @endif
                                     </div>
                                 </div>
@@ -102,7 +102,7 @@
                                         </div>
                                         <div class="col-12 col-lg-6">
                                             <div style="text-align: right">
-                                                <button type="submit" class="btn btn-primary">Editar</a>
+                                                <button type="submit" class="btn btn-primary">Salvar</a>
                                             </div>
                                         </div>
                                     </div>
@@ -131,7 +131,7 @@
                                         <input type="file" class="form-control" name="attributes[image]"
                                             id="image">
                                         @if ($client->attributes->image)
-                                            <img height="100px" src="{{$client->attributes->image}}" alt="image">
+                                            <img height="100px" src="{{env('APP_URL') . '/' . $client->attributes->image}}" alt="image">
                                         @endif
                                     </div>
                                     <div class="form-group">
@@ -179,7 +179,7 @@
                                         </div>
                                         <div class="col-12 col-lg-6">
                                             <div style="text-align: right">
-                                                <button type="submit" class="btn btn-primary">Editar</a>
+                                                <button type="submit" class="btn btn-primary">Salvar</a>
                                             </div>
                                         </div>
                                     </div>
@@ -247,7 +247,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div style="text-align: right">
-                                        <button type="submit" class="btn btn-primary">Editar</a>
+                                        <button type="submit" class="btn btn-primary">Salvar</a>
                                     </div>
                                 </div>
                             </div>

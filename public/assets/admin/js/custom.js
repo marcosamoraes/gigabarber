@@ -340,7 +340,8 @@ $(function () {
 
 	$(document).on('change', '[name="state"], #state', function() {
 		let state_id = $('[name="state"] option:selected, #state option:selected').data('id');
-		$.getJSON('/json/cities.json', function(data) {
+		const url = $('meta[name="url"]').attr('content');
+		$.getJSON(url+'/json/cities.json', function(data) {
 			data = data.filter(function (v){
 		        return v.estado==state_id;
 		    });

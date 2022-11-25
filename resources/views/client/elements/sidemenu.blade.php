@@ -27,6 +27,14 @@
                             <span class="sidemenu-label">Configurações</span>
                         </a>
                     </li>
+                    <li class="nav-item {{ request()->is('client.users.*') ? 'active' : false }}">
+                        <a class="nav-link" href="{{ route('client.users.index') }}">
+                            <span class="shape1"></span>
+                            <span class="shape2"></span>
+                            <i class="ti-write sidemenu-icon menu-icon "></i>
+                            <span class="sidemenu-label">Usuários</span>
+                        </a>
+                    </li>
                     <li class="nav-item {{ request()->is('client.categories.*') ? 'active' : false }}">
                         <a class="nav-link" href="{{ route('client.categories.index') }}">
                             <span class="shape1"></span>
@@ -51,8 +59,8 @@
                             <span class="sidemenu-label">Imagens</span>
                         </a>
                     </li>
-                    <li class="nav-item {{ request()->is('client.appointment.*') ? 'active' : false }}">
-                        <a class="nav-link" href="{{ route('client.appointment.index') }}">
+                    <li class="nav-item {{ request()->is('client.appointments.*') ? 'active' : false }}">
+                        <a class="nav-link" href="{{ route('client.appointments.index') }}">
                             <span class="shape1"></span>
                             <span class="shape2"></span>
                             <i class="ti-time sidemenu-icon menu-icon "></i>

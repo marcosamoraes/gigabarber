@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Client;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -24,7 +23,7 @@ class ClientFactory extends Factory
             'company_name' => fake()->company(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => Hash::make('password'),
+            'password' => 'password',
             'remember_token' => Str::random(10),
             'logo' => fake()->imageUrl(100, 100, 'Logo'),
             'whatsapp' => fake()->cellphoneNumber(),
@@ -51,6 +50,7 @@ class ClientFactory extends Factory
             \App\Models\ClientAttribute::factory(1)->create($config);
             \App\Models\ClientAddress::factory(1)->create($config);
             \App\Models\ClientImage::factory(6)->create($config);
+            \App\Models\ClientHours::factory(5)->create($config);
             \App\Models\Category::factory(3)->create($config);
         });
     }

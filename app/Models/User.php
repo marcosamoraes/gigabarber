@@ -13,15 +13,22 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Model
 {
     use HasApiTokens, HasFactory, Notifiable, HasUuids;
-    
+
     protected $primaryKey = 'uuid';
 
     protected $fillable = [
+        'uuid',
+        'client_uuid',
         'name',
         'email',
         'whatsapp',
         'cpf',
     ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
 
     public function appointments()
     {

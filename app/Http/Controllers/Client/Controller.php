@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller as BaseController;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Appointment;
 use App\Models\Client;
+use App\Models\ClientAddress;
 use App\Models\Service;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class Controller extends BaseController
@@ -68,6 +70,7 @@ class Controller extends BaseController
     $validated = $request->safe()->all();
 
     try {
+      DB::beginTransaction();
       $client = Client::findOrFail(Auth::id());
 
       if (isset($validated['logo'])) {
@@ -81,8 +84,17 @@ class Controller extends BaseController
       }
 
       $client->update($validated);
+      $client->attributes()->updateOrCreate(['client_uuid' => $client->uuid], $validated['attributes']);
+      ClientAddress::updateOrCreate(['client_uuid' => $client->uuid], $validated['address']);
+
+      $client->hours()->delete();
+      foreach ($validated['hours'] as $clientHour)
+        $client->hours()->create($clientHour);
+
+      DB::commit();
       return back()->with('success', 'Dados editado com sucesso!');
     } catch (Exception $e) {
+      DB::rollBack();
       logError($e, $validated);
       return back()->withErrors('Erro ao editar dados, tente novamente.');
     }

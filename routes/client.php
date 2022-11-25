@@ -6,6 +6,7 @@ use App\Http\Controllers\Client\CategoryController;
 use App\Http\Controllers\Client\ClientImageController;
 use App\Http\Controllers\Client\Controller;
 use App\Http\Controllers\Client\ServiceController;
+use App\Http\Controllers\Client\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guest:web'])->group(function () {
@@ -19,13 +20,14 @@ Route::middleware(['guest:web'])->group(function () {
   Route::post('/reset-password', [AuthController::class, 'reset_password'])->name('password.reset');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth:web'])->group(function () {
   Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
   Route::get('/settings', [Controller::class, 'settings'])->name('settings');
   Route::put('/settings', [Controller::class, 'settings_update'])->name('settings.update');
+  Route::resource('users', UserController::class)->except(['show']);
   Route::resource('categories', CategoryController::class)->except(['show']);
   Route::resource('services', ServiceController::class)->except(['show']);
-  Route::resource('images', ClientImageController::class)->except(['show', 'edit', 'update']);
-  Route::resource('appointment', AppointmentController::class)->only(['index', 'destroy']);
+  Route::resource('images', ClientImageController::class)->except(['show']);
+  Route::resource('appointments', AppointmentController::class)->except(['show', 'edit', 'update']);
   Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });

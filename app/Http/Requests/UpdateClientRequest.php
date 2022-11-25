@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -37,14 +38,15 @@ class UpdateClientRequest extends FormRequest
      */
     public function rules()
     {
-        $client = $this->route('client');
+        $client = $this->route('client') ? $this->route('client') : Auth::id();
+
         return [
             'name'          => ['nullable'],
-            'email'         => ['email', Rule::unique('clients')->ignore($client), 'required'],
+            'email'         => ['email', Rule::unique('clients')->ignore($client, 'uuid'), 'required'],
             'password'      => ['nullable'],
-            'slug'          => [Rule::unique('clients')->ignore($client), 'required'],
+            'slug'          => [Rule::unique('clients')->ignore($client, 'uuid'), 'required'],
             'whatsapp'      => ['nullable'],
-            'company_name'  => [Rule::unique('clients')->ignore($client), 'required'],
+            'company_name'  => [Rule::unique('clients')->ignore($client, 'uuid'), 'required'],
             'whatsapp'      => ['nullable'],
             'logo'          => ['nullable', 'image'],
             'favicon'       => ['nullable', 'image'],
@@ -67,6 +69,10 @@ class UpdateClientRequest extends FormRequest
             'address.complement'   => ['nullable', 'max: 50'],
             'address.city'         => ['required', 'max:50'],
             'address.state'        => ['required', 'max:2'],
+
+            'hours.*.day'        => ['required', 'string', 'in:segunda,terça,quarta,quinta,sexta,sábado,domingo'],
+            'hours.*.open_time'  => ['required'],
+            'hours.*.close_time' => ['required', 'after:hours.*.open_time'],
         ];
     }
 }

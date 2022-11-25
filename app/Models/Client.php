@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 class Client extends Authenticatable
 {
     use HasFactory, HasUuids, SoftDeletes, Notifiable;
-    
+
     protected $primaryKey = 'uuid';
 
     protected $fillable = [
@@ -45,6 +45,11 @@ class Client extends Authenticatable
             $model->slug = Str::slug($model->company_name.'-'.rand(1000,9999), '-');
             $model->password = Hash::make($model->password);
         });
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
     }
 
     public function address()
@@ -82,14 +87,21 @@ class Client extends Authenticatable
         return $this->hasMany(ClientImage::class);
     }
 
+    public function hours()
+    {
+        return $this->hasMany(ClientHours::class)
+            ->orderBy('day', 'asc')
+            ->orderBy('open_time', 'asc');
+    }
+
     public function fullAddress()
     {
         if (!isset($this->address[0]))
             return false;
-            
+
         $address = $this->address[0];
 
-        $full_address = $address->address . 
+        $full_address = $address->address .
         ', ' . $address->number .
         ', ' . $address->area;
 

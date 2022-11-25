@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('client_hours', function (Blueprint $table) {
             $table->uuid()->primary();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('whatsapp');
-            $table->string('cpf')->unique();
+            $table->foreignUuid('client_uuid')->constrained('clients', 'uuid');
+            $table->enum('day', ['segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado', 'domingo']);
+            $table->time('open_time');
+            $table->time('close_time');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('client_hours');
     }
 };

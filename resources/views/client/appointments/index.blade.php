@@ -1,7 +1,7 @@
 @extends('client.layouts.app')
- 
+
 @section('title', 'Agendamentos')
- 
+
 @section('content')
 
 	<!-- Main Content-->
@@ -14,6 +14,13 @@
 				<div class="page-header">
 					<div>
 						<h2 class="main-content-title tx-24 mg-b-5">Agendamentos</h2>
+					</div>
+					<div class="d-flex">
+						<div class="justify-content-center">
+							<a href="{{route('client.appointments.create')}}" class="btn btn-primary my-2 btn-icon-text">
+							  <i class="fe fe-plus me-2"></i> Cadastrar
+							</a>
+						</div>
 					</div>
 				</div>
 				<!-- End Page Header -->
@@ -71,7 +78,7 @@
 													</td>
 													<td>
 														<div class="btn-group" role="group">
-															<form method="post" action="{{route('client.appointment.destroy', $appointment)}}" onsubmit="return confirm('Tem certeza que quer excluir esse agendamento?');">
+															<form method="post" action="{{route('client.appointments.destroy', $appointment)}}" onsubmit="return confirm('Tem certeza que quer excluir esse agendamento?');">
 																@csrf
 	    														{{ method_field('DELETE') }}
 																<button type="submit" class="btn btn-danger">
