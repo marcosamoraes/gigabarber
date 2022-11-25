@@ -128,165 +128,32 @@
         </div>
     </header>
 
-    {{-- <section id="about" class="about_section bd-bottom padding">
+    <section id="about" class="about_section bd-bottom padding">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-12 col-lg-6 offset-lg-3">
                     <div class="about_content align-center">
                         <h2 class="wow fadeInUp" data-wow-delay="200ms">
-                            {{ $client->attributes->title }}
+                            Realizar Agendamento
                         </h2>
-                        <p class="wow fadeInUp" data-wow-delay="600ms">
-                            {{ $client->attributes->description }}
-                        </p>
+                    </div>
+                    <div class="form-group">
+                      <input type="date" name="date" class="form-control">
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <button class="btn btn-outline-dark w-100 mb-3">08:00</button>
+                        <button class="btn btn-outline-dark w-100 mb-3">08:30</button>
+                        <button class="btn btn-outline-dark w-100 mb-3">09:00</button>
+                        <button class="btn btn-outline-dark w-100 mb-3">09:30</button>
+                        <button class="btn btn-outline-dark w-100 mb-3">10:00</button>
+                        <button class="btn btn-outline-dark w-100 mb-3">10:30</button>
+                      </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <section id="appointment" class="book_section padding">
-        <div class="book_bg" style="background-image: url({{ $client->attributes->image }})"></div>
-        <div class="map_pattern"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-6 offset-md-6">
-                    <form action="{{ route('make.appointment', ['uuid' => $client->uuid]) }}" method="post"
-                        id="appointment_form" class="form-horizontal appointment_form">
-                        @csrf
-                        <div class="book_content">
-                            <h2>Faça um agendamento</h2>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-6 padding-10">
-                                <input type="text" name="user[name]" class="form-control" placeholder="Nome" required />
-                            </div>
-                            <div class="col-md-6 padding-10">
-                                <input type="email" name="user[email]" class="form-control" placeholder="E-mail"
-                                    required />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-6 padding-10">
-                                <input type="text" name="user[whatsapp]" id="whatsapp" class="form-control" placeholder="Whatsapp"
-                                    required />
-                            </div>
-                            <div class="col-md-6 padding-10">
-                                <select class="form-control" placeholder="Serviços" name="services[]"
-                                    data-select-all="false" multiple>
-                                    @foreach ($client->services as $service)
-                                        <option>{{$service->category->name . ' - ' . $service->title}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-6 padding-10">
-                                <input type="text" name="user[cpf]" class="form-control" id="cpf" placeholder="CPF"
-                                    required />
-                            </div>
-                            <div class="col-md-6 padding-10">
-                                <input type="datetime-local" name="date" class="form-control" placeholder="Data"
-                                    required />
-                            </div>
-                        </div>
-                        <button id="app_submit" class="default_btn" type="submit">
-                            Agendar
-                        </button>
-                        <div id="msg-status" class="alert" role="alert"></div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
-    <section id="services" class="pricing_section bg-grey bd-bottom padding">
-        <div class="container">
-            <div class="section_heading text-center mb-40 wow fadeInUp" data-wow-delay="300ms">
-                <h2>Nossos Serviços</h2>
-                <div class="heading-line"></div>
-            </div>
-            <div class="row">
-                @foreach ($client->categories as $category)
-                    @if ($category->services->count() > 0 && $category->active)
-                        <div class="col-12 col-md-6 col-lg sm-padding">
-                            <div class="price_wrap">
-                                <h3>{{ $category->name }}</h3>
-                                <ul class="price_list">
-                                    @foreach ($category->services as $service)
-                                        @if ($service->active)
-                                            <li>
-                                                <h4>{{ $service->title }}</h4>
-                                                <p class="description">
-                                                    {{ $service->description }}
-                                                </p>
-                                                <span
-                                                    class="price">R${{ number_format($service->value, 2, ',', '.') }}</span>
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                    @endif
-                @endforeach
-            </div>
-        </div>
-    </section>
-
-    @if (count($client->images) > 0)
-        <section id="portfolio" class="pricing_section bg-grey bd-bottom padding">
-            <div class="container">
-                <div class="section_heading text-center mb-40 wow fadeInUp" data-wow-delay="300ms">
-                    <h2>Imagens</h2>
-                    <div class="heading-line"></div>
-                </div>
-                <div class="row">
-                    <div class="col-12 sm-padding">
-                        <div class="owl-carousel">
-                            @foreach ($client->images as $image)
-                                <div>
-                                    <a href="{{ $image->name }}" target="_blank">
-                                        <img src="{{ $image->name }}" alt="{{ $client->company_name }}"
-                                            class="w-100">
-                                    </a>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    @endif
-
-    {{-- @if (count($client->address) > 0)
-        <section id="map" class="pricing_section bg-grey bd-bottom">
-            <div class="container-fluid px-0">
-                <div class="mapouter">
-                    <div class="gmap_canvas">
-                        <iframe width="100%" height="300" id="gmap_canvas"
-                            src="https://maps.google.com/maps?q={{ $client->fullAddress() }}&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-                        <style>
-                            .mapouter {
-                                position: relative;
-                                text-align: right;
-                                height: 300px;
-                                width: 100%;
-                            }
-
-                            .gmap_canvas {
-                                overflow: hidden;
-                                background: none !important;
-                                height: 300px;
-                                width: 100%;
-                            }
-                        </style>
-                    </div>
-                </div>
-            </div>
-        </section>
-    @endif --}}
 
     <section class="widget_section padding">
         <div class="container">

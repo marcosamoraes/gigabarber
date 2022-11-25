@@ -4,6 +4,7 @@ use App\Http\Requests\StoreAppointmentRequest;
 use App\Models\Appointment;
 use App\Models\Client;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -26,12 +27,25 @@ Route::get('/{slug}', function ($slug) {
     try {
         $client = Client::where('slug', $slug)->firstOrFail();
         $client->increment('views');
-        return view('index', compact('client'));
     } catch (Exception $e) {
         logError($e, false, ['slug' => $slug]);
         abort(404);
     }
+
+    return view('index', compact('client'));
 })->name('index');
+
+Route::get('/{slug}/agendamento', function (Request $request, $slug) {
+    $whatsapp = $request->only('whatsapp');
+
+    $client = Client::where('slug', $slug)->first();
+
+    $user = User::where('whatsapp', $whatsapp)->first();
+    if (!$user)
+        return back()->withErrors('Você precisa de um pré-cadastro feito pelo Administrador para realizar um agendamento.');
+
+    return view('appointment', compact('client', 'user'));
+})->name('appointment');
 
 Route::post('/{uuid}', function (StoreAppointmentRequest $request, $uuid) {
     $validated = $request->safe()->all();

@@ -15,8 +15,6 @@ return new class extends Migration
     {
         Schema::create('client_attributes', function (Blueprint $table) {
             $table->foreignUuid('client_uuid')->constrained('clients', 'uuid')->primary();
-            $table->string('title');
-            $table->text('description')->nullable();
             $table->string('public_email')->nullable();
             $table->string('image')->default('/storage/book-bg.jpg');
             $table->string('primary_color')->default('#9E8A78');

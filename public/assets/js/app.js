@@ -43,8 +43,10 @@ $(document).ready(function () {
         }
     });
 
-    $('[name="cpf"], #cpf').mask('999.999.999-99');
-    $('[name="value"], #value').mask("000.000.000.000.000,00", { reverse: true });
+    $('[name="cpf"], #cpf').mask("999.999.999-99");
+    $('[name="value"], #value').mask("000.000.000.000.000,00", {
+        reverse: true,
+    });
 
     $('[name="whatsapp"], #whatsapp').mask("(00) 00000-0000");
     function updateMask(event) {
@@ -60,26 +62,34 @@ $(document).ready(function () {
     }
     $('[name="whatsapp"]').on("blur", updateMask);
 
-    $('.owl-carousel').owlCarousel({
-        loop:true,
-        margin:10,
-        responsiveClass:true,
-        responsive:{
-            0:{
-                items:1,
-                nav:true,
-                loop:true
+    $(".owl-carousel").owlCarousel({
+        loop: true,
+        margin: 10,
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1,
+                nav: true,
+                loop: true,
             },
-            600:{
-                items:3,
-                nav:true,
-                loop:true
+            600: {
+                items: 3,
+                nav: true,
+                loop: true,
             },
-            1000:{
-                items:5,
-                nav:true,
-                loop:true
-            }
-        }
-    })
+            1000: {
+                items: 5,
+                nav: true,
+                loop: true,
+            },
+        },
+    });
+
+    $('[name="date"]').change(function() {
+        getAvailableTimes($(this).val());
+    });
+
+    function getAvailableTimes(date) {
+        console.log(date);
+    }
 });

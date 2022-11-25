@@ -13,8 +13,6 @@ class ClientAttribute extends Model
 
     protected $fillable = [
         'client_uuid',
-        'title',
-        'description',
         'public_email',
         'image',
         'primary_color',

@@ -110,18 +110,6 @@
 
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label class="tx-medium">Título</label>
-                                        <input type="text" class="form-control" placeholder="Título"
-                                            name="attributes[title]"
-                                            value="{{ old('attributes.title', $client->attributes ? $client->attributes->title : null) }}"
-                                            required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="tx-medium">Descrição</label>
-                                        <textarea name="description" id="attributes[description]" placeholder="Descrição" class="form-control"
-                                            rows="3">{{ old('attributes.description', $client->attributes ? $client->attributes->description : null) }}</textarea>
-                                    </div>
-                                    <div class="form-group">
                                         <label class="tx-medium">E-mail Público</label>
                                         <input type="email" class="form-control" placeholder="E-mail Público"
                                             name="attributes[public_email]"

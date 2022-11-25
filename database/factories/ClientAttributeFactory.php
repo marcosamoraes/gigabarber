@@ -19,8 +19,6 @@ class ClientAttributeFactory extends Factory
     public function definition()
     {
         return [
-            'title' => fake()->sentence(2),
-            'description' => fake()->paragraph(),
             'public_email' => fake()->unique()->safeEmail(),
             'image' => fake()->imageUrl(500, 700, 'Imagem de Fundo'),
             'description_footer' => fake()->paragraph(),

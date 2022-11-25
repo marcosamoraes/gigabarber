@@ -17,9 +17,9 @@ return new class extends Migration
             $table->uuid()->primary();
             $table->foreignUuid('client_uuid')->constrained('clients', 'uuid');
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('whatsapp');
-            $table->string('cpf')->unique();
+            $table->string('email')->unique()->nullable();
+            $table->string('whatsapp')->unique();
+            $table->string('cpf')->unique()->nullable();
             $table->timestamps();
         });
     }
