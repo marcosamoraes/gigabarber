@@ -51,8 +51,6 @@ class UpdateClientRequest extends FormRequest
             'logo'          => ['nullable', 'image'],
             'favicon'       => ['nullable', 'image'],
 
-            'attributes.title'               => ['required'],
-            'attributes.description'         => ['nullable'],
             'attributes.public_email'        => ['email', 'nullable'],
             'attributes.image'               => ['image', 'nullable'],
             'attributes.primary_color'       => ['nullable'],
