@@ -42,6 +42,8 @@
     <link rel="stylesheet" href="{{ env('APP_URL') }}/assets/css/owl.carousel.min.css">
     <!-- App CSS -->
     <link rel="stylesheet" href="{{ env('APP_URL') }}/assets/css/app.css" />
+    <!-- JQuery UI CSS -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
     <script src="{{ env('APP_URL') }}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
@@ -153,7 +155,8 @@
                             </div>
                             <div class="col-12 col-lg-6">
                                 <div class="form-group">
-                                    <input type="date" name="date" class="form-control" required>
+                                    {{-- <input type="date" name="date" class="form-control" required> --}}
+                                    <div id="datepicker"></div>
                                 </div>
                             </div>
                         </div>
@@ -252,7 +255,9 @@
     <a data-scroll href="#header" id="scroll-to-top"><i class="arrow_up"></i></a>
 
     <!-- jQuery Lib -->
-    <script src="{{ env('APP_URL') }}/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
     <!-- Jquery Mask JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"
         integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw=="

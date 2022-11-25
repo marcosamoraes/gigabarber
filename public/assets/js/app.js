@@ -85,8 +85,17 @@ $(document).ready(function () {
         },
     });
 
-    $('[name="date"]').change(function () {
-        getAvailableTimes($(this).val());
+    if ($("#datepicker").length > 0) {
+        $("#datepicker").datepicker({
+            minDate: 0
+        });
+    }
+
+    $('#datepicker').change(function () {
+        let date = $(this).val();
+        date = date.split('/');
+        date = `${date[2]}-${date[0]}-${date[1]}`
+        getAvailableTimes(date);
     });
 
     function getAvailableTimes(date) {
