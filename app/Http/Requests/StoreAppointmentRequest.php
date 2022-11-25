@@ -36,12 +36,10 @@ class StoreAppointmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'user.name' => ['required'],
-            'user.email' => ['required', 'email'],
-            'user.whatsapp' => ['required'],
-            'user.cpf' => ['required'],
+            'uuid' => ['required'],
             'services' => ['required', 'json'],
-            'date' => ['required'],
+            'date' => ['required', 'date'],
+            'time' => ['required'],
         ];
     }
 }

@@ -90,6 +90,30 @@ $(document).ready(function () {
     });
 
     function getAvailableTimes(date) {
-        console.log(date);
+        const div = $('.appointment-dates .col-12');
+        const uuid = $('[name="uuid"]').val();
+        $.get(`${envUrl}/available-times/${uuid}/${date}`, function(times) {
+            let content = '';
+            $.each(times, function(i, time) {
+                content += `<input type="button" class="btn-finish btn btn-outline-dark w-100 mb-3" value="${time}">`;
+            });
+            div.append(content);
+        });
     }
+
+    $(document).on('click', '.btn-finish', function(e) {
+        e.preventDefault();
+        const time = $(this).val();
+        $('[name="time"]').val(time);
+        const data = $('form').serialize();
+
+        $.post($('form').attr('action'), data, function(response) {
+            if (response.message) {
+                alert('Agendamento realizado com sucesso!\nVocẽ receberá um e-mail com a confirmação.')
+                window.location = envUrl + '/' + slug;
+            } else {
+                alert('Falha ao realizar agendamento.')
+            }
+        });
+    });
 });

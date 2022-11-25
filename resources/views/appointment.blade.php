@@ -47,6 +47,7 @@
 
     <script>
         envUrl = "{{ env('APP_URL') }}";
+        slug = "{{ $client->slug }}";
     </script>
 
     <style>
@@ -66,7 +67,7 @@
 
     @foreach ($errors->all() as $error)
         <div class="alert alert-danger alert-dismissible fade show" role="alert" style="z-index: 999999">
-            {{$error}}
+            {{ $error }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -109,24 +110,22 @@
                 </style>
                 <div class="d-flex menu-wrap align-items-center">
                     <div id="mainmenu" class="mainmenu">
-                        <form action="{{ route('appointment', $client->slug) }}">
-                            <ul class="nav d-lg-flex align-items-center">
-                                <li>
-                                    <input type="text" name="whatsapp" class="form-control"
-                                        placeholder="Digite seu Whatsapp" style="height: 45px">
-                                </li>
-                                <li>
-                                    <div class="header-btn">
-                                        <button type="submit" class="menu-btn">Realizar Agendamento</button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </form>
+                        <ul class="nav d-lg-flex align-items-center">
+                            <li class="text-light">
+                                Olá, <b>{{$user->name}}</b>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </nav>
         </div>
     </header>
+
+    <style>
+        .ms-parent.form-control {
+            height: 60px;
+        }
+    </style>
 
     <section id="about" class="about_section bd-bottom padding">
         <div class="container">
@@ -137,19 +136,27 @@
                             Realizar Agendamento
                         </h2>
                     </div>
-                    <div class="form-group">
-                      <input type="date" name="date" class="form-control">
-                    </div>
-                    <div class="row">
-                      <div class="col-12">
-                        <button class="btn btn-outline-dark w-100 mb-3">08:00</button>
-                        <button class="btn btn-outline-dark w-100 mb-3">08:30</button>
-                        <button class="btn btn-outline-dark w-100 mb-3">09:00</button>
-                        <button class="btn btn-outline-dark w-100 mb-3">09:30</button>
-                        <button class="btn btn-outline-dark w-100 mb-3">10:00</button>
-                        <button class="btn btn-outline-dark w-100 mb-3">10:30</button>
-                      </div>
-                    </div>
+                    <form action="{{ route('make.appointment', $user->uuid) }}" method="post"
+                        id="appointment_form">
+                        @csrf
+                        <input type="hidden" name="uuid" value="{{ $client->uuid }}">
+                        <div class="form-group">
+                            <select class="form-control" placeholder="Serviços" name="services[]"
+                                data-select-all="false" required multiple>
+                                @foreach ($client->services as $service)
+                                    <option>{{ $service->category->name . ' - ' . $service->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="date" name="date" class="form-control" required>
+                        </div>
+                        <input type="hidden" name="time">
+                        <div class="row appointment-dates">
+                            <div class="col-12">
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
