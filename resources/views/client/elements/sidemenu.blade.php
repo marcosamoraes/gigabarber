@@ -32,7 +32,7 @@
                             <span class="shape1"></span>
                             <span class="shape2"></span>
                             <i class="ti-write sidemenu-icon menu-icon "></i>
-                            <span class="sidemenu-label">Usuários</span>
+                            <span class="sidemenu-label">Clientes</span>
                         </a>
                     </li>
                     <li class="nav-item {{ request()->is('client.categories.*') ? 'active' : false }}">

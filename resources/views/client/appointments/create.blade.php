@@ -46,14 +46,11 @@
                                     <div class="form-group">
                                         <label class="tx-medium">Horário</label>
                                         <select name="date[1]" class="form-control" value="{{ old('date.1') }}" required>
-                                            @for ($i = 6; $i <= 23; $i++)
-                                                <option value="{{ $i }}:00"
-                                                    {{ old('date.1') == "$i:00" ? 'selected' : false }}>
-                                                    {{ $i }}:00</option>
-                                                <option value="{{ $i }}:30"
-                                                    {{ old('date.1') == "$i:30" ? 'selected' : false }}>
-                                                    {{ $i }}:30</option>
-                                            @endfor
+                                            @foreach ($times as $time)
+                                                <option value="{{ $time }}"
+                                                    {{ old('date.1') == $time ? 'selected' : false }}>
+                                                    {{$time}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

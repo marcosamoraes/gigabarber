@@ -9,7 +9,7 @@
 
     <title>{{ $client->company_name . ' | ' . env('APP_NAME') }}</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ $client->favicon }}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ env('APP_URL') . $client->favicon }}" />
 
     <!-- Elegant Font Icons CSS -->
     <link rel="stylesheet" href="{{ env('APP_URL') }}/assets/css/elegant-font-icons.css" />
@@ -46,7 +46,8 @@
     <script src="{{ env('APP_URL') }}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
     <script>
-        envUrl = "{{ env('APP_URL') }}";
+        envUrl = "{{ explode('/public', env('APP_URL'))[0] }}";
+        slug = "{{ $client->slug }}";
     </script>
 
     <style>
@@ -84,7 +85,7 @@
             <nav class="navbar">
                 <a href="#" class="navbar-brand">
                     @if ($client->logo)
-                        <img src="{{ $client->logo }}" alt="{{ $client->company_name }}" />
+                        <img src="{{ env('APP_URL') . $client->logo }}" alt="{{ $client->company_name }}" />
                     @else
                         {{ $client->company_name }}
                     @endif
@@ -221,7 +222,7 @@
                                                     {{ $service->description }}
                                                 </p>
                                                 <span
-                                                    class="price">R${{ number_format($service->value, 2, ',', '.') }}</span>
+                                                    class="price" style="background: #fcf9f5;">R${{ number_format($service->value, 2, ',', '.') }}</span>
                                             </li>
                                         @endif
                                     @endforeach
@@ -294,7 +295,7 @@
                 <div class="col-lg-6 col-md-6 sm-padding">
                     <div class="footer_widget">
                         @if ($client->logo)
-                            <img class="mb-15" src="{{ $client->logo }}" alt="{{ $client->company_name }}" />
+                            <img class="mb-15" height="100" src="{{ env('APP_URL') . $client->logo }}" alt="{{ $client->company_name }}" />
                         @else
                             <p>{{ $client->company_name }}</p>
                         @endif

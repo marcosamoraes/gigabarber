@@ -9,7 +9,7 @@
 
     <title>{{ $client->company_name . ' | ' . env('APP_NAME') }}</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ $client->favicon }}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ env('APP_URL') . $client->favicon }}" />
 
     <!-- Elegant Font Icons CSS -->
     <link rel="stylesheet" href="{{ env('APP_URL') }}/assets/css/elegant-font-icons.css" />
@@ -46,7 +46,7 @@
     <script src="{{ env('APP_URL') }}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
     <script>
-        envUrl = "{{ env('APP_URL') }}";
+        envUrl = "{{ explode('/public', env('APP_URL'))[0] }}";
         slug = "{{ $client->slug }}";
     </script>
 
@@ -85,7 +85,7 @@
             <nav class="navbar">
                 <a href="#" class="navbar-brand">
                     @if ($client->logo)
-                        <img src="{{ $client->logo }}" alt="{{ $client->company_name }}" />
+                        <img src="{{ env('APP_URL') . $client->logo }}" alt="{{ $client->company_name }}" />
                     @else
                         {{ $client->company_name }}
                     @endif
@@ -112,7 +112,7 @@
                     <div id="mainmenu" class="mainmenu">
                         <ul class="nav d-lg-flex align-items-center">
                             <li class="text-light">
-                                Olá, <b>{{$user->name}}</b>
+                                Olá, <b>{{ $user->name }}</b>
                             </li>
                         </ul>
                     </div>
@@ -130,31 +130,35 @@
     <section id="about" class="about_section bd-bottom padding">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-6 offset-lg-3">
+                <div class="col-12">
                     <div class="about_content align-center">
                         <h2 class="wow fadeInUp" data-wow-delay="200ms">
                             Realizar Agendamento
                         </h2>
                     </div>
-                    <form action="{{ route('make.appointment', $user->uuid) }}" method="post"
-                        id="appointment_form">
+                    <form action="{{ route('make.appointment', $user->uuid) }}" method="post" id="appointment_form">
                         @csrf
                         <input type="hidden" name="uuid" value="{{ $client->uuid }}">
-                        <div class="form-group">
-                            <select class="form-control" placeholder="Serviços" name="services[]"
-                                data-select-all="false" required multiple>
-                                @foreach ($client->services as $service)
-                                    <option>{{ $service->category->name . ' - ' . $service->title }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <input type="date" name="date" class="form-control" required>
+                        <input type="hidden" name="user_uuid" value="{{$user->uuid}}">
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-lg-6">
+                                <div class="form-group">
+                                    <select class="form-control" placeholder="Serviços" name="services[]"
+                                        data-select-all="false" required multiple>
+                                        @foreach ($client->services as $service)
+                                            <option>{{ $service->category->name . ' - ' . $service->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <div class="form-group">
+                                    <input type="date" name="date" class="form-control" required>
+                                </div>
+                            </div>
                         </div>
                         <input type="hidden" name="time">
                         <div class="row appointment-dates">
-                            <div class="col-12">
-                            </div>
                         </div>
                     </form>
                 </div>
@@ -168,7 +172,8 @@
                 <div class="col-lg-6 col-md-6 sm-padding">
                     <div class="footer_widget">
                         @if ($client->logo)
-                            <img class="mb-15" src="{{ $client->logo }}" alt="{{ $client->company_name }}" />
+                            <img class="mb-15" height="100" src="{{ env('APP_URL') . $client->logo }}"
+                                alt="{{ $client->company_name }}" />
                         @else
                             <p>{{ $client->company_name }}</p>
                         @endif
@@ -284,7 +289,7 @@
     <script src="{{ env('APP_URL') }}/assets/js/main.js"></script>
 
     <!-- App JS -->
-    <script src="{{ env('APP_URL') }}/assets/js/app.js"></script>
+    <script src="{{ env('APP_URL') }}/assets/js/app.js?v={{time()}}"></script>
 </body>
 
 </html>

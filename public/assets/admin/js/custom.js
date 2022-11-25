@@ -368,10 +368,10 @@ $(function () {
 				$('[name="area"], #area').val(response.bairro);
 				$('[name="complement"], #complement').val();
 				$("[name='state'], #state").val(response.uf).trigger('change');
-
+				console.log(response.localidade);
 				setTimeout(function() {
 					$('[name="city"], #city').val(response.localidade).trigger('change');
-				}, 1000);
+				}, 2000);
 
 				$('#global-loader').fadeOut();
 			});
@@ -570,4 +570,3 @@ $(function () {
 	});
 
 })()
-

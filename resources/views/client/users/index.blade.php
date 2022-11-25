@@ -1,6 +1,6 @@
 @extends('client.layouts.app')
 
-@section('title', 'Usuários')
+@section('title', 'Clientes')
 
 @section('content')
 
@@ -13,7 +13,7 @@
                 <!-- Page Header -->
                 <div class="page-header">
                     <div>
-                        <h2 class="main-content-title tx-24 mg-b-5">Usuários</h2>
+                        <h2 class="main-content-title tx-24 mg-b-5">Clientes</h2>
                     </div>
                     <div class="d-flex">
                         <div class="justify-content-center">

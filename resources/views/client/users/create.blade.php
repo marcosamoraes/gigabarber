@@ -1,6 +1,6 @@
 @extends('client.layouts.app')
 
-@section('title', 'Cadastrar Usuário')
+@section('title', 'Cadastrar Cliente')
 
 @section('content')
 	<!-- Main Content-->
@@ -12,9 +12,9 @@
 				<!-- Page Header -->
 				<div class="page-header">
 					<div>
-						<h2 class="main-content-title tx-24 mg-b-5">Cadastrar Usuário</h2>
+						<h2 class="main-content-title tx-24 mg-b-5">Cadastrar Cliente</h2>
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="{{route('client.users.index')}}">Usuários</a></li>
+							<li class="breadcrumb-item"><a href="{{route('client.users.index')}}">Clientes</a></li>
 							<li class="breadcrumb-item active" aria-current="page">Cadastrar</li>
 						</ol>
 					</div>

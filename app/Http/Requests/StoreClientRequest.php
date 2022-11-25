@@ -49,13 +49,13 @@ class StoreClientRequest extends FormRequest
             'favicon'       => ['nullable', 'image'],
 
             'attributes.public_email'        => ['email', 'nullable'],
-            'attributes.image'               => ['image', 'nullable'],
             'attributes.primary_color'       => ['nullable'],
             'attributes.text_color'          => ['nullable'],
             'attributes.description_footer'  => ['nullable'],
             'attributes.link_facebook'       => ['url', 'nullable'],
             'attributes.link_instagram'      => ['url', 'nullable'],
             'attributes.opening_hours'       => ['nullable'],
+            'attributes.time_interval'       => ['nullable'],
 
             'address.cep'          => ['required', 'max:8'],
             'address.address'      => ['required', 'max:50'],

@@ -20,6 +20,7 @@ class ClientAttribute extends Model
         'description_footer',
         'link_facebook',
         'link_instagram',
+        'time_interval',
     ];
 
     public function client()

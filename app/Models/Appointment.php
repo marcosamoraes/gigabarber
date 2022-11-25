@@ -16,7 +16,7 @@ class Appointment extends Model
     use HasFactory;
     use HasUuids;
     use Notifiable;
-    
+
     protected $primaryKey = 'uuid';
 
     protected $fillable = [
@@ -41,9 +41,11 @@ class Appointment extends Model
         Notification::route('mail', [
             $this->client->email => $this->client->name,
         ])->notify(new NewAppointmentClient($this));
-        
-        Notification::route('mail', [
-            $this->user->email => $this->user->name,
-        ])->notify(new NewAppointmentUser($this));
+
+        if ($this->user->email) {
+            Notification::route('mail', [
+                $this->user->email => $this->user->name,
+            ])->notify(new NewAppointmentUser($this));
+        }
     }
 }

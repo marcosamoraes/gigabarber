@@ -172,7 +172,7 @@
 		<script src="{{env('APP_URL')}}/assets/admin/js/jquery.mask.min.js"></script>
 
 		<!-- Custom js -->
-		<script src="{{env('APP_URL')}}/assets/admin/js/custom.js?v=1.0.4"></script>
+		<script src="{{env('APP_URL')}}/assets/admin/js/custom.js?v=1.0.5"></script>
 
 	</body>
 </html>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Models\Appointment;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +43,17 @@ class AppointmentController extends Controller
             ];
         }, $appointments);
 
-        return view('client.appointments.create', compact('users', 'reserveds'));
+        $times = [];
+        $open_time = new Carbon('8:00');
+        $close_time = new Carbon('23:00');
+
+        while ($open_time < $close_time) {
+            $times[] = $open_time->format('H:i');
+
+            $open_time->addMinutes(Auth::user()->attributes->time_interval);
+        }
+
+        return view('client.appointments.create', compact('users', 'reserveds', 'times'));
     }
 
     /**

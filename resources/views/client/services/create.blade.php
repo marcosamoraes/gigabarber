@@ -44,7 +44,7 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label class="tx-medium">Valor</label>
-                                        <input type="text" class="form-control" placeholder="Valor" name="value">
+                                        <input type="text" class="form-control" placeholder="Valor" name="value" value="0.00">
                                     </div>
                                 </div>
                                 <div class="card-body">

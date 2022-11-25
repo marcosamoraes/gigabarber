@@ -85,34 +85,83 @@ $(document).ready(function () {
         },
     });
 
-    $('[name="date"]').change(function() {
+    $('[name="date"]').change(function () {
         getAvailableTimes($(this).val());
     });
 
     function getAvailableTimes(date) {
-        const div = $('.appointment-dates .col-12');
+        const div = $(".appointment-dates");
         const uuid = $('[name="uuid"]').val();
-        $.get(`${envUrl}/available-times/${uuid}/${date}`, function(times) {
-            let content = '';
-            $.each(times, function(i, time) {
-                content += `<input type="button" class="btn-finish btn btn-outline-dark w-100 mb-3" value="${time}">`;
-            });
-            div.append(content);
+        const user_uuid = $('[name="user_uuid"]').val();
+        $.get(`${envUrl}/available-times/${uuid}/${date}?u=${user_uuid}`, function (times) {
+            let content = "";
+            if (times.length > 0) {
+                $.each(times, function (i, time) {
+                    let btnClass = '';
+                    let btnAction = '';
+                    switch (time['reserved']) {
+                        case 2:
+                            btnAction = 'btn-cancel';
+                            btnClass = 'btn-warning';
+                            break;
+                        case 1:
+                            btnClass = 'btn-danger';
+                            break;
+                        default:
+                            btnAction = 'btn-finish';
+                            btnClass = 'btn-outline-dark';
+                            break;
+                    }
+                    content += `
+                        <div class="col-6 col-md-4 col-lg-2">
+                            <input type="button" class="${btnAction} btn ${btnClass} w-100 mb-3" value="${time['time']}">
+                        </div>`;
+                });
+            } else {
+                content = `
+                <div class="col-12">
+                    <div class="alert alert-warning w-100" role="alert">
+                        Não há horários disponíveis nessa data.
+                    </div>
+                </div>`;
+            }
+            div.html(content);
         });
     }
 
-    $(document).on('click', '.btn-finish', function(e) {
+    $(document).on("click", ".btn-finish", function (e) {
         e.preventDefault();
         const time = $(this).val();
         $('[name="time"]').val(time);
-        const data = $('form').serialize();
+        const data = $("form").serialize();
 
-        $.post($('form').attr('action'), data, function(response) {
+        $.post($("form").attr("action"), data, function (response) {
             if (response.message) {
-                alert('Agendamento realizado com sucesso!\nVocẽ receberá um e-mail com a confirmação.')
-                window.location = envUrl + '/' + slug;
+                alert(
+                    "Agendamento realizado com sucesso!\nVocẽ receberá um e-mail com a confirmação."
+                );
+                window.location = envUrl + "/" + slug;
             } else {
-                alert('Falha ao realizar agendamento.')
+                alert("Falha ao realizar agendamento.");
+            }
+        });
+    });
+
+    $(document).on("click", ".btn-cancel", function (e) {
+        e.preventDefault();
+        const time = $(this).val();
+        $('[name="time"]').val(time);
+        const data = $("form").serialize();
+        const user_uuid = $('[name="user_uuid"]').val();
+
+        $.post(`${envUrl}/cancelar/${user_uuid}`, data, function (response) {
+            if (response.message) {
+                alert(
+                    "Agendamento cancelado com sucesso."
+                );
+                location.reload();
+            } else {
+                alert("Falha ao cancelar agendamento.");
             }
         });
     });

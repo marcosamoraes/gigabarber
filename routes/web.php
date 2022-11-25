@@ -49,7 +49,8 @@ Route::get('/{slug}/agendamento', function (Request $request, $slug) {
     return view('appointment', compact('client', 'user'));
 })->name('appointment');
 
-Route::get('/available-times/{uuid}/{date}', function ($uuid, $date) {
+Route::get('/available-times/{uuid}/{date}', function (Request $request, $uuid, $date) {
+    $user_uuid = $request->only('u');
     $client = Client::findOrFail($uuid);
     $date = new Carbon($date);
     $weekday = getWeekdays($date->format('l'));
@@ -60,6 +61,16 @@ Route::get('/available-times/{uuid}/{date}', function ($uuid, $date) {
         return $time->format('H:i');
     }, $reserveds);
 
+    $reservedsUser = Appointment::where('client_uuid', $client->uuid)
+        ->where('user_uuid', $user_uuid)
+        ->whereDate('date', $date)
+        ->get()
+        ->toArray();
+    $reservedsUser = array_map(function ($reservedUser) {
+        $time = new Carbon($reservedUser['date']);
+        return $time->format('H:i');
+    }, $reservedsUser);
+
     $opening_hours = ClientHours::where('client_uuid', $client->uuid)->where('day', $weekday)->get()->toArray();
     $times = [];
     foreach ($opening_hours as $opening_hour) {
@@ -67,10 +78,19 @@ Route::get('/available-times/{uuid}/{date}', function ($uuid, $date) {
         $close_time = new Carbon($opening_hour['close_time']);
 
         while ($open_time < $close_time) {
-            if (!in_array($open_time->format('H:i'), $reserveds))
-                $times[] = $open_time->format('H:i');
+            if (in_array($open_time->format('H:i'), $reservedsUser)) {
+                $times[] = [
+                    'time' => $open_time->format('H:i'),
+                    'reserved' => 2
+                ];
+            } else {
+                $times[] = [
+                    'time' => $open_time->format('H:i'),
+                    'reserved' => in_array($open_time->format('H:i'), $reserveds) ? 1 : 0
+                ];
+            }
 
-            $open_time->addMinutes(30);
+            $open_time->addMinutes($client->attributes->time_interval);
         }
     }
 
@@ -122,3 +142,17 @@ Route::post('/agendar/{user_uuid}', function (StoreAppointmentRequest $request, 
         return response()->json(['error' => 'Falha ao realizar agendamento, tente novamente.'], 400);
     }
 })->name('make.appointment');
+
+Route::post('/cancelar/{user_uuid}', function (Request $request, $user_uuid) {
+    $date = new Carbon($request->date . ' ' . $request->time);
+    $date = $date->format('Y-m-d H:i');
+
+    try {
+        Appointment::where('user_uuid', $user_uuid)->where('date', $date)->delete();
+
+        return response()->json(['message' => 'Agendamento cancelado com sucesso!'], 200);
+    } catch (Exception $e) {
+        logError($e, $request->all());
+        return response()->json(['error' => 'Falha ao cancelar agendamento, tente novamente.'], 400);
+    }
+})->name('cancel.appointment');

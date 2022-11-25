@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('description_footer')->nullable();
             $table->string('link_facebook')->nullable();
             $table->string('link_instagram')->nullable();
+            $table->integer('time_interval')->default(30);
             $table->timestamps();
         });
     }
