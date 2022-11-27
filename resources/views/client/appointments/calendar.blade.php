@@ -79,7 +79,7 @@
 
         function getAvailableTimes(date) {
             const div = $(".appointment-dates");
-            $.get(`{{ env('APP_URL') }}/client/calendar-times/${date}`, function(times) {
+            $.get(`{{ explode('public/', env('APP_URL'))[0] }}/client/calendar-times/${date}`, function(times) {
                 let content = "";
                 if (times.length > 0) {
                     $.each(times, function(i, time) {
