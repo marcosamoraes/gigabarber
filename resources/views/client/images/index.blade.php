@@ -35,6 +35,7 @@
 										<thead>
 											<tr>
 												<th class="text-center">Imagem</th>
+												<th class="text-center">Nome</th>
 												<th></th>
 											</tr>
 										</thead>
@@ -43,6 +44,9 @@
 												<tr class="border-bottom">
 													<td class="font-weight-bold text-center">
 														<img src="{{env('APP_URL').$image->name}}" alt="{{Auth::user()->company_name}}" height="100" width="100">
+													</td>
+													<td class="font-weight-bold text-center">
+														<p>{{$image->image_name}}</p>
 													</td>
 													<td>
 														<div class="btn-group" role="group">

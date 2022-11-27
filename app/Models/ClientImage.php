@@ -10,11 +10,12 @@ class ClientImage extends Model
 {
     use HasFactory;
     use HasUuids;
-    
+
     protected $primaryKey = 'uuid';
 
     protected $fillable = [
         'client_uuid',
+        'image_name',
         'name',
         'active',
     ];

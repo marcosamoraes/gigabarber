@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('client_images', function (Blueprint $table) {
             $table->uuid()->primary();
             $table->foreignUuid('client_uuid')->constrained('clients', 'uuid');
+            $table->string('image_name')->nullable();
             $table->string('name');
             $table->timestamps();
         });

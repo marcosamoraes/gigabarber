@@ -1,7 +1,7 @@
 @extends('client.layouts.app')
- 
+
 @section('title', 'Cadastrar Imagem')
- 
+
 @section('content')
 	<!-- Main Content-->
 	<div class="main-content side-content pt-0">
@@ -28,6 +28,10 @@
 							@csrf
 							<div class="card custom-card">
 								<div class="card-body">
+									<div class="form-group">
+										<label class="tx-medium">Nome</label>
+										<input type="text" class="form-control" placeholder="Nome" name="image_name">
+									</div>
 									<div class="form-group">
 										<label class="tx-medium">Imagem</label>
 										<input type="file" class="form-control" name="image" required>

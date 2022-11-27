@@ -262,7 +262,7 @@
                         <div class="owl-carousel">
                             @foreach ($client->images as $image)
                                 <div>
-                                    <a href="{{ $image->name }}" target="_blank">
+                                    <a href="{{ env('APP_URL').$image->name }}" target="_blank">
                                         <img src="{{ env('APP_URL').$image->name }}" alt="{{ $client->company_name }}"
                                             class="w-100">
                                     </a>

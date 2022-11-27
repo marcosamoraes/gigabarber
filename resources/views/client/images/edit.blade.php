@@ -14,7 +14,7 @@
 					<div>
 						<h2 class="main-content-title tx-24 mg-b-5">Editar Imagem</h2>
 						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="{{route('client.images.index')}}">Imagems</a></li>
+							<li class="breadcrumb-item"><a href="{{route('client.images.index')}}">Imagens</a></li>
 							<li class="breadcrumb-item active" aria-current="page">Editar</li>
 						</ol>
 					</div>
@@ -30,8 +30,12 @@
 							<div class="card custom-card">
 								<div class="card-body">
 									<div class="form-group">
+										<label class="tx-medium">Nome</label>
+										<input type="text" class="form-control" placeholder="Nome" name="image_name" value="{{$image->image_name}}">
+									</div>
+									<div class="form-group">
 										<label class="tx-medium">Imagem</label>
-										<input type="file" class="form-control" name="image" required>
+										<input type="file" class="form-control" name="image">
                     <img src="{{$image->name}}" height="100">
 									</div>
 								</div>

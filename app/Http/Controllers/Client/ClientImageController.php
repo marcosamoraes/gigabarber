@@ -41,6 +41,7 @@ class ClientImageController extends Controller
     public function store(Request $request)
     {
         $validated = $this->validate($request, [
+            'image_name' => ['nullable', 'string'],
             'image' => ['required', 'image']
         ]);
 
@@ -76,12 +77,15 @@ class ClientImageController extends Controller
     public function update(Request $request, ClientImage $image)
     {
         $validated = $this->validate($request, [
-            'image' => ['required', 'image']
+            'image_name' => ['nullable', 'string'],
+            'image' => ['nullable', 'image']
         ]);
 
         try {
-            Storage::delete(str_replace('/storage/', '', $image->name));
-            $validated['name'] = $this->storageFile($validated['image'], 'client_images');
+            if (isset($validated['image']) && $validated['image']) {
+                Storage::delete(str_replace('/storage/', '', $image->name));
+                $validated['name'] = $this->storageFile($validated['image'], 'client_images');
+            }
             $image->update($validated);
             return redirect(route('client.images.index'))->with('success', 'Imagem editada com sucesso!');
         } catch (Exception $e) {
