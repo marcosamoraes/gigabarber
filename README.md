@@ -1,10 +1,2 @@
-- Tirar a 1a section e section de agendamento
-- Colocar agendamento no navbar
-- Pré cadastro de usuário pelo cliente
-- Busca de agendamento pelo whatsapp
-- Mudar nome do botão Editar para Salvar
-- Adicionar opção de editar imagem
-- Remover admin do link de clientes do painel admin
-- Remover mapa
-- Permitir adicionar horário de funcionamento
-- Permitir adicionar horários disponíveis e indisponíveis
+Alterar url para vendor/laravel/framework/src/Illuminate/Auth/Notifications/ResetPassword.php:97
+password.reset -> client.password.reset
