@@ -27,6 +27,14 @@
 
 	<body class="ltr main-body leftmenu error-1">
 
+		@if (session('success'))
+			<div class="alert alert-solid-success mg-b-0" role="alert">
+				<button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button">
+				<span aria-hidden="true">&times;</span></button>
+				{{ session('success') }}
+			</div>
+		@endif
+
 		@foreach ($errors->all() as $error)
 			<div class="alert alert-solid-danger mg-b-0" role="alert">
 				<button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button">
@@ -95,7 +103,7 @@
 
 		<!-- Jquery js-->
 		<script src="{{env('APP_URL')}}/assets/admin/plugins/jquery/jquery.min.js"></script>
-		
+
 		<!-- Jquery Mask js -->
 		<script src="{{env('APP_URL')}}/assets/admin/js/jquery.mask.min.js"></script>
 
