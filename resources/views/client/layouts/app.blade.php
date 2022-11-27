@@ -90,6 +90,27 @@
 
         @yield('content')
 
+		<a class="btn-whatsapp" target="_blank" href="https://wa.me/18997913837?text=Olá,%20vim%20pelo%20Agenda%20Portátil!%20Poderia%20me%20ajudar?">
+			<i class="fab fa-2x fa-whatsapp"></i>
+		</a>
+
+		<style>
+			.btn-whatsapp {
+				position: fixed;
+				bottom: 30px;
+				right: 30px;
+				width: 50px;
+				height: 50px;
+				background-color: #2dcc47;
+				border-radius: 100%;
+				z-index: 2;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: white;
+			}
+		</style>
+
 		@include('client/elements/footer')
 
 		<script type="text/javascript">
