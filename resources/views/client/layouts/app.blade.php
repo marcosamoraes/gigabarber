@@ -24,7 +24,7 @@
 		<link href="{{env('APP_URL')}}/assets/admin/plugins/web-fonts/plugin.css" rel="stylesheet"/>
 
 		<!-- Style css-->
-		<link href="{{env('APP_URL')}}/assets/admin/css/style.css" rel="stylesheet">
+		<link href="{{env('APP_URL')}}/assets/admin/css/style.css?v=1.0.1" rel="stylesheet">
 
 		<!-- Owl-carousel css-->
 		<link href="{{env('APP_URL')}}/assets/admin/plugins/owl-carousel/owl.carousel.css" rel="stylesheet" />
