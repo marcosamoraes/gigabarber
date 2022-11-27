@@ -24,10 +24,13 @@ Route::middleware(['auth:web'])->group(function () {
   Route::get('/dashboard', [Controller::class, 'dashboard'])->name('dashboard');
   Route::get('/settings', [Controller::class, 'settings'])->name('settings');
   Route::put('/settings', [Controller::class, 'settings_update'])->name('settings.update');
+  Route::get('/users/active/{user}', [UserController::class, 'active'])->name('users.active');
   Route::resource('users', UserController::class)->except(['show']);
   Route::resource('categories', CategoryController::class)->except(['show']);
   Route::resource('services', ServiceController::class)->except(['show']);
   Route::resource('images', ClientImageController::class)->except(['show']);
+  Route::get('calendar', [AppointmentController::class, 'calendar'])->name('calendar');
+  Route::get('calendar-times/{date}', [AppointmentController::class, 'calendarTimes'])->name('calendar.times');
   Route::resource('appointments', AppointmentController::class)->except(['show', 'edit', 'update']);
   Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });

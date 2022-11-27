@@ -28,6 +28,7 @@ class StoreUserRequest extends FormRequest
             'email' => ['nullable', 'email'],
             'whatsapp' => ['required'],
             'cpf' => ['nullable'],
+            'active' => ['nullable']
         ];
     }
 }

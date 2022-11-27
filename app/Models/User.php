@@ -23,6 +23,7 @@ class User extends Model
         'email',
         'whatsapp',
         'cpf',
+        'active',
     ];
 
     public function client()

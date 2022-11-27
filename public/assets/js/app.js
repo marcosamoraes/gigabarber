@@ -92,9 +92,18 @@ $(document).ready(function () {
     }
 
     $('#datepicker').change(function () {
+        $('.services-error').remove();
+        const services = $('[name="services[]"]');
+        if (services.val().length == 0) {
+            const content = `<p class="services-error text-danger">Selecione pelo menos um serviço</p>`
+            services.parent().append(content);
+            return false;
+        }
+
         let date = $(this).val();
         date = date.split('/');
         date = `${date[2]}-${date[0]}-${date[1]}`
+        $('[name="date"]').val(date);
         getAvailableTimes(date);
     });
 

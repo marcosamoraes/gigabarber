@@ -6,6 +6,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -96,6 +97,17 @@ class UserController extends Controller
         } catch (Exception $e) {
             logError($e);
             return back()->withErrors('Erro ao deletar usuário, tente novamente.');
+        }
+    }
+
+    public function active(User $user)
+    {
+        try {
+            $user->update(['active' => 1]);
+            return redirect(route('client.users.index'))->with('success', 'Usuário ativado com sucesso!');
+        } catch (Exception $e) {
+            logError($e);
+            return back()->withErrors('Erro ao ativar usuário, tente novamente.');
         }
     }
 }

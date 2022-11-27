@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('whatsapp')->unique();
             $table->string('cpf')->unique()->nullable();
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

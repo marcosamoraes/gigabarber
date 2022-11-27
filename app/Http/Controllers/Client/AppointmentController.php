@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Models\Appointment;
+use App\Models\ClientHours;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -97,5 +98,68 @@ class AppointmentController extends Controller
             logError($e);
             return back()->withErrors('Erro ao deletar agendamento, tente novamente.');
         }
+    }
+
+    public function calendar()
+    {
+        return view('client.appointments.calendar');
+    }
+
+    public function calendarTimes($date)
+    {
+        $date = new Carbon($date);
+        $weekday = $this->getWeekdays($date->format('l'));
+
+        $reserveds = Appointment::where('client_uuid', Auth::id())
+            ->with(['user'])
+            ->whereDate('date', $date)->get()->toArray();
+
+        $reserveds = array_map(function ($reserved) {
+            $time = new Carbon($reserved['date']);
+
+            return [
+                'time' => $time->format('H:i'),
+                'user' => explode(' ', $reserved['user']['name'])[0],
+                'whatsapp' => $reserved['user']['whatsapp'],
+                'link' => preg_replace('/[^0-9]/', '', $reserved['user']['whatsapp'])
+            ];
+        }, $reserveds);
+
+        $opening_hours = ClientHours::where('client_uuid', Auth::id())->where('day', $weekday)->get()->toArray();
+        $times = [];
+        foreach ($opening_hours as $opening_hour) {
+            $open_time = new Carbon($opening_hour['open_time']);
+            $close_time = new Carbon($opening_hour['close_time']);
+
+            while ($open_time < $close_time) {
+                $reservedKey = null;
+
+                foreach ($reserveds as $key => $reserved) {
+                    if ($open_time->format('H:i') == $reserved['time']) {
+                        $reservedKey = $key;
+                        break;
+                    }
+                }
+
+                if ($reservedKey !== null) {
+                    $times[] = [
+                        'time' => $open_time->format('H:i'),
+                        'user' => $reserveds[$reservedKey]['user'],
+                        'whatsapp' => $reserveds[$reservedKey]['whatsapp'],
+                        'link' => $reserveds[$reservedKey]['link']
+                    ];
+                } else {
+                    $times[] = [
+                        'time' => $open_time->format('H:i'),
+                        'user' => false,
+                        'whatsapp' => false
+                    ];
+                }
+
+                $open_time->addMinutes(Auth::user()->attributes->time_interval);
+            }
+        }
+
+        return response()->json($times);
     }
 }

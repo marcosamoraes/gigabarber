@@ -95,7 +95,7 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				setTimeout(function() {
-					$('.alert').slideUp();
+					$('.alert:not(.alert-block)').slideUp();
 				}, 3000);
 			});
 		</script>
@@ -144,7 +144,7 @@
 		<script src="{{env('APP_URL')}}/assets/admin/plugins/sidebar/sidebar.js"></script>
 
 		<!-- Internal Data Table js -->
-		<script src="{{env('APP_URL')}}/assets/admin/plugins/datatable/js/jquery.dataTables.min.js"></script>
+		<script src="{{env('APP_URL')}}/assets/admin/plugins/datatable/js/jquery.dataTables.min.js?v={{time()}}"></script>
 		<script src="{{env('APP_URL')}}/assets/admin/plugins/datatable/js/dataTables.bootstrap5.js"></script>
 		<script src="{{env('APP_URL')}}/assets/admin/plugins/datatable/js/dataTables.buttons.min.js"></script>
 		<script src="{{env('APP_URL')}}/assets/admin/plugins/datatable/js/buttons.bootstrap5.min.js"></script>
@@ -156,7 +156,7 @@
 		<script src="{{env('APP_URL')}}/assets/admin/plugins/datatable/js/buttons.colVis.min.js"></script>
 		<script src="{{env('APP_URL')}}/assets/admin/plugins/datatable/dataTables.responsive.min.js"></script>
 		<script src="{{env('APP_URL')}}/assets/admin/plugins/datatable/responsive.bootstrap5.min.js"></script>
-		<script src="{{env('APP_URL')}}/assets/admin/js/table-data.js"></script>
+		<script src="{{env('APP_URL')}}/assets/admin/js/table-data.js?v={{time()}}"></script>
 
 		<!-- Internal Fileuploads js-->
 		<script src="{{env('APP_URL')}}/assets/admin/plugins/fileuploads/js/fileupload.js"></script>

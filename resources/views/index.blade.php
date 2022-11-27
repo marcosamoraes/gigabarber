@@ -43,6 +43,8 @@
     <!-- App CSS -->
     <link rel="stylesheet" href="{{ env('APP_URL') }}/assets/css/app.css" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <script src="{{ env('APP_URL') }}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
     <script>
@@ -80,10 +82,25 @@
         </script>
     @endforeach
 
+    @if (session('success'))
+		<div class="alert alert-success mg-b-0" role="alert" style="z-index: 999999;">
+			{{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+		</div>
+
+        <script>
+            setTimeout(() => {
+                $(".alert").alert('close')
+            }, 3000);
+        </script>
+	@endif
+
     <header id="header" class="header-section">
         <div class="container">
             <nav class="navbar">
-                <a href="#" class="navbar-brand">
+                <a href="{{env('APP_URL')}}" class="navbar-brand">
                     @if ($client->logo)
                         <img src="{{ env('APP_URL') . $client->logo }}" alt="{{ $client->company_name }}" />
                     @else
@@ -248,7 +265,7 @@
                             @foreach ($client->images as $image)
                                 <div>
                                     <a href="{{ $image->name }}" target="_blank">
-                                        <img src="{{ $image->name }}" alt="{{ $client->company_name }}"
+                                        <img src="{{ env('APP_URL').$image->name }}" alt="{{ $client->company_name }}"
                                             class="w-100">
                                     </a>
                                 </div>
@@ -335,7 +352,7 @@
                         <p>
                             <a href="http://wa.me/{{ preg_replace('/[^0-9]/', '', $client->whatsapp) }}?text=Olá,%20vim%20pelo%20seu%20site.%20Poderia%20me%20passar%20mais%20informações?"
                                 target="_blank">
-                                {{ $client->whatsapp }}
+                                <i class="fa fa-whatsapp"></i> {{ $client->whatsapp }}
                             </a>
                         </p>
                     </div>

@@ -36,7 +36,7 @@
                                             <tr>
                                                 <th class="text-center">Nome</th>
                                                 <th class="text-center">Whatsapp</th>
-                                                <th class="text-center">CPF</th>
+                                                <th class="text-center">Ativo</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -53,10 +53,21 @@
                                                         </b>
                                                     </td>
                                                     <td class="text-center">
-                                                        {{ $user->cpf }}
+                                                        @if ($user->active)
+                                                            <p class="text-success">Sim</p>
+                                                        @else
+                                                            <p class="text-danger">Não</p>
+                                                        @endif
                                                     </td>
                                                     <td>
                                                         <div class="btn-group" role="group">
+                                                            @if (!$user->active)
+                                                                <a href="{{ route('client.users.active', $user) }}"
+                                                                    class="btn btn-success">
+                                                                    <i class="fa fa-check"></i>
+                                                                </a>
+                                                            @endif
+
                                                             <a href="{{ route('client.users.edit', $user) }}"
                                                                 class="btn btn-warning">
                                                                 <i class="fa fa-edit"></i>

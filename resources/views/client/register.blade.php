@@ -88,6 +88,11 @@
                                                     type="text">
                                             </div>
                                             <div class="form-group text-start">
+                                                <label>Whatsapp</label>
+                                                <input class="form-control" placeholder="Whatsapp" name="whatsapp"
+                                                    value="{{ old('whatsapp') }}" type="text">
+                                            </div>
+                                            <div class="form-group text-start">
                                                 <label>E-mail</label>
                                                 <input class="form-control" placeholder="E-mail" name="email"
                                                     value="{{ old('email') }}" type="email">

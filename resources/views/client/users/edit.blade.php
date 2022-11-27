@@ -45,6 +45,13 @@
 										<label class="tx-medium">E-mail</label>
 										<input type="email" class="form-control" placeholder="E-mail" name="email" value="{{$user->email}}">
 									</div>
+									<div class="form-group">
+										<label class="tx-medium">Ativo</label>
+										<select name="active" class="form-control">
+											<option value="1" {{$user->active ? 'selected' : false}}>Ativo</option>
+											<option value="0" {{!$user->active ? 'selected' : false}}>Inativo</option>
+										</select>
+									</div>
 								</div>
 								<div class="card-footer mb-1">
 									<button type="submit" class="btn btn-primary">Cadastrar</a>

@@ -26,6 +26,7 @@ class RegisterClientRequest extends FormRequest
         return [
             'name'          => ['required'],
             'company_name'  => ['required', 'unique:clients'],
+            'whatsapp'      => ['required', 'unique:clients'],
             'email'         => ['required', 'email', 'unique:clients'],
             'password'      => ['required', 'confirmed', 'min:6'],
         ];

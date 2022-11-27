@@ -67,6 +67,14 @@
                             <span class="sidemenu-label">Agendamentos</span>
                         </a>
                     </li>
+                    <li class="nav-item {{ request()->is('client.calendar') ? 'active' : false }}">
+                        <a class="nav-link" href="{{ route('client.calendar') }}">
+                            <span class="shape1"></span>
+                            <span class="shape2"></span>
+                            <i class="ti-calendar sidemenu-icon menu-icon "></i>
+                            <span class="sidemenu-label">Calendário</span>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('client.logout') }}">
                             <span class="shape1"></span>

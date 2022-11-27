@@ -45,7 +45,9 @@
     <!-- JQuery UI CSS -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+        integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <script src="{{ env('APP_URL') }}/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
@@ -87,7 +89,7 @@
     <header id="header" class="header-section">
         <div class="container">
             <nav class="navbar">
-                <a href="{{env('APP_URL')}}" class="navbar-brand">
+                <a href="{{ env('APP_URL') }}" class="navbar-brand">
                     @if ($client->logo)
                         <img src="{{ env('APP_URL') . $client->logo }}" alt="{{ $client->company_name }}" />
                     @else
@@ -112,15 +114,6 @@
                         cursor: pointer;
                     }
                 </style>
-                <div class="d-flex menu-wrap align-items-center">
-                    <div id="mainmenu" class="mainmenu">
-                        <ul class="nav d-lg-flex align-items-center">
-                            <li class="text-light">
-                                Olá, <b>{{ $user->name }}</b>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
             </nav>
         </div>
     </header>
@@ -137,37 +130,41 @@
                 <div class="col-12">
                     <div class="about_content align-center">
                         <h2 class="wow fadeInUp" data-wow-delay="200ms">
-                            Realizar Agendamento
+                            Realizar Pré Cadastro
                         </h2>
                     </div>
-                    <form action="{{ route('make.appointment', $user->uuid) }}" method="post" id="appointment_form">
+                    <form action="{{ route('make.pre.register', $client) }}" method="post">
                         @csrf
-                        <input type="hidden" name="uuid" value="{{ $client->uuid }}">
-                        <input type="hidden" name="user_uuid" value="{{$user->uuid}}">
-                        <div class="row">
+                        <div class="row justify-content-center">
                             <div class="col-12 col-lg-4">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <select class="form-control" placeholder="Serviços" name="services[]"
-                                                data-select-all="false" required multiple>
-                                                @foreach ($client->services as $service)
-                                                    <option>{{ $service->category->name . ' - ' . $service->title }}</option>
-                                                @endforeach
-                                            </select>
+                                            <input type="text" class="form-control" name="name"
+                                                placeholder="Nome" value="{{old('name')}}" required>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <div id="datepicker"></div>
-                                            <input type="hidden" name="date">
+                                            <input type="text" class="form-control" name="whatsapp"
+                                                placeholder="Whatsapp" value="{{old('whatsapp', $whatsapp)}}" required>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-8">
-                                <input type="hidden" name="time">
-                                <div class="row appointment-dates">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" placeholder="E-mail"
+                                                name="email" value="{{old('email')}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="CPF"
+                                                name="cpf" value="{{old('cpf')}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="save-btn m-auto">Salvar</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -176,6 +173,21 @@
             </div>
         </div>
     </section>
+
+    <style>
+        .save-btn {
+            background-color: var(--client-primary-color);
+            font-family: "Work Sans", sans-serif;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--client-text-color) !important;
+            padding: 0 30px;
+            height: 45px;
+            line-height: 45px;
+            display: block;
+            margin: 0;
+        }
+    </style>
 
     <section class="widget_section padding">
         <div class="container">
@@ -302,7 +314,7 @@
     <script src="{{ env('APP_URL') }}/assets/js/main.js"></script>
 
     <!-- App JS -->
-    <script src="{{ env('APP_URL') }}/assets/js/app.js?v={{time()}}"></script>
+    <script src="{{ env('APP_URL') }}/assets/js/app.js?v={{ time() }}"></script>
 </body>
 
 </html>

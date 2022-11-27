@@ -42,7 +42,7 @@
 											@foreach($images as $image)
 												<tr class="border-bottom">
 													<td class="font-weight-bold text-center">
-														<img src="{{$image->name}}" alt="{{Auth::user()->company_name}}" height="100" width="100">
+														<img src="{{env('APP_URL').$image->name}}" alt="{{Auth::user()->company_name}}" height="100" width="100">
 													</td>
 													<td>
 														<div class="btn-group" role="group">

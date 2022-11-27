@@ -12,9 +12,9 @@ $(function () {
 
    $('#example1').DataTable({
       language: {
-         searchPlaceholder: 'Search...',
+         searchPlaceholder: 'Busca...',
          sSearch: '',
-         lengthMenu: '_MENU_ items/page',
+         lengthMenu: '_MENU_ itens/página',
       }
    });
    $('#example2').DataTable({

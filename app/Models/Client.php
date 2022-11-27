@@ -17,6 +17,7 @@ class Client extends Authenticatable
     protected $primaryKey = 'uuid';
 
     protected $fillable = [
+        'uuid',
         'name',
         'company_name',
         'email',
