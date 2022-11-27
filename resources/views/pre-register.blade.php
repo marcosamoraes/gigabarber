@@ -67,7 +67,7 @@
 <body>
     <div id="preloader">
         <div class="loader">
-            <img src="{{ env('APP_URL') }}/assets/img/loading.gif" width="80" alt="" />
+            <i class="fa fa-spinner fa-spin fa-4x" aria-hidden="true"></i>
         </div>
     </div>
 

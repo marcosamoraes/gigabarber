@@ -30,28 +30,38 @@
                             @csrf
                             <div class="card custom-card">
                                 <div class="card-body">
-                                    <div class="form-group">
-                                        <label class="tx-medium">Usuário</label>
-                                        <select class="form-control" placeholder="Usuário" name="user_uuid" required>
-                                            @foreach ($users as $user)
-                                                <option value="{{ $user['uuid'] }}">{{ $user['name'] }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="tx-medium">Data</label>
-                                        <input type="date" class="form-control" placeholder="Data" name="date[0]"
-                                            value="{{ old('date.0') }}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="tx-medium">Horário</label>
-                                        <select name="date[1]" class="form-control" value="{{ old('date.1') }}" required>
-                                            @foreach ($times as $time)
-                                                <option value="{{ $time }}"
-                                                    {{ old('date.1') == $time ? 'selected' : false }}>
-                                                    {{$time}}</option>
-                                            @endforeach
-                                        </select>
+                                    <div class="row">
+                                        <div class="col-12 col-lg 4">
+                                            <div class="form-group">
+                                                <label class="tx-medium">Usuário</label>
+                                                <select class="form-control" placeholder="Usuário" name="user_uuid"
+                                                    required>
+                                                    @foreach ($users as $user)
+                                                        <option value="{{ $user['uuid'] }}">{{ $user['name'] }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg 4">
+                                            <div class="form-group">
+                                                <label class="tx-medium">Data</label>
+                                                <input type="date" class="form-control" placeholder="Data" name="date[0]"
+                                                    value="{{ old('date.0') }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg 4">
+                                            <div class="form-group">
+                                                <label class="tx-medium">Horário</label>
+                                                <select name="date[1]" class="form-control" value="{{ old('date.1') }}"
+                                                    required>
+                                                    @foreach ($times as $time)
+                                                        <option value="{{ $time }}"
+                                                            {{ old('date.1') == $time ? 'selected' : false }}>
+                                                            {{ $time }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-footer mb-1">
@@ -69,8 +79,8 @@
     <!-- End Main Content-->
 
     <script>
-			const backupDates = $('[name="date[1]"] option').clone();
-				let reserveds = [];
+        const backupDates = $('[name="date[1]"] option').clone();
+        let reserveds = [];
         @foreach ($reserveds as $i => $reserved)
             reserveds.push({
                 'date': '{{ $reserved['date'] }}',
@@ -86,9 +96,9 @@
                 .filter((reserved) => reserved.date === date)
                 .map((reserved) => reserved.time);
 
-						$.each(reservedDates, function(i, date) {
-							$(`[name="date[1]"] option[value="${date}"]`).remove();
-						});
+            $.each(reservedDates, function(i, date) {
+                $(`[name="date[1]"] option[value="${date}"]`).remove();
+            });
         });
     </script>
 @endsection

@@ -27,35 +27,47 @@
                         <form action="{{ route('client.services.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="card custom-card">
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label class="tx-medium">Título</label>
-                                        <input type="text" class="form-control" placeholder="Título" name="title"
-                                            required>
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label class="tx-medium">Título</label>
+                                                <input type="text" class="form-control" placeholder="Título"
+                                                    name="title" required>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label class="tx-medium">Descrição</label>
-                                        <input type="text" class="form-control" placeholder="Descrição"
-                                            name="description">
+                                    <div class="col-12 col-lg-6">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label class="tx-medium">Descrição</label>
+                                                <input type="text" class="form-control" placeholder="Descrição"
+                                                    name="description">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label class="tx-medium">Valor</label>
-                                        <input type="text" class="form-control" placeholder="Valor" name="value" value="0.00">
+                                    <div class="col-12 col-lg-6">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label class="tx-medium">Valor</label>
+                                                <input type="text" class="form-control" placeholder="Valor"
+                                                    name="value" value="0.00">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label class="tx-medium">Categoria</label>
-                                        <select class="form-control" name="category_uuid" id="category_uuid" required>
-                                            <option value="">Selecione uma categoria...</option>
-                                            @foreach ($categories as $category)
-                                                <option value="{{ $category->uuid }}">{{ $category->name }}</option>
-                                            @endforeach
-                                        </select>
+                                    <div class="col-12 col-lg-6">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label class="tx-medium">Categoria</label>
+                                                <select class="form-control" name="category_uuid" id="category_uuid"
+                                                    required>
+                                                    <option value="">Selecione uma categoria...</option>
+                                                    @foreach ($categories as $category)
+                                                        <option value="{{ $category->uuid }}">{{ $category->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-footer mb-1">

@@ -59,20 +59,20 @@
                             <span class="sidemenu-label">Imagens</span>
                         </a>
                     </li>
-                    <li class="nav-item {{ request()->is('client.appointments.*') ? 'active' : false }}">
+                    {{-- <li class="nav-item {{ request()->is('client.appointments.*') ? 'active' : false }}">
                         <a class="nav-link" href="{{ route('client.appointments.index') }}">
                             <span class="shape1"></span>
                             <span class="shape2"></span>
                             <i class="ti-time sidemenu-icon menu-icon "></i>
                             <span class="sidemenu-label">Agendamentos</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item {{ request()->is('client.calendar') ? 'active' : false }}">
                         <a class="nav-link" href="{{ route('client.calendar') }}">
                             <span class="shape1"></span>
                             <span class="shape2"></span>
                             <i class="ti-calendar sidemenu-icon menu-icon "></i>
-                            <span class="sidemenu-label">Calendário</span>
+                            <span class="sidemenu-label">Agendamentos</span>
                         </a>
                     </li>
                     <li class="nav-item">

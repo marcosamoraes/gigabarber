@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-12 col-md-7 col-xl-8">
                         <div class="card custom-card transcation-crypto">
-                            <div class="card-body appointment-dates row">
+                            <div class="card-body appointment-dates row" style="padding: 5px">
                                 <div class="col-12">
                                     <div class="alert alert-warning alert-block w-100" role="alert">
                                         Selecione uma data para verificar os agendamentos
@@ -89,7 +89,7 @@
                         <div class="col-6 col-md-4 col-lg-3">
                             <a href="${time['link'] ? `https://wa.me/${time['link']}` : '#'}" target="_blank"
                               class="btn ${btnClass} w-100 mb-3 p-0 d-flex align-items-center flex-wrap justify-content-center"
-                              style="height:77px">
+                              style="height:55px">
                               <p class="mb-0 w-100">${time['time']}</p>
                               ${time['user'] ? `<small class="w-100">${time['user']}</small>` : ''}
                               ${time['whatsapp'] ?

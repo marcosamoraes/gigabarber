@@ -51,6 +51,14 @@
     </div>
     <!-- End Loader -->
 
+    <style>
+        @media (max-width: 1299px) and (min-width: 991px) {
+            .signpages {
+                width: 90%;
+            }
+        }
+    </style>
+
     <!-- Page -->
     <div class="page main-signin-wrapper">
 
@@ -76,36 +84,51 @@
                                         <div class="clearfix"></div>
                                         <form method="post" action="{{ route('client.register.post') }}">
                                             @csrf
-                                            <div class="form-group text-start">
-                                                <label>Nome</label>
-                                                <input class="form-control" placeholder="Nome" name="name"
-                                                    value="{{ old('name') }}" type="text">
-                                            </div>
-                                            <div class="form-group text-start">
-                                                <label>Nome da Empresa</label>
-                                                <input class="form-control" placeholder="Nome da Empresa"
-                                                    name="company_name" value="{{ old('company_name') }}"
-                                                    type="text">
-                                            </div>
-                                            <div class="form-group text-start">
-                                                <label>Whatsapp</label>
-                                                <input class="form-control" placeholder="Whatsapp" name="whatsapp"
-                                                    value="{{ old('whatsapp') }}" type="text">
-                                            </div>
-                                            <div class="form-group text-start">
-                                                <label>E-mail</label>
-                                                <input class="form-control" placeholder="E-mail" name="email"
-                                                    value="{{ old('email') }}" type="email">
-                                            </div>
-                                            <div class="form-group text-start">
-                                                <label>Senha</label>
-                                                <input class="form-control" placeholder="Senha" name="password"
-                                                    type="password">
-                                            </div>
-                                            <div class="form-group text-start">
-                                                <label>Confirmar Senha</label>
-                                                <input class="form-control" placeholder="Confirmar Senha"
-                                                    name="password_confirmation" type="password">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="form-group text-start">
+                                                        <label>Nome</label>
+                                                        <input class="form-control" placeholder="Nome" name="name"
+                                                            value="{{ old('name') }}" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="form-group text-start">
+                                                        <label>Nome da Empresa</label>
+                                                        <input class="form-control" placeholder="Nome da Empresa"
+                                                            name="company_name" value="{{ old('company_name') }}"
+                                                            type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="form-group text-start">
+                                                        <label>Whatsapp</label>
+                                                        <input class="form-control" placeholder="Whatsapp"
+                                                            name="whatsapp" value="{{ old('whatsapp') }}"
+                                                            type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="form-group text-start">
+                                                        <label>E-mail</label>
+                                                        <input class="form-control" placeholder="E-mail" name="email"
+                                                            value="{{ old('email') }}" type="email">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="form-group text-start">
+                                                        <label>Senha</label>
+                                                        <input class="form-control" placeholder="Senha" name="password"
+                                                            type="password">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="form-group text-start">
+                                                        <label>Confirmar Senha</label>
+                                                        <input class="form-control" placeholder="Confirmar Senha"
+                                                            name="password_confirmation" type="password">
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="form-group text-center">
                                                 <a href="{{ route('client.login') }}">Já tem conta? Clique aqui</a>

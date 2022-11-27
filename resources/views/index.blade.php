@@ -63,7 +63,7 @@
 <body>
     <div id="preloader">
         <div class="loader">
-            <img src="{{ env('APP_URL') }}/assets/img/loading.gif" width="80" alt="" />
+            <i class="fa fa-spinner fa-spin fa-4x" aria-hidden="true"></i>
         </div>
     </div>
 
@@ -222,12 +222,11 @@
         <div class="container">
             <div class="section_heading text-center mb-40 wow fadeInUp" data-wow-delay="300ms">
                 <h2>Nossos Serviços</h2>
-                <div class="heading-line"></div>
             </div>
             <div class="row">
                 @foreach ($client->categories as $category)
                     @if ($category->services->count() > 0 && $category->active)
-                        <div class="col-12 col-md-6 col-lg sm-padding">
+                        <div class="col-12 col-md-6 col-lg-4 sm-padding">
                             <div class="price_wrap">
                                 <h3>{{ $category->name }}</h3>
                                 <ul class="price_list">
@@ -257,7 +256,6 @@
             <div class="container">
                 <div class="section_heading text-center mb-40 wow fadeInUp" data-wow-delay="300ms">
                     <h2>Imagens</h2>
-                    <div class="heading-line"></div>
                 </div>
                 <div class="row">
                     <div class="col-12 sm-padding">

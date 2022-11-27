@@ -65,7 +65,7 @@
 <body>
     <div id="preloader">
         <div class="loader">
-            <img src="{{ env('APP_URL') }}/assets/img/loading.gif" width="80" alt="" />
+            <i class="fa fa-spinner fa-spin fa-4x" aria-hidden="true"></i>
         </div>
     </div>
 
@@ -150,7 +150,7 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <select class="form-control" placeholder="Serviços" name="services[]"
-                                                data-select-all="false" required multiple>
+                                                data-select-all="false" required>
                                                 @foreach ($client->services as $service)
                                                     <option>{{ $service->category->name . ' - ' . $service->title }}</option>
                                                 @endforeach
