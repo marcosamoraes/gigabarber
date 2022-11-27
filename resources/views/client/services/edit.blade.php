@@ -30,46 +30,55 @@
                             {{ method_field('PUT') }}
                             <div class="card custom-card">
                                 <div class="card-body">
-                                    <div class="form-group">
-                                        <label class="tx-medium">Título</label>
-                                        <input type="text" class="form-control" placeholder="Título"
-                                            value="{{ old('title', $service->title) }}" name="title" required>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label class="tx-medium">Descrição</label>
-                                        <input type="text" class="form-control" placeholder="Descrição"
-                                            value="{{ old('description', $service->description) }}" name="description">
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label class="tx-medium">Valor</label>
-                                        <input type="text" class="form-control" placeholder="Valor"
-                                            value="{{ old('value', $service->value) }}" name="value">
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label class="tx-medium">Categoria</label>
-                                        <select class="form-control" name="category_uuid" id="category_uuid" required>
-                                            <option value="">Selecione uma categoria...</option>
-                                            @foreach ($categories as $category)
-                                                <option value="{{ $category->uuid }}"
-                                                    {{ $service->category_uuid === $category->uuid ? 'selected' : false }}>
-                                                    {{ $category->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="tx-medium">Status</label>
-                                        <select class="form-control select2" name="active">
-                                            <option value="1" {{ $service->active ? 'selected' : false }}>Ativo
-                                            </option>
-                                            <option value="0" {{ !$service->active ? 'selected' : false }}>Inativo
-                                            </option>
-                                        </select>
+                                    <div class="row">
+                                        <div class="col-12 col-lg-4">
+                                            <div class="form-group">
+                                                <label class="tx-medium">Título</label>
+                                                <input type="text" class="form-control" placeholder="Título"
+                                                    value="{{ old('title', $service->title) }}" name="title" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-4">
+                                            <div class="form-group">
+                                                <label class="tx-medium">Descrição</label>
+                                                <input type="text" class="form-control" placeholder="Descrição"
+                                                    value="{{ old('description', $service->description) }}"
+                                                    name="description">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-4">
+                                            <div class="form-group">
+                                                <label class="tx-medium">Valor</label>
+                                                <input type="text" class="form-control" placeholder="Valor"
+                                                    value="{{ old('value', $service->value) }}" name="value">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-4">
+                                            <div class="form-group">
+                                                <label class="tx-medium">Categoria</label>
+                                                <select class="form-control" name="category_uuid" id="category_uuid"
+                                                    required>
+                                                    <option value="">Selecione uma categoria...</option>
+                                                    @foreach ($categories as $category)
+                                                        <option value="{{ $category->uuid }}"
+                                                            {{ $service->category_uuid === $category->uuid ? 'selected' : false }}>
+                                                            {{ $category->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-4">
+                                            <div class="form-group">
+                                                <label class="tx-medium">Status</label>
+                                                <select class="form-control select2" name="active">
+                                                    <option value="1" {{ $service->active ? 'selected' : false }}>Ativo
+                                                    </option>
+                                                    <option value="0" {{ !$service->active ? 'selected' : false }}>
+                                                        Inativo
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-footer mb-1">

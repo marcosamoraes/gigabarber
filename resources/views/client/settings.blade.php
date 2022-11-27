@@ -95,7 +95,7 @@
                                         </div>
                                         <div class="col-12 col-lg-4">
                                             <div class="form-group">
-                                                <label class="tx-medium">Logo</label>
+                                                <label class="tx-medium">Logo (300x300px)</label>
                                                 <input type="file" class="form-control" name="logo" id="logo">
                                                 @if ($client->logo)
                                                     <img height="100px" src="{{ env('APP_URL') . $client->logo }}"
@@ -105,7 +105,7 @@
                                         </div>
                                         <div class="col-12 col-lg-4">
                                             <div class="form-group">
-                                                <label class="tx-medium">Foto de Perfil</label>
+                                                <label class="tx-medium">Foto de Perfil (100x100px)</label>
                                                 <input type="file" class="form-control" name="profile" id="profile">
                                                 @if ($client->profile)
                                                     <img height="100px" src="{{ env('APP_URL') . $client->profile }}"
@@ -115,7 +115,7 @@
                                         </div>
                                         <div class="col-12 col-lg-4">
                                             <div class="form-group">
-                                                <label class="tx-medium">Favicon</label>
+                                                <label class="tx-medium">Favicon (32x32px)</label>
                                                 <input type="file" class="form-control" name="favicon" id="favicon">
                                                 @if ($client->favicon)
                                                     <img height="100px" src="{{ env('APP_URL') . $client->favicon }}"

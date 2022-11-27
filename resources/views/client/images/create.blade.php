@@ -33,7 +33,7 @@
 										<input type="text" class="form-control" placeholder="Nome" name="image_name">
 									</div>
 									<div class="form-group">
-										<label class="tx-medium">Imagem</label>
+										<label class="tx-medium">Imagem (300x300px)</label>
 										<input type="file" class="form-control" name="image" required>
 									</div>
 								</div>

@@ -34,7 +34,7 @@
 										<input type="text" class="form-control" placeholder="Nome" name="image_name" value="{{$image->image_name}}">
 									</div>
 									<div class="form-group">
-										<label class="tx-medium">Imagem</label>
+										<label class="tx-medium">Imagem (300x300px)</label>
 										<input type="file" class="form-control" name="image">
                     <img src="{{$image->name}}" height="100">
 									</div>
