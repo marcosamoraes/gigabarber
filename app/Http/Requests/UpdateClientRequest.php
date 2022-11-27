@@ -49,6 +49,7 @@ class UpdateClientRequest extends FormRequest
             'company_name'  => [Rule::unique('clients')->ignore($client, 'uuid'), 'required'],
             'whatsapp'      => ['nullable'],
             'logo'          => ['nullable', 'image'],
+            'profile'       => ['nullable', 'image'],
             'favicon'       => ['nullable', 'image'],
 
             'attributes.public_email'        => ['email', 'nullable'],

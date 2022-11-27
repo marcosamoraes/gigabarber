@@ -74,10 +74,13 @@ class Controller extends BaseController
       $client = Client::findOrFail(Auth::id());
 
       if (isset($validated['logo'])) {
-        $validated['logo'] = $this->storageFile($validated['logo'], 'clients');
+        $validated['logo'] = $this->storageFile($validated['logo']);
+      }
+      if (isset($validated['profile'])) {
+        $validated['profile'] = $this->storageFile($validated['profile']);
       }
       if (isset($validated['favicon'])) {
-        $validated['favicon'] = $this->storageFile($validated['favicon'], 'clients');
+        $validated['favicon'] = $this->storageFile($validated['favicon']);
       }
       if (isset($validated['password'])) {
         $validated['password'] = Hash::make($validated['password']);

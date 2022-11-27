@@ -105,6 +105,16 @@
                                         </div>
                                         <div class="col-12 col-lg-4">
                                             <div class="form-group">
+                                                <label class="tx-medium">Foto de Perfil</label>
+                                                <input type="file" class="form-control" name="profile" id="profile">
+                                                @if ($client->profile)
+                                                    <img height="100px" src="{{ env('APP_URL') . $client->profile }}"
+                                                        alt="profile">
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-4">
+                                            <div class="form-group">
                                                 <label class="tx-medium">Favicon</label>
                                                 <input type="file" class="form-control" name="favicon" id="favicon">
                                                 @if ($client->favicon)

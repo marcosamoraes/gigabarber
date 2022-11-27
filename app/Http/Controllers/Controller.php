@@ -21,7 +21,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function storageFile($file, $location)
+    public function storageFile($file, $location = '')
     {
         if ($file->isValid()) {
             $name = $file->hashName();

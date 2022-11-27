@@ -46,6 +46,7 @@ class StoreClientRequest extends FormRequest
             'company_name'  => [Rule::unique('clients'), 'required'],
             'whatsapp'      => ['nullable'],
             'logo'          => ['nullable', 'image'],
+            'profile'       => ['nullable', 'image'],
             'favicon'       => ['nullable', 'image'],
 
             'attributes.public_email'        => ['email', 'nullable'],

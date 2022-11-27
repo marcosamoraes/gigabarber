@@ -25,6 +25,7 @@ class Client extends Authenticatable
         'whatsapp',
         'cnpj',
         'logo',
+        'profile',
         'favicon',
         'views',
         'active',

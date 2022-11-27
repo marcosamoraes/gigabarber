@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('company_name')->unique();
             $table->string('cnpj')->nullable()->unique();
             $table->string('logo')->nullable();
+            $table->string('profile')->default('/storage/default.png');
             $table->string('favicon')->default('/storage/favicon.png');
             $table->integer('views')->default(0);
             $table->boolean('active')->default(true);
