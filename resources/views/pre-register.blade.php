@@ -89,7 +89,7 @@
     <header id="header" class="header-section">
         <div class="container">
             <nav class="navbar">
-                <a href="{{env('APP_URL').$client->slug}}" class="navbar-brand">
+                <a href="{{explode('/public', env('APP_URL'))[0].$client->slug}}" class="navbar-brand">
                     @if ($client->logo)
                         <img src="{{ env('APP_URL') . $client->logo }}" alt="{{ $client->company_name }}" />
                     @else
