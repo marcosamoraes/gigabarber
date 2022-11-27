@@ -151,6 +151,7 @@
                                         <div class="form-group">
                                             <select class="form-control" placeholder="Serviços" name="services[]"
                                                 data-select-all="false" required>
+                                                <option value="0">Selecione um serviço...</option>
                                                 @foreach ($client->services as $service)
                                                     <option>{{ $service->category->name . ' - ' . $service->title }}</option>
                                                 @endforeach
