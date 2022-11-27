@@ -132,6 +132,9 @@
                         <h2 class="wow fadeInUp" data-wow-delay="200ms">
                             Realizar Pré Cadastro
                         </h2>
+                        <h3 class="wow fadeInUp" data-wow-delay="400ms">
+                            Realize um pré-cadastro para que o administrador aprove e você possa realizar agendamentos.
+                        </h3>
                     </div>
                     <form action="{{ route('make.pre.register', $client) }}" method="post">
                         @csrf
