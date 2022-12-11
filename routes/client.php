@@ -17,7 +17,6 @@ Route::middleware(['guest:web'])->group(function () {
   Route::get('/forgot-password', [AuthController::class, 'forgot_password_view'])->name('password.forgot.view');
   Route::post('/forgot-password', [AuthController::class, 'forgot_password'])->name('password.forgot');
   Route::get('/reset-password', [AuthController::class, 'reset_password_view'])->name('password.reset.view');
-  Route::post('/reset-password', [AuthController::class, 'reset_password'])->name('password.reset');
 });
 
 Route::middleware(['auth:web'])->group(function () {

@@ -3,13 +3,12 @@
 namespace App\Notifications;
 
 use App\Models\Appointment;
-use App\Models\Service;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewAppointmentUser extends Notification
+class CancelAppointmentClient extends Notification
 {
     use Queueable;
 
@@ -49,32 +48,20 @@ class NewAppointmentUser extends Notification
     public function toMail($notifiable)
     {
         $services = json_decode($this->appointment->services);
+        $services = is_array($services) ? implode(',', $services) : $services;
         $date = formatDate($this->appointment->date);
-        $mail = (new MailMessage)
-            ->subject('Você realizou um agendamento!')
-            ->greeting("Olá, {$this->user->name}!")
-            ->line("Você realizou um agendamento no {$this->client->company_name}!")
+        $envName = env('APP_NAME');
+        return (new MailMessage)
+            ->subject('Um agendamento foi cancelado')
+            ->greeting("Olá, {$this->client->name}!")
+            ->line("Um agendamento foi cancelado")
             ->line("Nome: {$this->user->name}")
             ->line("E-mail: {$this->user->email}")
             ->line("Whatsapp: {$this->user->whatsapp}")
             ->line("CPF: {$this->user->cpf}")
-            ->line("Data do agendamento: {$date}");
-
-        $sum = 0;
-        foreach ($services as $service) {
-            $name = explode(' - ', $service);
-            $service = Service::where('title', $name[1])
-                ->whereHas('category', function ($query) use ($name) {
-                    $query->where('name', $name[0]);
-                })->first();
-            $sum += $service->value;
-            $value = number_format($service->value, 2, ',', '.');
-            $mail->line("Serviço: {$service->category->name} - {$service->title}: {$service->description} (R${$value})");
-        }
-        $sum = number_format($sum, 2, ',', '.');
-        $mail->line("Valor Total: R${$sum}");
-
-        return $mail;
+            ->line("Serviços: {$services}")
+            ->line("Data do agendamento: {$date}")
+            ->line("Obrigado por utilizar o {$envName}!");
     }
 
     /**

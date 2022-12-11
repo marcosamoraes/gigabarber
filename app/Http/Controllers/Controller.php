@@ -185,8 +185,9 @@ class Controller extends BaseController
         $date = $date->format('Y-m-d H:i');
 
         try {
-            Appointment::where('user_uuid', $user_uuid)->where('date', $date)->delete();
-
+            $appointment = Appointment::where('user_uuid', $user_uuid)->where('date', $date)->first();
+            $appointment->cancelAppointment();
+            $appointment->delete();
             return response()->json(['message' => 'Agendamento cancelado com sucesso!'], 200);
         } catch (Exception $e) {
             logError($e, $request->all());

@@ -123,6 +123,7 @@ $(document).ready(function () {
                             btnClass = 'btn-warning';
                             break;
                         case 1:
+                            $btnAction = 'btn-unavailable';
                             btnClass = 'btn-danger';
                             break;
                         default:
@@ -153,6 +154,9 @@ $(document).ready(function () {
         $('[name="time"]').val(time);
         const data = $("form").serialize();
 
+        if (!confirm('Você deseja reservar esse horário?'))
+            return false;
+
         $.post($("form").attr("action"), data, function (response) {
             if (response.message) {
                 alert(
@@ -172,6 +176,9 @@ $(document).ready(function () {
         const data = $("form").serialize();
         const user_uuid = $('[name="user_uuid"]').val();
 
+        if (!confirm('Você já tem esse horário reservado, deseja cancelar?'))
+            return false;
+
         $.post(`${envUrl}/cancelar/${user_uuid}`, data, function (response) {
             if (response.message) {
                 alert(
@@ -183,4 +190,8 @@ $(document).ready(function () {
             }
         });
     });
+
+    $(document).on('click', '.btn-unavailable', function (e) {
+        alert('Esse horário não está disponível, consulte outra opção');
+    })
 });

@@ -25,7 +25,7 @@ class AuthController extends Controller
             $client->attributes()->create(['title' => $client->company_name]);
 
             Auth::guard('web')->loginUsingId($client->uuid);
-            return redirect(route('client.dashboard'))->with('success', 'Cadastro realizado com sucesso!');
+            return redirect(route('client.dashboard'))->with('success', 'Cadastro realizado com sucesso!')->withInput(['email']);
         } catch (\Exception $e) {
             logError($e, $validated);
             return back()->withErrors([

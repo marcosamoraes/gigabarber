@@ -15,6 +15,8 @@ use App\Models\Client;
 |
 */
 
+Route::post('/reset-password', [AuthController::class, 'reset_password'])->name('password.reset');
+
 Route::get('/', function () {
     $client = Client::inRandomOrder()->firstOrFail();
     return redirect(route('index', ['slug' => $client->slug]));

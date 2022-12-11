@@ -135,7 +135,7 @@
                                 </li>
                                 <li>
                                     <div class="header-btn">
-                                        <button type="submit" class="menu-btn">Realizar Agendamento</button>
+                                        <button type="submit" class="menu-btn">Acessar Agenda</button>
                                     </div>
                                 </li>
                             </ul>
@@ -255,7 +255,7 @@
         <section id="portfolio" class="pricing_section bg-grey bd-bottom padding">
             <div class="container">
                 <div class="section_heading text-center mb-40 wow fadeInUp" data-wow-delay="300ms">
-                    <h2>Imagens</h2>
+                    <h2>Portfólio</h2>
                 </div>
                 <div class="row">
                     <div class="col-12 sm-padding">

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Notifications\CancelAppointmentClient;
+use App\Notifications\CancelAppointmentUser;
 use App\Notifications\NewAppointmentClient;
 use App\Notifications\NewAppointmentUser;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -46,6 +48,19 @@ class Appointment extends Model
             Notification::route('mail', [
                 $this->user->email => $this->user->name,
             ])->notify(new NewAppointmentUser($this));
+        }
+    }
+
+    public function cancelAppointment()
+    {
+        Notification::route('mail', [
+            $this->client->email => $this->client->name,
+        ])->notify(new CancelAppointmentClient($this));
+
+        if ($this->user->email) {
+            Notification::route('mail', [
+                $this->user->email => $this->user->name,
+            ])->notify(new CancelAppointmentUser($this));
         }
     }
 }

@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewAppointmentUser extends Notification
+class CancelAppointmentUser extends Notification
 {
     use Queueable;
 
@@ -51,9 +51,9 @@ class NewAppointmentUser extends Notification
         $services = json_decode($this->appointment->services);
         $date = formatDate($this->appointment->date);
         $mail = (new MailMessage)
-            ->subject('Você realizou um agendamento!')
+            ->subject('Você cancelou um agendamento')
             ->greeting("Olá, {$this->user->name}!")
-            ->line("Você realizou um agendamento no {$this->client->company_name}!")
+            ->line("Você cancelou o agendamento no {$this->client->company_name}!")
             ->line("Nome: {$this->user->name}")
             ->line("E-mail: {$this->user->email}")
             ->line("Whatsapp: {$this->user->whatsapp}")
