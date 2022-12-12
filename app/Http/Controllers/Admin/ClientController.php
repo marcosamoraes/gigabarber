@@ -51,10 +51,10 @@ class ClientController extends Controller
     public function store(StoreClientRequest $request)
     {
         $validated = $request->safe()->all();
-
+        return response()->json($validated);
         try {
             $validated['logo'] = $this->storageFile($validated['logo'], 'clients');
-            
+
             if (isset($validated['favicon'])) {
                 $validated['favicon'] = $this->storageFile($validated['favicon'], 'clients');
             }

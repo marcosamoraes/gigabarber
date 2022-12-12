@@ -21,12 +21,13 @@
                 <!-- End Page Header -->
 
                 <!-- Row -->
-                <div class="row row-sm">
-                    <div class="col-lg-12 col-md-12 col-md-12">
-                        <form action="{{ route('client.settings.update', $client) }}" method="post"
-                            enctype="multipart/form-data" novalidate>
-                            @csrf
-                            {{ method_field('PUT') }}
+                <form action="{{ route('client.settings.update', $client) }}" method="post" enctype="multipart/form-data"
+                    novalidate>
+                    @csrf
+                    {{ method_field('PUT') }}
+                    <div class="row row-sm">
+                        <div class="col-lg-12 col-md-12 col-md-12">
+
                             <div class="card custom-card">
                                 <div class="card-header p-3">
                                     <div class="row">
@@ -116,7 +117,8 @@
                                         <div class="col-12 col-lg-4">
                                             <div class="form-group">
                                                 <label class="tx-medium">Favicon (32x32px)</label>
-                                                <input type="file" class="form-control" name="favicon" id="favicon">
+                                                <input type="file" class="form-control" name="favicon"
+                                                    id="favicon">
                                                 @if ($client->favicon)
                                                     <img height="100px" src="{{ env('APP_URL') . $client->favicon }}"
                                                         alt="favicon">
@@ -202,345 +204,361 @@
                                     </div>
                                 </div>
                             </div>
-                    </div>
+                        </div>
 
-                    <div class="card custom-card">
-                        <div class="card-header p-3">
-                            <div class="row">
-                                <div class="col-12 col-lg-6">
-                                    <h3>Horário de Funcionamento</h3>
-                                </div>
-                                <div class="col-12 col-lg-6">
-                                    <div style="text-align: right">
-                                        <button type="submit" class="btn btn-primary">Salvar</a>
+                        <div class="card custom-card">
+                            <div class="card-header p-3">
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        <h3>Horário de Funcionamento</h3>
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <div style="text-align: right">
+                                            <button type="submit" class="btn btn-primary">Salvar</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="card-body">
-                            @if ($client->hours && count($client->hours) > 0)
-                                @foreach ($client->hours as $i => $clientHour)
+                            <div class="card-body">
+                                @if ($client->hours && count($client->hours) > 0)
+                                    @foreach ($client->hours as $i => $clientHour)
+                                        <div class="form-group hours">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-4 mb-2">
+                                                    <select name="hours[{{ $i }}][day]"
+                                                        data-id="{{ $i }}" class="form-control day" required>
+                                                        <option value="segunda"
+                                                            {{ $clientHour->day === 'segunda' ? 'selected' : false }}>
+                                                            segunda</option>
+                                                        <option value="terça"
+                                                            {{ $clientHour->day === 'terça' ? 'selected' : false }}>
+                                                            terça</option>
+                                                        <option value="quarta"
+                                                            {{ $clientHour->day === 'quarta' ? 'selected' : false }}>
+                                                            quarta</option>
+                                                        <option value="quinta"
+                                                            {{ $clientHour->day === 'quinta' ? 'selected' : false }}>
+                                                            quinta</option>
+                                                        <option value="sexta"
+                                                            {{ $clientHour->day === 'sexta' ? 'selected' : false }}>
+                                                            sexta</option>
+                                                        <option value="sábado"
+                                                            {{ $clientHour->day === 'sábado' ? 'selected' : false }}>
+                                                            sábado</option>
+                                                        <option value="domingo"
+                                                            {{ $clientHour->day === 'domingo' ? 'selected' : false }}>
+                                                            domingo</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-lg-4 mb-2">
+                                                    <input type="time" class="form-control open_time"
+                                                        placeholder="Horário de Abertura"
+                                                        name="hours[{{ $i }}][open_time]"
+                                                        data-id="{{ $i }}"
+                                                        value="{{ $clientHour->open_time }}" required>
+                                                </div>
+                                                <div class="col-12 col-lg-4 mb-2">
+                                                    <input type="time" class="form-control close_time"
+                                                        placeholder="Horário de Fechamento"
+                                                        name="hours[{{ $i }}][close_time]"
+                                                        data-id="{{ $i }}"
+                                                        value="{{ $clientHour->close_time }}" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
                                     <div class="form-group hours">
                                         <div class="row">
                                             <div class="col-12 col-lg-4 mb-2">
-                                                <select name="hours[{{ $i }}][day]"
-                                                    data-id="{{ $i }}" class="form-control day" required>
-                                                    <option value="segunda"
-                                                        {{ $clientHour->day === 'segunda' ? 'selected' : false }}>
-                                                        segunda</option>
-                                                    <option value="terça"
-                                                        {{ $clientHour->day === 'terça' ? 'selected' : false }}>
-                                                        terça</option>
-                                                    <option value="quarta"
-                                                        {{ $clientHour->day === 'quarta' ? 'selected' : false }}>
-                                                        quarta</option>
-                                                    <option value="quinta"
-                                                        {{ $clientHour->day === 'quinta' ? 'selected' : false }}>
-                                                        quinta</option>
-                                                    <option value="sexta"
-                                                        {{ $clientHour->day === 'sexta' ? 'selected' : false }}>
-                                                        sexta</option>
-                                                    <option value="sábado"
-                                                        {{ $clientHour->day === 'sábado' ? 'selected' : false }}>
-                                                        sábado</option>
-                                                    <option value="domingo"
-                                                        {{ $clientHour->day === 'domingo' ? 'selected' : false }}>
-                                                        domingo</option>
+                                                <select name="hours[0][day]" data-id="0" class="form-control day"
+                                                    required>
+                                                    <option value="0">Selecione um dia...</option>
+                                                    <option value="segunda" selected>segunda</option>
+                                                    <option value="terça">terça</option>
+                                                    <option value="quarta">quarta</option>
+                                                    <option value="quinta">quinta</option>
+                                                    <option value="sexta">sexta</option>
+                                                    <option value="sábado">sábado</option>
+                                                    <option value="domingo">domingo</option>
                                                 </select>
                                             </div>
                                             <div class="col-12 col-lg-4 mb-2">
                                                 <input type="time" class="form-control open_time"
-                                                    placeholder="Horário de Abertura"
-                                                    name="hours[{{ $i }}][open_time]"
-                                                    data-id="{{ $i }}" value="{{ $clientHour->open_time }}"
+                                                    placeholder="Horário de Abertura" name="hours[0][open_time]"
+                                                    data-id="0" value="{{ old('hours.0.open_time', '08:00') }}"
                                                     required>
                                             </div>
                                             <div class="col-12 col-lg-4 mb-2">
                                                 <input type="time" class="form-control close_time"
-                                                    placeholder="Horário de Fechamento"
-                                                    name="hours[{{ $i }}][close_time]"
-                                                    data-id="{{ $i }}" value="{{ $clientHour->close_time }}"
+                                                    placeholder="Horário de Fechamento" name="hours[0][close_time]"
+                                                    data-id="0" value="{{ old('hours.0.close_time', '18:00') }}"
                                                     required>
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
-                            @else
-                                <div class="form-group hours">
+                                    <div class="form-group hours">
+                                        <div class="row">
+                                            <div class="col-12 col-lg-4 mb-2">
+                                                <select name="hours[1][day]" data-id="1" class="form-control day"
+                                                    required>
+                                                    <option value="0">Selecione um dia...</option>
+                                                    <option value="segunda">segunda</option>
+                                                    <option value="terça" selected>terça</option>
+                                                    <option value="quarta">quarta</option>
+                                                    <option value="quinta">quinta</option>
+                                                    <option value="sexta">sexta</option>
+                                                    <option value="sábado">sábado</option>
+                                                    <option value="domingo">domingo</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 col-lg-4 mb-2">
+                                                <input type="time" class="form-control open_time"
+                                                    placeholder="Horário de Abertura" name="hours[1][open_time]"
+                                                    data-id="1" value="{{ old('hours.1.open_time', '08:00') }}"
+                                                    required>
+                                            </div>
+                                            <div class="col-12 col-lg-4 mb-2">
+                                                <input type="time" class="form-control close_time"
+                                                    placeholder="Horário de Fechamento" name="hours[1][close_time]"
+                                                    data-id="1" value="{{ old('hours.1.close_time', '18:00') }}"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group hours">
+                                        <div class="row">
+                                            <div class="col-12 col-lg-4 mb-2">
+                                                <select name="hours[2][day]" data-id="2" class="form-control day"
+                                                    required>
+                                                    <option value="0">Selecione um dia...</option>
+                                                    <option value="segunda">segunda</option>
+                                                    <option value="terça">terça</option>
+                                                    <option value="quarta" selected>quarta</option>
+                                                    <option value="quinta">quinta</option>
+                                                    <option value="sexta">sexta</option>
+                                                    <option value="sábado">sábado</option>
+                                                    <option value="domingo">domingo</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 col-lg-4 mb-2">
+                                                <input type="time" class="form-control open_time"
+                                                    placeholder="Horário de Abertura" name="hours[2][open_time]"
+                                                    data-id="2" value="{{ old('hours.2.open_time', '08:00') }}"
+                                                    required>
+                                            </div>
+                                            <div class="col-12 col-lg-4 mb-2">
+                                                <input type="time" class="form-control close_time"
+                                                    placeholder="Horário de Fechamento" name="hours[2][close_time]"
+                                                    data-id="2" value="{{ old('hours.2.close_time', '18:00') }}"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group hours">
+                                        <div class="row">
+                                            <div class="col-12 col-lg-4 mb-2">
+                                                <select name="hours[3][day]" data-id="3" class="form-control day"
+                                                    required>
+                                                    <option value="0">Selecione um dia...</option>
+                                                    <option value="segunda">segunda</option>
+                                                    <option value="terça">terça</option>
+                                                    <option value="quarta">quarta</option>
+                                                    <option value="quinta" selected>quinta</option>
+                                                    <option value="sexta">sexta</option>
+                                                    <option value="sábado">sábado</option>
+                                                    <option value="domingo">domingo</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 col-lg-4 mb-2">
+                                                <input type="time" class="form-control open_time"
+                                                    placeholder="Horário de Abertura" name="hours[3][open_time]"
+                                                    data-id="3" value="{{ old('hours.3.open_time', '08:00') }}"
+                                                    required>
+                                            </div>
+                                            <div class="col-12 col-lg-4 mb-2">
+                                                <input type="time" class="form-control close_time"
+                                                    placeholder="Horário de Fechamento" name="hours[3][close_time]"
+                                                    data-id="3" value="{{ old('hours.3.close_time', '18:00') }}"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group hours">
+                                        <div class="row">
+                                            <div class="col-12 col-lg-4 mb-2">
+                                                <select name="hours[4][day]" data-id="4" class="form-control day"
+                                                    required>
+                                                    <option value="0">Selecione um dia...</option>
+                                                    <option value="segunda">segunda</option>
+                                                    <option value="terça">terça</option>
+                                                    <option value="quarta">quarta</option>
+                                                    <option value="quinta">quinta</option>
+                                                    <option value="sexta" selected>sexta</option>
+                                                    <option value="sábado">sábado</option>
+                                                    <option value="domingo">domingo</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 col-lg-4 mb-2">
+                                                <input type="time" class="form-control open_time"
+                                                    placeholder="Horário de Abertura" name="hours[4][open_time]"
+                                                    data-id="4" value="{{ old('hours.4.open_time', '08:00') }}"
+                                                    required>
+                                            </div>
+                                            <div class="col-12 col-lg-4 mb-2">
+                                                <input type="time" class="form-control close_time"
+                                                    placeholder="Horário de Fechamento" name="hours[4][close_time]"
+                                                    data-id="4" value="{{ old('hours.4.close_time', '18:00') }}"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group hours">
+                                        <div class="row">
+                                            <div class="col-12 col-lg-4 mb-2">
+                                                <select name="hours[5][day]" data-id="5" class="form-control day"
+                                                    required>
+                                                    <option value="0">Selecione um dia...</option>
+                                                    <option value="segunda">segunda</option>
+                                                    <option value="terça">terça</option>
+                                                    <option value="quarta">quarta</option>
+                                                    <option value="quinta">quinta</option>
+                                                    <option value="sexta">sexta</option>
+                                                    <option value="sábado" selected>sábado</option>
+                                                    <option value="domingo">domingo</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 col-lg-4 mb-2">
+                                                <input type="time" class="form-control open_time"
+                                                    placeholder="Horário de Abertura" name="hours[5][open_time]"
+                                                    data-id="5" value="{{ old('hours.5.open_time', '08:00') }}"
+                                                    required>
+                                            </div>
+                                            <div class="col-12 col-lg-4 mb-2">
+                                                <input type="time" class="form-control close_time"
+                                                    placeholder="Horário de Fechamento" name="hours[5][close_time]"
+                                                    data-id="5" value="{{ old('hours.5.close_time', '12:00') }}"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                                <div class="form-group hours-buttons">
                                     <div class="row">
-                                        <div class="col-12 col-lg-4 mb-2">
-                                            <select name="hours[0][day]" data-id="0" class="form-control day"
-                                                required>
-                                                <option value="0">Selecione um dia...</option>
-                                                <option value="segunda" selected>segunda</option>
-                                                <option value="terça">terça</option>
-                                                <option value="quarta">quarta</option>
-                                                <option value="quinta">quinta</option>
-                                                <option value="sexta">sexta</option>
-                                                <option value="sábado">sábado</option>
-                                                <option value="domingo">domingo</option>
-                                            </select>
+                                        <div class="col-6 d-flex justify-content-end">
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="removeHours()">Remover</a>
                                         </div>
-                                        <div class="col-12 col-lg-4 mb-2">
-                                            <input type="time" class="form-control open_time"
-                                                placeholder="Horário de Abertura" name="hours[0][open_time]"
-                                                data-id="0" value="{{ old('hours.0.open_time', '08:00') }}" required>
-                                        </div>
-                                        <div class="col-12 col-lg-4 mb-2">
-                                            <input type="time" class="form-control close_time"
-                                                placeholder="Horário de Fechamento" name="hours[0][close_time]"
-                                                data-id="0" value="{{ old('hours.0.close_time', '18:00') }}" required>
+                                        <div class="col-6 d-flex justify-content-start">
+                                            <button type="button" class="btn btn-success"
+                                                onclick="addHours()">Adicionar</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group hours">
-                                    <div class="row">
-                                        <div class="col-12 col-lg-4 mb-2">
-                                            <select name="hours[1][day]" data-id="1" class="form-control day"
-                                                required>
-                                                <option value="0">Selecione um dia...</option>
-                                                <option value="segunda">segunda</option>
-                                                <option value="terça" selected>terça</option>
-                                                <option value="quarta">quarta</option>
-                                                <option value="quinta">quinta</option>
-                                                <option value="sexta">sexta</option>
-                                                <option value="sábado">sábado</option>
-                                                <option value="domingo">domingo</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12 col-lg-4 mb-2">
-                                            <input type="time" class="form-control open_time"
-                                                placeholder="Horário de Abertura" name="hours[1][open_time]"
-                                                data-id="1" value="{{ old('hours.1.open_time', '08:00') }}" required>
-                                        </div>
-                                        <div class="col-12 col-lg-4 mb-2">
-                                            <input type="time" class="form-control close_time"
-                                                placeholder="Horário de Fechamento" name="hours[1][close_time]"
-                                                data-id="1" value="{{ old('hours.1.close_time', '18:00') }}" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group hours">
-                                    <div class="row">
-                                        <div class="col-12 col-lg-4 mb-2">
-                                            <select name="hours[2][day]" data-id="2" class="form-control day"
-                                                required>
-                                                <option value="0">Selecione um dia...</option>
-                                                <option value="segunda">segunda</option>
-                                                <option value="terça">terça</option>
-                                                <option value="quarta" selected>quarta</option>
-                                                <option value="quinta">quinta</option>
-                                                <option value="sexta">sexta</option>
-                                                <option value="sábado">sábado</option>
-                                                <option value="domingo">domingo</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12 col-lg-4 mb-2">
-                                            <input type="time" class="form-control open_time"
-                                                placeholder="Horário de Abertura" name="hours[2][open_time]"
-                                                data-id="2" value="{{ old('hours.2.open_time', '08:00') }}" required>
-                                        </div>
-                                        <div class="col-12 col-lg-4 mb-2">
-                                            <input type="time" class="form-control close_time"
-                                                placeholder="Horário de Fechamento" name="hours[2][close_time]"
-                                                data-id="2" value="{{ old('hours.2.close_time', '18:00') }}" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group hours">
-                                    <div class="row">
-                                        <div class="col-12 col-lg-4 mb-2">
-                                            <select name="hours[3][day]" data-id="3" class="form-control day"
-                                                required>
-                                                <option value="0">Selecione um dia...</option>
-                                                <option value="segunda">segunda</option>
-                                                <option value="terça">terça</option>
-                                                <option value="quarta">quarta</option>
-                                                <option value="quinta" selected>quinta</option>
-                                                <option value="sexta">sexta</option>
-                                                <option value="sábado">sábado</option>
-                                                <option value="domingo">domingo</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12 col-lg-4 mb-2">
-                                            <input type="time" class="form-control open_time"
-                                                placeholder="Horário de Abertura" name="hours[3][open_time]"
-                                                data-id="3" value="{{ old('hours.3.open_time', '08:00') }}" required>
-                                        </div>
-                                        <div class="col-12 col-lg-4 mb-2">
-                                            <input type="time" class="form-control close_time"
-                                                placeholder="Horário de Fechamento" name="hours[3][close_time]"
-                                                data-id="3" value="{{ old('hours.3.close_time', '18:00') }}" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group hours">
-                                    <div class="row">
-                                        <div class="col-12 col-lg-4 mb-2">
-                                            <select name="hours[4][day]" data-id="4" class="form-control day"
-                                                required>
-                                                <option value="0">Selecione um dia...</option>
-                                                <option value="segunda">segunda</option>
-                                                <option value="terça">terça</option>
-                                                <option value="quarta">quarta</option>
-                                                <option value="quinta">quinta</option>
-                                                <option value="sexta" selected>sexta</option>
-                                                <option value="sábado">sábado</option>
-                                                <option value="domingo">domingo</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12 col-lg-4 mb-2">
-                                            <input type="time" class="form-control open_time"
-                                                placeholder="Horário de Abertura" name="hours[4][open_time]"
-                                                data-id="4" value="{{ old('hours.4.open_time', '08:00') }}" required>
-                                        </div>
-                                        <div class="col-12 col-lg-4 mb-2">
-                                            <input type="time" class="form-control close_time"
-                                                placeholder="Horário de Fechamento" name="hours[4][close_time]"
-                                                data-id="4" value="{{ old('hours.4.close_time', '18:00') }}" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group hours">
-                                    <div class="row">
-                                        <div class="col-12 col-lg-4 mb-2">
-                                            <select name="hours[5][day]" data-id="5" class="form-control day"
-                                                required>
-                                                <option value="0">Selecione um dia...</option>
-                                                <option value="segunda">segunda</option>
-                                                <option value="terça">terça</option>
-                                                <option value="quarta">quarta</option>
-                                                <option value="quinta">quinta</option>
-                                                <option value="sexta">sexta</option>
-                                                <option value="sábado" selected>sábado</option>
-                                                <option value="domingo">domingo</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12 col-lg-4 mb-2">
-                                            <input type="time" class="form-control open_time"
-                                                placeholder="Horário de Abertura" name="hours[5][open_time]"
-                                                data-id="5" value="{{ old('hours.5.open_time', '08:00') }}" required>
-                                        </div>
-                                        <div class="col-12 col-lg-4 mb-2">
-                                            <input type="time" class="form-control close_time"
-                                                placeholder="Horário de Fechamento" name="hours[5][close_time]"
-                                                data-id="5" value="{{ old('hours.5.close_time', '12:00') }}" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                            <div class="form-group hours-buttons">
+                            </div>
+                        </div>
+
+                        <div class="card custom-card">
+                            <div class="card-header p-3">
                                 <div class="row">
-                                    <div class="col-6 d-flex justify-content-end">
-                                        <button type="button" class="btn btn-danger" onclick="removeHours()">Remover</a>
+                                    <div class="col-12 col-lg-6">
+                                        <h3>Endereço</h3>
                                     </div>
-                                    <div class="col-6 d-flex justify-content-start">
-                                        <button type="button" class="btn btn-success" onclick="addHours()">Adicionar</a>
+                                    <div class="col-12 col-lg-6">
+                                        <div style="text-align: right">
+                                            <button type="submit" class="btn btn-primary">Salvar</a>
+                                        </div>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 col-lg-4">
+                                        <div class="form-group">
+                                            <label class="tx-medium">CEP</label>
+                                            <input type="text" id="cep" class="form-control" placeholder="CEP"
+                                                name="address[cep]"
+                                                value="{{ old('address.cep', isset($client->address[0]) ? $client->address[0]->cep : null) }}"
+                                                maxlength="8" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-4">
+                                        <div class="form-group">
+                                            <label class="tx-medium">Endereço</label>
+                                            <input type="text" id="address" class="form-control"
+                                                placeholder="Endereço" name="address[address]"
+                                                value="{{ old('address.address', isset($client->address[0]) ? $client->address[0]->address : null) }}"
+                                                maxlength="50" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-4">
+                                        <div class="form-group">
+                                            <label class="tx-medium">Número</label>
+                                            <input type="text" id="number" class="form-control"
+                                                placeholder="Número" name="address[number]"
+                                                value="{{ old('address.number', isset($client->address[0]) ? $client->address[0]->number : null) }}"
+                                                maxlength="4" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-4">
+                                        <div class="form-group">
+                                            <label class="tx-medium">Bairro</label>
+                                            <input type="text" id="area" class="form-control"
+                                                placeholder="Bairro" name="address[area]"
+                                                value="{{ old('address.area', isset($client->address[0]) ? $client->address[0]->area : null) }}"
+                                                maxlength="50" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-4">
+                                        <div class="form-group">
+                                            <label class="tx-medium">Complemento</label>
+                                            <input type="text" id="complement" class="form-control"
+                                                placeholder="Complemento" name="address[complement]"
+                                                value="{{ old('address.complement', isset($client->address[0]) ? $client->address[0]->complement : null) }}"
+                                                maxlength="50">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-4">
+                                        <div class="form-group">
+                                            <label class="tx-medium">Estado</label>
+                                            <select id="state" name="address[state]" value=""
+                                                class="form-control" id="state" required>
+                                                <option value="">Selecione um estado...</option>
+                                                @foreach ($all_states as $all_state)
+                                                    <option data-id="{{ $all_state['id'] }}"
+                                                        value="{{ $all_state['uf'] }}"
+                                                        {{ $all_state['uf'] === old('address.state', isset($client->address[0]) ? $client->address[0]->state : null) ? 'selected' : false }}>
+                                                        {{ $all_state['name'] }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-4">
+                                        <div class="form-group">
+                                            <label class="tx-medium">Cidade</label>
+                                            <select id="city" name="address[city]" class="form-control"
+                                                id="city" required>
+                                                @foreach ($all_cities as $all_city)
+                                                    <option data-id="{{ $all_city['id'] }}"
+                                                        value="{{ $all_city['name'] }}"
+                                                        {{ $all_city['name'] === old('address.city', isset($client->address[0]) ? $client->address[0]->city : null) ? 'selected' : false }}>
+                                                        {{ $all_city['name'] }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div style="text-align: right">
+                                    <button type="submit" class="btn btn-primary">Salvar</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="card custom-card">
-                        <div class="card-header p-3">
-                            <div class="row">
-                                <div class="col-12 col-lg-6">
-                                    <h3>Endereço</h3>
-                                </div>
-                                <div class="col-12 col-lg-6">
-                                    <div style="text-align: right">
-                                        <button type="submit" class="btn btn-primary">Salvar</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-12 col-lg-4">
-                                    <div class="form-group">
-                                        <label class="tx-medium">CEP</label>
-                                        <input type="text" id="cep" class="form-control" placeholder="CEP"
-                                            name="address[cep]"
-                                            value="{{ old('address.cep', isset($client->address[0]) ? $client->address[0]->cep : null) }}"
-                                            maxlength="8" required>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-4">
-                                    <div class="form-group">
-                                        <label class="tx-medium">Endereço</label>
-                                        <input type="text" id="address" class="form-control" placeholder="Endereço"
-                                            name="address[address]"
-                                            value="{{ old('address.address', isset($client->address[0]) ? $client->address[0]->address : null) }}"
-                                            maxlength="50" required>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-4">
-                                    <div class="form-group">
-                                        <label class="tx-medium">Número</label>
-                                        <input type="text" id="number" class="form-control" placeholder="Número"
-                                            name="address[number]"
-                                            value="{{ old('address.number', isset($client->address[0]) ? $client->address[0]->number : null) }}"
-                                            maxlength="4" required>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-4">
-                                    <div class="form-group">
-                                        <label class="tx-medium">Bairro</label>
-                                        <input type="text" id="area" class="form-control" placeholder="Bairro"
-                                            name="address[area]"
-                                            value="{{ old('address.area', isset($client->address[0]) ? $client->address[0]->area : null) }}"
-                                            maxlength="50" required>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-4">
-                                    <div class="form-group">
-                                        <label class="tx-medium">Complemento</label>
-                                        <input type="text" id="complement" class="form-control"
-                                            placeholder="Complemento" name="address[complement]"
-                                            value="{{ old('address.complement', isset($client->address[0]) ? $client->address[0]->complement : null) }}"
-                                            maxlength="50">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-4">
-                                    <div class="form-group">
-                                        <label class="tx-medium">Estado</label>
-                                        <select id="state" name="address[state]" value="" class="form-control"
-                                            id="state" required>
-                                            <option value="">Selecione um estado...</option>
-                                            @foreach ($all_states as $all_state)
-                                                <option data-id="{{ $all_state['id'] }}" value="{{ $all_state['uf'] }}"
-                                                    {{ $all_state['uf'] === old('address.state', isset($client->address[0]) ? $client->address[0]->state : null) ? 'selected' : false }}>
-                                                    {{ $all_state['name'] }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-4">
-                                    <div class="form-group">
-                                        <label class="tx-medium">Cidade</label>
-                                        <select id="city" name="address[city]" class="form-control" id="city"
-                                            required>
-                                            @foreach ($all_cities as $all_city)
-                                                <option data-id="{{ $all_city['id'] }}" value="{{ $all_city['name'] }}"
-                                                    {{ $all_city['name'] === old('address.city', isset($client->address[0]) ? $client->address[0]->city : null) ? 'selected' : false }}>
-                                                    {{ $all_city['name'] }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div style="text-align: right">
-                                <button type="submit" class="btn btn-primary">Salvar</a>
-                            </div>
-                        </div>
-                    </div>
-                    </form>
-                </div>
+                </form>
             </div>
             <!-- End Row -->
 
