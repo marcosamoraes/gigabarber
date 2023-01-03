@@ -19,6 +19,7 @@ class Client extends Authenticatable
     protected $fillable = [
         'uuid',
         'name',
+        'slug',
         'company_name',
         'email',
         'email_verified_at',
