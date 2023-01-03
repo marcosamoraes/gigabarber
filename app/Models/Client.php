@@ -22,6 +22,7 @@ class Client extends Authenticatable
         'company_name',
         'email',
         'email_verified_at',
+        'password',
         'whatsapp',
         'cnpj',
         'logo',
